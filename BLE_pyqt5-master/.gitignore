@@ -1,0 +1,7 @@
+# my .gitignore
+
+*~
+*.py[co]
+
+__pycache__
+ble_demo_pyqt5.pro.user*
