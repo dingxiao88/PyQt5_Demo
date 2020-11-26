@@ -1,37 +1,55 @@
 import sys
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QMessageBox, QApplication
-
-def dialog():
-    mbox = QMessageBox()
-
-    mbox.setText("Your allegiance has been noted")
-    mbox.setDetailedText("You are now a disciple and subject of the all-knowing Guru")
-    mbox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-            
-    mbox.exec_()
+from PyQt5.QtWidgets import QApplication, QLabel, QToolBar, QAction, QStatusBar, QCheckBox, QMainWindow
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QIcon
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    app.setStyle("Fusion")
+# Subclass QMainWindow to customise your application's main window
+class MainWindow(QMainWindow):
     
-    window = QWidget()
-    window.resize(300, 300)
-    window.setWindowTitle("DX First Demo")
+    def __init__(self, *args, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
 
-    label = QLabel(window)
-    label.setText("Behold the Guru, Guru99")
-    label.move(100,130)
-    label.show()
+        self.setWindowTitle("My Awesome App")
 
-    btn = QPushButton(window)
-    btn.setText('Beheld')
-    btn.move(110,150)
-    btn.show()
-    btn.clicked.connect(dialog)
+        label = QLabel("THIS IS AWESOME!!!")
+        label.setAlignment(Qt.AlignCenter)
 
-    window.show()
-    sys.exit(app.exec_())
+        self.setCentralWidget(label)
+
+        toolbar = QToolBar("My main toolbar")
+        toolbar.setIconSize(QSize(16,16))
+        self.addToolBar(toolbar)
+
+        button_action = QAction(QIcon("D:\Work\PyQt\PyQt5_Demo\home.png"), "Your button", self)
+        button_action.setStatusTip("This is your button")
+        button_action.triggered.connect(self.onMyToolBarButtonClick)
+        button_action.setCheckable(True)
+        toolbar.addAction(button_action)
+
+        toolbar.addSeparator()
+
+        button_action2 = QAction(QIcon("D:\Work\PyQt\PyQt5_Demo\home.png"), "Your button2", self)
+        button_action2.setStatusTip("This is your button2")
+        button_action2.triggered.connect(self.onMyToolBarButtonClick)
+        button_action2.setCheckable(True)
+        toolbar.addAction(button_action2)
+
+        toolbar.addWidget(QLabel("Hello"))
+        toolbar.addWidget(QCheckBox())
+
+        self.setStatusBar(QStatusBar(self))
 
 
+    def onMyToolBarButtonClick(self, s):
+        print("click-dx", s)
+
+
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec_()
