@@ -1,7 +1,11 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QLabel, QToolBar, QAction, QStatusBar, QCheckBox, QMainWindow
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QIcon
+# from PyQt5.QtWidgets import QApplication, QLabel, QToolBar, QAction, QStatusBar, QCheckBox, QMainWindow
+# from PyQt5.QtCore import Qt, QSize
+# from PyQt5.QtGui import QIcon
+
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 
 # Subclass QMainWindow to customise your application's main window
@@ -12,39 +16,35 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("My Awesome App")
 
-        label = QLabel("THIS IS AWESOME!!!")
-        label.setAlignment(Qt.AlignCenter)
 
-        self.setCentralWidget(label)
+        layout = QVBoxLayout()
+        widgets = [QCheckBox,
+            QComboBox,
+            QDateEdit,
+            QDateTimeEdit,
+            QDial,
+            QDoubleSpinBox,
+            QFontComboBox,
+            QLCDNumber,
+            QLabel,
+            QLineEdit,
+            QProgressBar,
+            QPushButton,
+            QRadioButton,
+            QSlider,
+            QSpinBox,
+            QTimeEdit]
 
-        toolbar = QToolBar("My main toolbar")
-        toolbar.setIconSize(QSize(16,16))
-        self.addToolBar(toolbar)
-
-        button_action = QAction(QIcon("D:\Work\PyQt\PyQt5_Demo\home.png"), "Your button", self)
-        button_action.setStatusTip("This is your button")
-        button_action.triggered.connect(self.onMyToolBarButtonClick)
-        button_action.setCheckable(True)
-        toolbar.addAction(button_action)
-
-        toolbar.addSeparator()
-
-        button_action2 = QAction(QIcon("D:\Work\PyQt\PyQt5_Demo\home.png"), "Your button2", self)
-        button_action2.setStatusTip("This is your button2")
-        button_action2.triggered.connect(self.onMyToolBarButtonClick)
-        button_action2.setCheckable(True)
-        toolbar.addAction(button_action2)
-
-        toolbar.addWidget(QLabel("Hello"))
-        toolbar.addWidget(QCheckBox())
-
-        self.setStatusBar(QStatusBar(self))
+        for w in widgets:
+            layout.addWidget(w())
 
 
-    def onMyToolBarButtonClick(self, s):
-        print("click-dx", s)
+        widget = QWidget()
+        widget.setLayout(layout)
 
-
+        # Set the central widget of the Window. Widget will expand
+        # to take up all the space in the window by default.
+        self.setCentralWidget(widget)
 
 
 app = QApplication(sys.argv)
