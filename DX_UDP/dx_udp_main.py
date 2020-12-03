@@ -4,7 +4,8 @@ import sys
 import socket
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow)
-from PyQt5.QtCore import pyqtSignal, Qt
+from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
 
 # ui_main.py中内容
 from ui_main import *
@@ -22,12 +23,26 @@ class mainWin(QMainWindow, Ui_MainWindow):
         super(mainWin, self).__init__(parent)
         self.setupUi(self)
 
+        # 安装正则表达式输入验证器
+        rx = QtCore.QRegExp("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")
+        self.lineEdit_Local_IP.setValidator(QRegExpValidator(rx,self))
+        self.lineEdit_Local_IP.setInputMask("000.000.000.000;_")
+
+        # 绑定按钮增加样式
         self.pushButton_bing.setStyleSheet('QPushButton {background-color: #A3C1DA; color: green;}')
 
+        # 按钮绑定触发事件
         self.pushButton_bing.clicked.connect(self.UDP_Connect)
         self.pushButton_udpSend.clicked.connect(self.UDP_Send)
 
+        # 绑定网络连接信号
         self.ConnectSignal.connect(self.UDP_Show_Status)
+
+        # 获得本地IP
+        self.hostname = socket.gethostname()
+        self.ip = socket.gethostbyname(self.hostname)
+        print(self.ip)
+        self.lineEdit_Local_IP.setPlaceholderText(self.ip)
 
     def UDP_Show_Status(self):
         if(self.UDP_Connect_Flag == False):
@@ -50,7 +65,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         local_ip = self.lineEdit_Local_IP.text()
         
         if(local_ip == ''):
-            local_ip = "192.168.41.4"
+            local_ip = self.ip
 
         # 获得本地Port
         if(self.lineEdit_Local_Port.text() == ''):
@@ -58,9 +73,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
         else:
             local_port = int(self.lineEdit_Local_Port.text())
 
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        # self.sock.bind(("192.168.41.4", 8883))
-        self.sock.bind((local_ip, local_port))
+        try:
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            self.sock.bind((local_ip, local_port))
+        except Exception as e:
+            print('DX--->Error:', e)
+            self.sock.close()
+            self.UDP_Connect_Flag = False
 
 
     def UDP_Send(self):
