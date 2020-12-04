@@ -1,3 +1,5 @@
+
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 import sys
@@ -26,7 +28,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 安装正则表达式输入验证器
         rx = QtCore.QRegExp("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")
         self.lineEdit_Local_IP.setValidator(QRegExpValidator(rx,self))
-        self.lineEdit_Local_IP.setInputMask("000.000.000.000;_")
+        # self.lineEdit_Local_IP.setInputMask("000.000.000.000;_")
 
         # 绑定按钮增加样式
         self.pushButton_bing.setStyleSheet('QPushButton {background-color: #A3C1DA; color: green;}')
@@ -43,6 +45,8 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.ip = socket.gethostbyname(self.hostname)
         print(self.ip)
         self.lineEdit_Local_IP.setPlaceholderText(self.ip)
+
+        self.show()
 
     def UDP_Show_Status(self):
         if(self.UDP_Connect_Flag == False):
