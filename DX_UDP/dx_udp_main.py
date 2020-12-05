@@ -2,8 +2,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+# 天气API参考：https://zhuanlan.zhihu.com/p/60815507
+
 import sys
 import socket
+import os
 
 import requests
 import json
@@ -67,7 +70,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         if(city_name == ''):
             city_name = '杭州'
 
-        file = open('.//weather_city_id.txt','r',encoding='utf-8',errors='ignore')
+        path1=os.path.abspath('.')
+        fn = path1 + '\weather_city_id.txt'
+        # print(fn)
+        file = open(fn,'r',encoding='utf-8',errors='ignore')
         line = file.readline()
         while line:
             line = file.readline()        #读取一行
@@ -84,6 +90,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
                     # print(self.Weather_ID) 
                     break
         file.close()
+        self.textEdit_Weather.setText('----------')
 
 
     # --------天气查询------------
@@ -97,6 +104,8 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.textEdit_Weather.setText('')
         # self.textEdit_Weather.setText(weatcher_result_txt)
         txt_city = json_data['data']['city']
+        txt_current_temp = json_data['data']['wendu']   #实时温度
+        txt_info = json_data['data']['ganmao']          #贴士
 
         txt_forecast_0_date = json_data['data']['forecast'][0]['date']
         txt_forecast_0_type = json_data['data']['forecast'][0]['type']
@@ -124,6 +133,9 @@ class mainWin(QMainWindow, Ui_MainWindow):
         txt_forecast_4_low  = json_data['data']['forecast'][4]['low']
 
         self.textEdit_Weather.setText(txt_city + '\n' 
+                                    + txt_current_temp + '\n'
+                                    + txt_info + '\n'
+                                    + '-----------------' + '\n'
                                     + txt_forecast_0_date + '\n' 
                                     + txt_forecast_0_type + '\n' 
                                     + txt_forecast_0_high + '\n' 
