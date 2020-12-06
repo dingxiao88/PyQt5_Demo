@@ -33,6 +33,8 @@ class mainWin(QMainWindow, Ui_MainWindow):
         super(mainWin, self).__init__(parent)
         self.setupUi(self)
 
+        self.statusBar().showMessage('reday.')
+
         # 安装正则表达式输入验证器
         rx = QtCore.QRegExp("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")
         self.lineEdit_Local_IP.setValidator(QRegExpValidator(rx,self))
@@ -87,10 +89,11 @@ class mainWin(QMainWindow, Ui_MainWindow):
                     txt4 = txt3[1].split('\n')
                     # print(txt4)
                     self.Weather_ID = txt4[0]
+                    self.statusBar().showMessage('find city id.')
                     # print(self.Weather_ID) 
                     break
         file.close()
-        self.textEdit_Weather.setText('----------')
+        # self.textEdit_Weather.setText('----------')
 
 
     # --------天气查询------------
