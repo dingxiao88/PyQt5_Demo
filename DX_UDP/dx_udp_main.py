@@ -41,7 +41,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # self.lineEdit_Local_IP.setInputMask("000.000.000.000;_")
 
         # 绑定按钮增加样式
-        self.pushButton_bing.setStyleSheet('QPushButton {background-color: #A3C1DA; color: green;}')
+        self.pushButton_bing.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
 
         # 按钮绑定触发事件
         self.pushButton_bing.clicked.connect(self.UDP_Connect)
@@ -171,10 +171,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
     # --------显示UDP连接状态------------
     def UDP_Show_Status(self):
         if(self.UDP_Connect_Flag == False):
-            self.pushButton_bing.setStyleSheet('QPushButton {background-color: #A3C1DA; color: green;}')
+            self.pushButton_bing.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
             self.pushButton_bing.setText('绑定')
         elif(self.UDP_Connect_Flag == True):
-            self.pushButton_bing.setStyleSheet('QPushButton {background-color: #A3C1DA; color: red;}')
+            self.pushButton_bing.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
             self.pushButton_bing.setText('断开')
 
     # --------UDP连接--------
