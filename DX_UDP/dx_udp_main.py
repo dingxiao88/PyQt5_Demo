@@ -7,10 +7,8 @@
 import sys
 import socket
 import os
-
 import requests
 import json
-
 from PyQt5.QtWidgets import (QApplication, QMainWindow)
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
@@ -28,6 +26,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
     UDP_Connect_Flag = False
     # @3-天气城市id
     Weather_ID = '101210101'  #默认是杭州
+
 
     def __init__(self, parent=None):
         super(mainWin, self).__init__(parent)
@@ -72,8 +71,8 @@ class mainWin(QMainWindow, Ui_MainWindow):
         if(city_name == ''):
             city_name = '杭州'
 
-        path1=os.path.abspath('.')
-        fn = path1 + '\weather_city_id.txt'
+        path = os.path.abspath('.')
+        fn = path + '\weather_city_id.txt'
         # print(fn)
         file = open(fn,'r',encoding='utf-8',errors='ignore')
         line = file.readline()
@@ -177,6 +176,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.pushButton_bing.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
             self.pushButton_bing.setText('断开')
 
+
     # --------UDP连接--------
     def UDP_Connect(self):
 
@@ -207,6 +207,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.sock.close()
             self.UDP_Connect_Flag = False
 
+
     # --------UDP发送--------
     def UDP_Send(self):
         # 获得远端IP
@@ -222,7 +223,6 @@ class mainWin(QMainWindow, Ui_MainWindow):
             remote_port = int(self.lineEdit_Remote_Port.text())
 
         self.sock.sendto(b'Successful! Message! ',(remote_ip, remote_port))
-
 
 
 if __name__ == '__main__':
