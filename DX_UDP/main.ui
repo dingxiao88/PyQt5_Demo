@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>434</height>
+    <width>698</width>
+    <height>509</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -241,13 +241,62 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>380</y>
+      <width>571</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Thread</string>
+    </property>
+    <widget class="QTextEdit" name="textEdit_thread">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>401</width>
+       <height>51</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_thread_clean">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>50</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>清空</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_thread_start">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>20</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>启动</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>696</width>
+     <width>698</width>
      <height>23</height>
     </rect>
    </property>
@@ -255,5 +304,22 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_thread_clean</sender>
+   <signal>clicked()</signal>
+   <receiver>textEdit_thread</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>529</x>
+     <y>450</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>425</x>
+     <y>448</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

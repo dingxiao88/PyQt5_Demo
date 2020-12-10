@@ -13,6 +13,8 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow)
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
 
+from Thread_Main import DX_Thread
+
 # ui_main.py中内容
 from ui_main import *
 
@@ -60,8 +62,35 @@ class mainWin(QMainWindow, Ui_MainWindow):
         print(self.ip)
         self.lineEdit_Local_IP.setPlaceholderText(self.ip)
 
+        # 创建线程
+        self.dx_thread = DX_Thread()
+        self.dx_thread.DX_Thread_OutSingal.connect(self.Thread_Info)
+
+        # 线程启动按钮绑定事件
+        self.pushButton_thread_start.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.pushButton_thread_start.clicked.connect(self.Thread_Run)
+
         # 显示界面
         self.show()
+
+    # 启停线程
+    def Thread_Run(self):
+        # 获得线程运行的状态
+        if(self.dx_thread.working_flag == False):
+            self.dx_thread.setRun()
+            self.dx_thread.start()
+            self.pushButton_thread_start.setText('停止')
+            self.pushButton_thread_start.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+
+        elif(self.dx_thread.working_flag == True):
+            self.dx_thread.setRun()
+            self.pushButton_thread_start.setText('启动')
+            self.pushButton_thread_start.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        
+
+    # 线程信息打印
+    def Thread_Info(self, str_info):
+        self.textEdit_thread.setText(str_info)
 
 
     # --------城市查询------------
