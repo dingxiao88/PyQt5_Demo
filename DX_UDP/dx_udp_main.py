@@ -9,11 +9,12 @@ import socket
 import os
 import requests
 import json
-from PyQt5.QtWidgets import (QApplication, QMainWindow)
-from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu)
+from PyQt5.QtGui import QRegExpValidator, QIcon, QPixmap, QColor
 from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
 
 from Thread_Main import DX_Thread
+import dx_SystemTray
 
 # ui_main.py中内容
 from ui_main import *
@@ -29,12 +30,22 @@ class mainWin(QMainWindow, Ui_MainWindow):
     # @3-天气城市id
     Weather_ID = '101210101'  #默认是杭州
 
-
     def __init__(self, parent=None):
+
+        # 关闭所有窗口,也不关闭应用程序
+        # QApplication.setQuitOnLastWindowClosed(False)
+
         super(mainWin, self).__init__(parent)
         self.setupUi(self)
 
+        # 软件状态栏显示
         self.statusBar().showMessage('reday.')
+
+        # 显示软件图标
+        self.setWindowIcon(QIcon("./images/me.png"))
+
+        # 配置系统托盘
+        self.dx_SystemTray1 = dx_SystemTray.setTary(self)
 
         # 安装正则表达式输入验证器
         rx = QtCore.QRegExp("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")
@@ -71,6 +82,26 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_thread_start.clicked.connect(self.Thread_Run)
 
         # 显示界面
+        self.show()
+
+
+    # Override closeEvent, to intercept the window closing event
+    # The window will be closed only if there is no check mark in the check box
+    # QSystemTrayIcon.NoIcon
+    # QSystemTrayIcon.Information
+    # QSystemTrayIcon.Warning
+    # QSystemTrayIcon.Critical
+    def closeEvent(self, event):
+        # if self.check_box.isChecked():
+        event.ignore()
+        self.hide()
+        dx_SystemTray.showMsg(self)
+
+    def closeApp_dx(self):
+        # 点击关闭按钮或者点击退出事件会出现图标无法消失的bug，需要手动将图标内存清除
+        sys.exit(app.exec_())
+
+    def showApp_dx(self):
         self.show()
 
     # 启停线程
@@ -258,5 +289,6 @@ if __name__ == '__main__':
     # 下面是使用PyQt5的固定用法
     app = QApplication(sys.argv)
     main_win = mainWin()
+    main_win.setWindowTitle('DX测试程序')
     main_win.show()
     sys.exit(app.exec_())
