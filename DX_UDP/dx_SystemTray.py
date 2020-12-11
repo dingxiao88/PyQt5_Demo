@@ -14,8 +14,9 @@ def setTary(self):
     self.tray = QSystemTrayIcon()
 
     # 创建QIcon对象，用于设置图标（图片过大会出错）
-    self.trayIconPix = QPixmap(16,16)
-    self.trayIconPix.fill(QColor(100,100,100))
+    # self.trayIconPix = QPixmap(16,16)
+    # self.trayIconPix.fill(QColor(100,100,100))
+    self.trayIconPix = QPixmap("./images/me.png")
     self.Icon = QIcon(self.trayIconPix)
 
     # 设置托盘图标（QIcon图标过大或者出错会导致托盘显示不出来）
