@@ -14,7 +14,8 @@ from PyQt5.QtGui import QRegExpValidator, QIcon, QPixmap, QColor
 from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
 
 from Thread_Main import DX_Thread
-import dx_SystemTray
+# import dx_SystemTray
+from dx_SystemTray import dx_SystemTray
 
 # ui_main.py中内容
 from ui_main import *
@@ -41,11 +42,17 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 软件状态栏显示
         self.statusBar().showMessage('reday.')
 
-        # 显示软件图标
+        # 显示软件图标  -- 运行python命令的目录必须在文件目录，不然会报错
+        # path = os.path.abspath('.')
+        # image_path = path + '\me.png'
+        # print(image_path)
         self.setWindowIcon(QIcon("./images/me.png"))
+        # self.setWindowIcon(QIcon(image_path))
 
         # 配置系统托盘
-        self.dx_SystemTray1 = dx_SystemTray.setTary(self)
+        # dx_SystemTray.setTary(self)
+        self.dx_SystemTray1 = dx_SystemTray()
+        self.dx_SystemTray1.dx_SystemTray_Signal.connect(self.SystemTray_Pro)
 
         # 安装正则表达式输入验证器
         rx = QtCore.QRegExp("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")
@@ -84,7 +91,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 显示界面
         self.show()
 
-
+    # 主程序全局关闭事件监听
     # Override closeEvent, to intercept the window closing event
     # The window will be closed only if there is no check mark in the check box
     # QSystemTrayIcon.NoIcon
@@ -95,12 +102,24 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # if self.check_box.isChecked():
         event.ignore()
         self.hide()
-        dx_SystemTray.showMsg(self)
+        # dx_SystemTray.showMsg(self)
+        self.dx_SystemTray1.showMsg(1, "程序缩小至系统托盘!")
 
+
+    # 系统托盘类信号数据处理
+    def SystemTray_Pro(self,str_info):
+        if(str_info == "show"):
+            self.showApp_dx()
+        elif(str_info == "close"):
+            self.closeApp_dx()
+
+
+    # 关闭程序
     def closeApp_dx(self):
         # 点击关闭按钮或者点击退出事件会出现图标无法消失的bug，需要手动将图标内存清除
         sys.exit(app.exec_())
 
+    # 显示程序
     def showApp_dx(self):
         self.show()
 
@@ -120,8 +139,11 @@ class mainWin(QMainWindow, Ui_MainWindow):
         
 
     # 线程信息打印
-    def Thread_Info(self, str_info):
+    def Thread_Info(self, str_info, count):
         self.textEdit_thread.setText(str_info)
+
+        if(count == 10000):
+            self.dx_SystemTray1.showMsg(1, "已成功发送10000次!")
 
 
     # --------城市查询------------
@@ -289,6 +311,6 @@ if __name__ == '__main__':
     # 下面是使用PyQt5的固定用法
     app = QApplication(sys.argv)
     main_win = mainWin()
-    main_win.setWindowTitle('DX测试程序')
+    main_win.setWindowTitle('霄哥的神秘工具V1.0')
     main_win.show()
     sys.exit(app.exec_())
