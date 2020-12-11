@@ -9,9 +9,13 @@ import socket
 import os
 import requests
 import json
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu)
-from PyQt5.QtGui import QRegExpValidator, QIcon, QPixmap, QColor
-from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
+# from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu)
+# from PyQt5.QtGui import QRegExpValidator, QIcon, QPixmap, QColor
+# from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
+
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 
 from Thread_Main import DX_Thread
 # import dx_SystemTray
@@ -68,8 +72,6 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         # 天气查询按键绑定点击触发信号
         self.pushButton_Weather_Check.clicked.connect(self.Weather_Check)
-        # 城市查询按键绑定点击触发信号
-        self.pushButton_City_Check.clicked.connect(self.City_Check)
 
         # 绑定网络连接信号
         self.ConnectSignal.connect(self.UDP_Show_Status)
@@ -148,6 +150,9 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     # --------城市查询------------
     def City_Check(self):
+        # 获得城市id标志
+        get_city = False
+        # 获得城市名字
         city_name = self.lineEdit_Weather_City.text()
         # print(city_name)
         if(city_name == ''):
@@ -171,82 +176,89 @@ class mainWin(QMainWindow, Ui_MainWindow):
                     # print(txt4)
                     self.Weather_ID = txt4[0]
                     self.statusBar().showMessage('find city id.')
+                    get_city = True
                     # print(self.Weather_ID) 
                     break
         file.close()
-        # self.textEdit_Weather.setText('----------')
+        return get_city
 
 
     # --------天气查询------------
     def Weather_Check(self):
-        rep = requests.get('http://wthrcdn.etouch.cn/weather_mini?citykey='+self.Weather_ID)
-        rep.encoding = 'utf-8'
-        str_x = rep.json()
-        weatcher_result_txt = json.dumps(str_x, ensure_ascii = False, indent = 6)
-        # 将 JSON 对象转换为 Python 字典
-        json_data = json.loads(weatcher_result_txt)
-        self.textEdit_Weather.setText('')
-        # self.textEdit_Weather.setText(weatcher_result_txt)
-        txt_city = json_data['data']['city']
-        txt_current_temp = json_data['data']['wendu']   #实时温度
-        txt_info = json_data['data']['ganmao']          #贴士
 
-        txt_forecast_0_date = json_data['data']['forecast'][0]['date']
-        txt_forecast_0_type = json_data['data']['forecast'][0]['type']
-        txt_forecast_0_high = json_data['data']['forecast'][0]['high']
-        txt_forecast_0_low  = json_data['data']['forecast'][0]['low']
+        res = self.City_Check()
 
-        txt_forecast_1_date = json_data['data']['forecast'][1]['date']
-        txt_forecast_1_type = json_data['data']['forecast'][1]['type']
-        txt_forecast_1_high = json_data['data']['forecast'][1]['high']
-        txt_forecast_1_low  = json_data['data']['forecast'][1]['low']
-        
-        txt_forecast_2_date = json_data['data']['forecast'][2]['date']
-        txt_forecast_2_type = json_data['data']['forecast'][2]['type']
-        txt_forecast_2_high = json_data['data']['forecast'][2]['high']
-        txt_forecast_2_low  = json_data['data']['forecast'][2]['low']
+        if(res == True):
+            rep = requests.get('http://wthrcdn.etouch.cn/weather_mini?citykey='+self.Weather_ID)
+            rep.encoding = 'utf-8'
+            str_x = rep.json()
+            weatcher_result_txt = json.dumps(str_x, ensure_ascii = False, indent = 6)
+            # 将 JSON 对象转换为 Python 字典
+            json_data = json.loads(weatcher_result_txt)
+            self.textEdit_Weather.setText('')
+            # self.textEdit_Weather.setText(weatcher_result_txt)
+            txt_city = json_data['data']['city']
+            txt_current_temp = json_data['data']['wendu']   #实时温度
+            txt_info = json_data['data']['ganmao']          #贴士
 
-        txt_forecast_3_date = json_data['data']['forecast'][3]['date']
-        txt_forecast_3_type = json_data['data']['forecast'][3]['type']
-        txt_forecast_3_high = json_data['data']['forecast'][3]['high']
-        txt_forecast_3_low  = json_data['data']['forecast'][3]['low']
+            txt_forecast_0_date = json_data['data']['forecast'][0]['date']
+            txt_forecast_0_type = json_data['data']['forecast'][0]['type']
+            txt_forecast_0_high = json_data['data']['forecast'][0]['high']
+            txt_forecast_0_low  = json_data['data']['forecast'][0]['low']
 
-        txt_forecast_4_date = json_data['data']['forecast'][4]['date']
-        txt_forecast_4_type = json_data['data']['forecast'][4]['type']
-        txt_forecast_4_high = json_data['data']['forecast'][4]['high']
-        txt_forecast_4_low  = json_data['data']['forecast'][4]['low']
+            txt_forecast_1_date = json_data['data']['forecast'][1]['date']
+            txt_forecast_1_type = json_data['data']['forecast'][1]['type']
+            txt_forecast_1_high = json_data['data']['forecast'][1]['high']
+            txt_forecast_1_low  = json_data['data']['forecast'][1]['low']
+            
+            txt_forecast_2_date = json_data['data']['forecast'][2]['date']
+            txt_forecast_2_type = json_data['data']['forecast'][2]['type']
+            txt_forecast_2_high = json_data['data']['forecast'][2]['high']
+            txt_forecast_2_low  = json_data['data']['forecast'][2]['low']
 
-        self.textEdit_Weather.setText(txt_city + '\n' 
-                                    + txt_current_temp + '\n'
-                                    + txt_info + '\n'
-                                    + '-----------------' + '\n'
-                                    + txt_forecast_0_date + '\n' 
-                                    + txt_forecast_0_type + '\n' 
-                                    + txt_forecast_0_high + '\n' 
-                                    + txt_forecast_0_low  + '\n'
-                                    + '-----------------' + '\n'
-                                    + txt_forecast_1_date + '\n' 
-                                    + txt_forecast_1_type + '\n' 
-                                    + txt_forecast_1_high + '\n' 
-                                    + txt_forecast_1_low  + '\n'
-                                    + '-----------------' + '\n'
-                                    + txt_forecast_2_date + '\n' 
-                                    + txt_forecast_2_type + '\n' 
-                                    + txt_forecast_2_high + '\n' 
-                                    + txt_forecast_2_low  + '\n'
-                                    + '-----------------' + '\n'
-                                    + txt_forecast_3_date + '\n' 
-                                    + txt_forecast_3_type + '\n' 
-                                    + txt_forecast_3_high + '\n' 
-                                    + txt_forecast_3_low  + '\n'
-                                    + '-----------------' + '\n'
-                                    + txt_forecast_4_date + '\n' 
-                                    + txt_forecast_4_type + '\n' 
-                                    + txt_forecast_4_high + '\n' 
-                                    + txt_forecast_4_low  + '\n'
-                                    + '-----------------' + '\n'
-                                    )
-        # print (weatcher_result_txt)
+            txt_forecast_3_date = json_data['data']['forecast'][3]['date']
+            txt_forecast_3_type = json_data['data']['forecast'][3]['type']
+            txt_forecast_3_high = json_data['data']['forecast'][3]['high']
+            txt_forecast_3_low  = json_data['data']['forecast'][3]['low']
+
+            txt_forecast_4_date = json_data['data']['forecast'][4]['date']
+            txt_forecast_4_type = json_data['data']['forecast'][4]['type']
+            txt_forecast_4_high = json_data['data']['forecast'][4]['high']
+            txt_forecast_4_low  = json_data['data']['forecast'][4]['low']
+
+            self.textEdit_Weather.setText(txt_city + '\n' 
+                                        + txt_current_temp + '\n'
+                                        + txt_info + '\n'
+                                        + '-----------------' + '\n'
+                                        + txt_forecast_0_date + '\n' 
+                                        + txt_forecast_0_type + '\n' 
+                                        + txt_forecast_0_high + '\n' 
+                                        + txt_forecast_0_low  + '\n'
+                                        + '-----------------' + '\n'
+                                        + txt_forecast_1_date + '\n' 
+                                        + txt_forecast_1_type + '\n' 
+                                        + txt_forecast_1_high + '\n' 
+                                        + txt_forecast_1_low  + '\n'
+                                        + '-----------------' + '\n'
+                                        + txt_forecast_2_date + '\n' 
+                                        + txt_forecast_2_type + '\n' 
+                                        + txt_forecast_2_high + '\n' 
+                                        + txt_forecast_2_low  + '\n'
+                                        + '-----------------' + '\n'
+                                        + txt_forecast_3_date + '\n' 
+                                        + txt_forecast_3_type + '\n' 
+                                        + txt_forecast_3_high + '\n' 
+                                        + txt_forecast_3_low  + '\n'
+                                        + '-----------------' + '\n'
+                                        + txt_forecast_4_date + '\n' 
+                                        + txt_forecast_4_type + '\n' 
+                                        + txt_forecast_4_high + '\n' 
+                                        + txt_forecast_4_low  + '\n'
+                                        + '-----------------' + '\n'
+                                        )
+            # print (weatcher_result_txt)
+        else:
+            self.statusBar().showMessage('can not find city id.')
 
 
     # --------显示UDP连接状态------------
@@ -292,25 +304,58 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     # --------UDP发送--------
     def UDP_Send(self):
-        # 获得远端IP
-        remote_ip = self.lineEdit_Remote_IP.text()
-        
-        if(remote_ip == ''):
-            remote_ip = "192.168.41.6"
 
-        # 获得远端Port
-        if(self.lineEdit_Remote_Port.text() == ''):
-            remote_port = 8886
+        if(self.UDP_Connect_Flag == True):
+            # 获得远端IP
+            remote_ip = self.lineEdit_Remote_IP.text()
+            
+            if(remote_ip == ''):
+                remote_ip = "192.168.41.6"
+
+            # 获得远端Port
+            if(self.lineEdit_Remote_Port.text() == ''):
+                remote_port = 8886
+            else:
+                remote_port = int(self.lineEdit_Remote_Port.text())
+
+            self.sock.sendto(b'Successful! Message! ',(remote_ip, remote_port))
+
         else:
-            remote_port = int(self.lineEdit_Remote_Port.text())
-
-        self.sock.sendto(b'Successful! Message! ',(remote_ip, remote_port))
+            self.statusBar().showMessage('the udp net is not bing!')
 
 
 if __name__ == '__main__':
     # 下面是使用PyQt5的固定用法
     app = QApplication(sys.argv)
+
+    app.setApplicationName("霄哥的神秘工具V1.0")
+    app.setStyle("Fusion")
+
+    # Fusion dark palette from https://gist.github.com/QuantumCD/6245215.
+    palette = QPalette()
+    palette.setColor(QPalette.Window, QColor(53, 53, 53))
+    palette.setColor(QPalette.WindowText, Qt.white)
+    palette.setColor(QPalette.Base, QColor(25, 25, 25))
+    palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
+    palette.setColor(QPalette.ToolTipBase, Qt.white)
+    palette.setColor(QPalette.ToolTipText, Qt.white)
+    palette.setColor(QPalette.Text, Qt.white)
+    palette.setColor(QPalette.Button, QColor(53, 53, 53))
+    palette.setColor(QPalette.ButtonText, Qt.white)
+    palette.setColor(QPalette.BrightText, Qt.red)
+    palette.setColor(QPalette.Link, QColor(42, 130, 218))
+    palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
+    palette.setColor(QPalette.HighlightedText, Qt.black)
+    app.setPalette(palette)
+    app.setStyleSheet(
+        "QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }"
+    )
+
     main_win = mainWin()
     main_win.setWindowTitle('霄哥的神秘工具V1.0')
+    #禁止最大化按钮
+    main_win.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowCloseButtonHint)
+    #禁止拉伸窗口大小
+    main_win.setFixedSize(main_win.width(), main_win.height());  
     main_win.show()
     sys.exit(app.exec_())

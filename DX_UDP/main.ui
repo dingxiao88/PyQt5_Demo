@@ -64,8 +64,8 @@
     <widget class="QPushButton" name="pushButton_udpSend">
      <property name="geometry">
       <rect>
-       <x>477</x>
-       <y>90</y>
+       <x>470</x>
+       <y>100</y>
        <width>75</width>
        <height>23</height>
       </rect>
@@ -78,7 +78,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>90</y>
+       <y>60</y>
        <width>188</width>
        <height>22</height>
       </rect>
@@ -106,8 +106,8 @@
     <widget class="QWidget" name="layoutWidget_3">
      <property name="geometry">
       <rect>
-       <x>257</x>
-       <y>90</y>
+       <x>260</x>
+       <y>60</y>
        <width>188</width>
        <height>22</height>
       </rect>
@@ -132,7 +132,7 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>257</x>
+       <x>260</x>
        <y>30</y>
        <width>188</width>
        <height>22</height>
@@ -158,14 +158,24 @@
     <widget class="QPushButton" name="pushButton_bing">
      <property name="geometry">
       <rect>
-       <x>477</x>
-       <y>30</y>
+       <x>470</x>
+       <y>50</y>
        <width>75</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
       <string>绑定</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEdit_udpSendData">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>100</y>
+       <width>421</width>
+       <height>31</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -213,6 +223,9 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="placeholderText">
+      <string>杭州</string>
+     </property>
     </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
@@ -225,19 +238,6 @@
      </property>
      <property name="text">
       <string>查询城市</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_City_Check">
-     <property name="geometry">
-      <rect>
-       <x>460</x>
-       <y>70</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>城市查询</string>
      </property>
     </widget>
    </widget>
