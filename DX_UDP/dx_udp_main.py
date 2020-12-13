@@ -90,8 +90,104 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_thread_start.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.pushButton_thread_start.clicked.connect(self.Thread_Run)
 
+        #--------------------------DC 控制-----------------------------------
+        self.DC_FY_RunStatus = 0    #FY运行状态 0：未知   1：运行   2：停止
+        self.DC_XH_RunStatus = 0    #XH运行状态 0：未知   1：运行   2：停止
+        self.DC_FY_CmdRun = False
+        self.DC_XH_CmdRun = False
+
+        if(self.DC_FY_RunStatus == 0):
+            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #F0C239; color: black;}')
+        elif(self.DC_FY_RunStatus == 1):
+            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #16A951; color: black;}')
+        elif(self.DC_FY_RunStatus == 2):
+            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #F20C00; color: black;}')
+
+        if(self.DC_XH_RunStatus == 0):
+            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #F0C239; color: black;}')
+        elif(self.DC_XH_RunStatus == 1):
+            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #16A951; color: black;}')
+        elif(self.DC_XH_RunStatus == 2):
+            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #F20C00; color: black;}')
+
+        self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+
+        self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+
+        # 绑定信号
+        self.pushButton_DC_FYRunCtl.clicked.connect(self.DC_FYRun)
+        self.pushButton_DC_XHRunCtl.clicked.connect(self.DC_XHRun)
+
+        self.pushButton_DC_FYRun_Up.pressed.connect(self.DC_FYRun1)
+        self.pushButton_DC_FYRun_Up.released.connect(self.DC_FYRun2)
+        self.pushButton_DC_FYRun_Down.pressed.connect(self.DC_FYRun3)
+        self.pushButton_DC_FYRun_Down.released.connect(self.DC_FYRun4)
+
+        self.pushButton_DC_XHRun_Left.pressed.connect(self.DC_XHRun1)
+        self.pushButton_DC_XHRun_Left.released.connect(self.DC_XHRun2)
+        self.pushButton_DC_XHRun_Right.pressed.connect(self.DC_XHRun3)
+        self.pushButton_DC_XHRun_Right.released.connect(self.DC_XHRun4)
+
         # 显示界面
         self.show()
+
+    # FY运行控制--------------------------
+    def DC_FYRun(self):
+        if(self.DC_FY_CmdRun == False):
+            self.DC_FY_CmdRun = True
+            self.pushButton_DC_FYRunCtl.setText("停止")
+            self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+            print("FY-Run")
+        else:
+            self.DC_FY_CmdRun = False
+            self.pushButton_DC_FYRunCtl.setText("启动")
+            self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+            print("FY-Stop")
+
+    def DC_FYRun1(self):
+        self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        print("FY-up")
+    def DC_FYRun2(self):
+        self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        print("FY-none")
+    def DC_FYRun3(self):
+        self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        print("FY-down")
+    def DC_FYRun4(self):
+        self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        print("FY-none")
+
+    # XH运行控制------------------
+    def DC_XHRun(self):
+        if(self.DC_XH_CmdRun == False):
+            self.DC_XH_CmdRun = True
+            self.pushButton_DC_XHRunCtl.setText("停止")
+            self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+            print("XH-Run")
+        else:
+            self.DC_XH_CmdRun = False
+            self.pushButton_DC_XHRunCtl.setText("启动")
+            self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+            print("XH-Stop")
+
+    def DC_XHRun1(self):
+        self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        print("XH-left")
+    def DC_XHRun2(self):
+        self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        print("XH-none")
+    def DC_XHRun3(self):
+        self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        print("XH-right")
+    def DC_XHRun4(self):
+        self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        print("XH-none")
+
+
 
     # 主程序全局关闭事件监听
     # Override closeEvent, to intercept the window closing event
