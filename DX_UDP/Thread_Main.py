@@ -46,5 +46,5 @@ class DX_Thread(QThread):
             if(self.Run_Count >= 10000):
                 self.Run_Count = 0
 
-
-            time.sleep(0.01)
+            # time.sleep(0.01)  每秒100次
+            time.sleep(0.02) 

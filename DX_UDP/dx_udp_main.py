@@ -43,6 +43,11 @@ class mainWin(QMainWindow, Ui_MainWindow):
         super(mainWin, self).__init__(parent)
         self.setupUi(self)
 
+        # 创建UDP发送数据
+        self.udp_send = []
+        for x in range(50):
+            self.udp_send.append(0x00)
+
         # 软件状态栏显示
         self.statusBar().showMessage('reday.')
 
@@ -69,6 +74,9 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 按钮绑定触发事件
         self.pushButton_bing.clicked.connect(self.UDP_Connect)
         self.pushButton_udpSend.clicked.connect(self.UDP_Send)
+        # UDP连续发送
+        self.pushButton_udpSend_continue.clicked.connect(self.UDP_Send_Continue)
+        
 
         # 天气查询按键绑定点击触发信号
         self.pushButton_Weather_Check.clicked.connect(self.Weather_Check)
@@ -85,6 +93,11 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 创建线程
         self.dx_thread = DX_Thread()
         self.dx_thread.DX_Thread_OutSingal.connect(self.Thread_Info)
+
+        # 创建UDP发送线程
+        self.pushButton_udpSend_continue.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send_thread = DX_Thread()
+        self.udp_send_thread.DX_Thread_OutSingal.connect(self.UDP_Send_Continue_Pro)
 
         # 线程启动按钮绑定事件
         self.pushButton_thread_start.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
@@ -112,6 +125,11 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+
+        self.pushButton_DC_FYRun_Up.setIcon(QIcon(QPixmap('./images/up.png')))
+        self.pushButton_DC_FYRun_Down.setIcon(QIcon(QPixmap('./images/down.png')))
+        self.pushButton_DC_XHRun_Left.setIcon(QIcon(QPixmap('./images/left.png')))
+        self.pushButton_DC_XHRun_Right.setIcon(QIcon(QPixmap('./images/right.png')))
 
         self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
         self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
@@ -150,15 +168,19 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     def DC_FYRun1(self):
         self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send[0] = 54
         print("FY-up")
     def DC_FYRun2(self):
         self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.udp_send[0] = 0
         print("FY-none")
     def DC_FYRun3(self):
         self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send[0] = 51
         print("FY-down")
     def DC_FYRun4(self):
         self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.udp_send[0] = 0
         print("FY-none")
 
     # XH运行控制------------------
@@ -176,15 +198,19 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     def DC_XHRun1(self):
         self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send[0] = 38
         print("XH-left")
     def DC_XHRun2(self):
         self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.udp_send[0] = 0
         print("XH-none")
     def DC_XHRun3(self):
         self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send[0] = 53
         print("XH-right")
     def DC_XHRun4(self):
         self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.udp_send[0] = 0
         print("XH-none")
 
 
@@ -385,7 +411,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         # 获得本地Port
         if(self.lineEdit_Local_Port.text() == ''):
-            local_port = 8883
+            local_port = 6000
         else:
             local_port = int(self.lineEdit_Local_Port.text())
 
@@ -398,23 +424,64 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.UDP_Connect_Flag = False
 
 
-    # --------UDP发送--------
-    def UDP_Send(self):
+    # UDP连续发送
+    def UDP_Send_Continue(self):
 
         if(self.UDP_Connect_Flag == True):
+
             # 获得远端IP
-            remote_ip = self.lineEdit_Remote_IP.text()
-            
-            if(remote_ip == ''):
-                remote_ip = "192.168.41.6"
+            self.udp_continue_remote_ip = self.lineEdit_Remote_IP.text()
+            if(self.udp_continue_remote_ip == ''):
+                self.udp_continue_remote_ip = "224.100.23.200"
 
             # 获得远端Port
             if(self.lineEdit_Remote_Port.text() == ''):
-                remote_port = 8886
+                self.udp_continue_remote_port = 6000
+            else:
+                self.udp_continue_remote_port = int(self.lineEdit_Remote_Port.text())
+
+            # 获得线程运行的状态
+            if(self.udp_send_thread.working_flag == False):
+                self.udp_send_thread.setRun()
+                self.udp_send_thread.start()
+                self.pushButton_udpSend_continue.setText('停止')
+                self.pushButton_udpSend_continue.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+
+            elif(self.udp_send_thread.working_flag == True):
+                self.udp_send_thread.setRun()
+                self.pushButton_udpSend_continue.setText('连续发送')
+                self.pushButton_udpSend_continue.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+
+
+    def UDP_Send_Continue_Pro(self, str_info, count):
+
+        if(self.UDP_Connect_Flag == True):
+
+            data = bytes(self.udp_send)
+            # self.sock.sendto(b'Successful! Message! ',(remote_ip, remote_port))  #UDP发送字符串
+            self.sock.sendto(data,(self.udp_continue_remote_ip, self.udp_continue_remote_port))  #UDP发送Byte数据
+        else:
+            self.statusBar().showMessage('the udp net is not bing!')
+
+    # --------UDP发送--------
+    def UDP_Send(self):
+
+        data = bytes(self.udp_send)
+ 
+        if(self.UDP_Connect_Flag == True):
+            # 获得远端IP
+            remote_ip = self.lineEdit_Remote_IP.text()
+            if(remote_ip == ''):
+                remote_ip = "224.100.23.200"
+
+            # 获得远端Port
+            if(self.lineEdit_Remote_Port.text() == ''):
+                remote_port = 6000
             else:
                 remote_port = int(self.lineEdit_Remote_Port.text())
 
-            self.sock.sendto(b'Successful! Message! ',(remote_ip, remote_port))
+            # self.sock.sendto(b'Successful! Message! ',(remote_ip, remote_port))  #UDP发送字符串
+            self.sock.sendto(data,(remote_ip, remote_port))  #UDP发送Byte数据
 
         else:
             self.statusBar().showMessage('the udp net is not bing!')
