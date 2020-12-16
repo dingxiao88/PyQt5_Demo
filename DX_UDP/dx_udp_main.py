@@ -11,6 +11,7 @@ import requests
 import json
 import threading
 import struct
+import time
 # from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu)
 # from PyQt5.QtGui import QRegExpValidator, QIcon, QPixmap, QColor
 # from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
@@ -20,7 +21,11 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
 from Thread_Main import DX_Thread
+from Thread_Udp_Recv import Thread_Udp_Recv
+from Thread_Udp_Send import Thread_Udp_Send
 from dx_SystemTray import dx_SystemTray
+
+
 
 # ui_main.py中内容
 from ui_main import *
@@ -30,15 +35,55 @@ from ui_main import *
 class mainWin(QMainWindow, Ui_MainWindow):
 
     # @1-创建udp连接信号
-    ConnectSignal = pyqtSignal(bool)
-    UDP_Recv_Signal = pyqtSignal(int)
+    # ConnectSignal = pyqtSignal(bool)
+    # UDP_Recv_Signal = pyqtSignal(int)
 
+    # @2-全局量
+    udpSocket = None
+    tr = None
+    destIp = ""
+    destPort = 0
+    udp_recv_count = 0
+    udp_send_count = 0
+    udp_connect_flag = False
+    udp_send = []
+    recv_msg = ()
+    recv_addr = ()
+    
 
     def __init__(self, parent=None):
 
+        # UDP组播发送-----------------------------
+        self.udpSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+        self.udpSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        #非阻塞模式
+        self.udpSocket.setblocking(False)
+        # 超时
+        self.udpSocket.settimeout(1)
+        # 绑定本地端口
+        self.udpSocket.bind(("",6000))
+        #告诉内核这是一个多播类型的socket
+        self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 255) 
+        # 加入组播地址
+        mreq = struct.pack('4sl', socket.inet_aton('224.100.23.200'), socket.INADDR_ANY)
+        self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
+        # 创建UDP收发线程
+        # tr = threading.Thread(target = lambda:self.udp_receiveInfo(udpSocket))
+        # tr.setDaemon(True)  #设置为后台线程
+        # tr.setName("th-udp recv")
+        # ts = threading.Thread(target = udp_sendInfo)
+
+        # tr.start()
+        # # ts.start()
+
+        # tr.join()
+        # ts.join()
+
+        # --------------------------------------------------------------
+
         # 关闭所有窗口,也不关闭应用程序
         # QApplication.setQuitOnLastWindowClosed(False)
-
         super(mainWin, self).__init__(parent)
         self.setupUi(self)
 
@@ -47,13 +92,16 @@ class mainWin(QMainWindow, Ui_MainWindow):
         for x in range(50):
             self.udp_send.append(0x00)
 
-        self.udp_sever_th = None
-        self.udp_recv_count = 0
         # @2-创建udp连接标志量
         self.UDP_Connect_Flag = False
         # @3-天气城市id
         self.Weather_ID = '101210101'  #默认是杭州
 
+        # @4-UDP 收发线程-----------------------------
+        self.udp_recv_thread = Thread_Udp_Recv(self.udpSocket)
+        self.udp_recv_thread.DX_Thread_OutSingal.connect(self.UDP_Recv_ShowInfo)
+        self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send)
+        
         # 软件状态栏显示
         self.statusBar().showMessage('reday.')
 
@@ -74,22 +122,23 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.lineEdit_Local_IP.setValidator(QRegExpValidator(rx,self))
         # self.lineEdit_Local_IP.setInputMask("000.000.000.000;_")
 
+        # 天气查询按键绑定点击触发信号
+        self.pushButton_Weather_Check.clicked.connect(self.Weather_Check)
+
         # 绑定按钮增加样式
         self.pushButton_bing.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
 
         # 按钮绑定触发事件-----------------
         # UDP连接
+        # self.pushButton_bing.clicked.connect(lambda:self.UDP_Connect(tr))
         self.pushButton_bing.clicked.connect(self.UDP_Connect)
-        # UDP单击发送
-        self.pushButton_udpSend.clicked.connect(self.UDP_Send)
+        # # UDP单击发送
+        self.pushButton_udpSend.clicked.connect(self.UDP_Send_Single)
         # UDP连续发送
         self.pushButton_udpSend_continue.clicked.connect(self.UDP_Send_Continue)
+        self.pushButton_udpSend_continue.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+    
 
-        # 天气查询按键绑定点击触发信号
-        self.pushButton_Weather_Check.clicked.connect(self.Weather_Check)
-
-        # 绑定网络连接信号
-        self.ConnectSignal.connect(self.UDP_Show_Status)
 
         # 获得本地IP
         self.hostname = socket.gethostname()
@@ -97,41 +146,14 @@ class mainWin(QMainWindow, Ui_MainWindow):
         print(self.ip)
         self.lineEdit_Local_IP.setPlaceholderText(self.ip)
 
-        # 创建线程
-        self.dx_thread = DX_Thread()
-        # self.dx_thread.setDaemon(True)
-        self.dx_thread.DX_Thread_OutSingal.connect(self.Thread_Info)
-
-        # 线程启动按钮绑定事件
+        # 线程启动按钮绑定事件------------
+        self.dx_thread = DX_Thread("dx")
         self.pushButton_thread_start.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.pushButton_thread_start.clicked.connect(self.Thread_Run)
 
-        # 创建UDP发送线程
-        self.UDP_Recv_Signal.connect(self.UDP_Recv_Show)
-        self.pushButton_udpSend_continue.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
-        self.udp_send_thread = DX_Thread()
-        # self.udp_send_thread.setDaemon(True)
-        self.udp_send_thread.DX_Thread_OutSingal.connect(self.UDP_Send_Continue_Pro)
-
         #--------------------------DC 控制-----------------------------------
-        self.DC_FY_RunStatus = 0    #FY运行状态 0：未知   1：运行   2：停止
-        self.DC_XH_RunStatus = 0    #XH运行状态 0：未知   1：运行   2：停止
         self.DC_FY_CmdRun = False
         self.DC_XH_CmdRun = False
-
-        if(self.DC_FY_RunStatus == 0):
-            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #F0C239; color: black;}')
-        elif(self.DC_FY_RunStatus == 1):
-            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #16A951; color: black;}')
-        elif(self.DC_FY_RunStatus == 2):
-            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #F20C00; color: black;}')
-
-        if(self.DC_XH_RunStatus == 0):
-            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #F0C239; color: black;}')
-        elif(self.DC_XH_RunStatus == 1):
-            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #16A951; color: black;}')
-        elif(self.DC_XH_RunStatus == 2):
-            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #F20C00; color: black;}')
 
         self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
@@ -160,6 +182,37 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_DC_XHRun_Right.pressed.connect(self.DC_XHRun3)
         self.pushButton_DC_XHRun_Right.released.connect(self.DC_XHRun4)
 
+        #--------------------------DC 反馈信息--------------------------------------------------------------
+        self.DC_Dev_Status = 1      #随动设备状态 0：正常   1：不明   2：关机   3：故障
+        self.DC_FY_RunStatus = 2    #FY运行状态 0：停止   1：运行   2：未知
+        self.DC_XH_RunStatus = 2    #XH运行状态 0：停止   1：运行   2：未知
+
+        if(self.DC_Dev_Status == 0):
+            self.label_DC_Dev_Status.setStyleSheet('QLabel {background-color: #16A951; color: black;}')  #绿
+        elif(self.DC_Dev_Status == 1):
+            self.label_DC_Dev_Status.setStyleSheet('QLabel {background-color: #F0C239; color: black;}')  #黄
+        elif(self.DC_Dev_Status == 2):
+            self.label_DC_Dev_Status.setStyleSheet('QLabel {background-color: #FFF2DF; color: black;}')  #白
+        elif(self.DC_Dev_Status == 3):
+            self.label_DC_Dev_Status.setStyleSheet('QLabel {background-color: #F20C00; color: black;}')  #红
+
+        if(self.DC_FY_RunStatus == 0):
+            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #F20C00; color: black;}')  #红
+        elif(self.DC_FY_RunStatus == 1):
+            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #16A951; color: black;}')  #绿
+        elif(self.DC_FY_RunStatus == 2):
+            self.label_DC_FYStatus.setStyleSheet('QLabel {background-color: #F0C239; color: black;}')  #黄
+
+        if(self.DC_XH_RunStatus == 0):
+            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #F20C00; color: black;}')  #红
+        elif(self.DC_XH_RunStatus == 1):
+            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #16A951; color: black;}')  #绿
+        elif(self.DC_XH_RunStatus == 2):
+            self.label_DC_XHStatus.setStyleSheet('QLabel {background-color: #F0C239; color: black;}')  #黄
+
+        self.label_DC_XHAngel.setText('5.99')
+        self.label_DC_XHAngel.setText('-129.23')
+
         # 显示界面
         self.show()
 
@@ -169,33 +222,35 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.DC_FY_CmdRun = True
             self.pushButton_DC_FYRunCtl.setText("停止")
             self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+            self.udp_send[3] = 1  #FY运行
             print("FY-Run")
         else:
             self.DC_FY_CmdRun = False
             self.pushButton_DC_FYRunCtl.setText("启动")
             self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+            self.udp_send[3] = 0  #FY停止
             print("FY-Stop")
 
     def DC_FYRun1(self):
-        if(self.DC_FY_RunStatus == 1):
-            self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
-            self.udp_send[0] = 54
-            print("FY-up")
+        # if(self.DC_FY_RunStatus == 1):
+        self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send[0] = 54
+        print("FY-up")
     def DC_FYRun2(self):
-        if(self.DC_FY_RunStatus == 1):
-            self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-            self.udp_send[0] = 0
-            print("FY-none")
+        # if(self.DC_FY_RunStatus == 1):
+        self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.udp_send[0] = 0
+        print("FY-none")
     def DC_FYRun3(self):
-        if(self.DC_FY_RunStatus == 1):
-            self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
-            self.udp_send[0] = 51
-            print("FY-down")
+        # if(self.DC_FY_RunStatus == 1):
+        self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send[0] = 51
+        print("FY-down")
     def DC_FYRun4(self):
-        if(self.DC_FY_RunStatus == 1):
-            self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-            self.udp_send[0] = 0
-            print("FY-none")
+        # if(self.DC_FY_RunStatus == 1):
+        self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.udp_send[0] = 0
+        print("FY-none")
 
     # XH运行控制------------------
     def DC_XHRun(self):
@@ -203,33 +258,35 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.DC_XH_CmdRun = True
             self.pushButton_DC_XHRunCtl.setText("停止")
             self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+            self.udp_send[4] = 1  #XH运行
             print("XH-Run")
         else:
             self.DC_XH_CmdRun = False
             self.pushButton_DC_XHRunCtl.setText("启动")
             self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+            self.udp_send[4] = 0  #XH停止
             print("XH-Stop")
 
     def DC_XHRun1(self):
-        if(self.DC_XH_RunStatus == 1):
-            self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
-            self.udp_send[0] = 38
-            print("XH-left")
+        # if(self.DC_XH_RunStatus == 1):
+        self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send[0] = 38
+        print("XH-left")
     def DC_XHRun2(self):
-        if(self.DC_XH_RunStatus == 1):
-            self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-            self.udp_send[0] = 0
-            print("XH-none")
+        # if(self.DC_XH_RunStatus == 1):
+        self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.udp_send[0] = 0
+        print("XH-none")
     def DC_XHRun3(self):
-        if(self.DC_XH_RunStatus == 1):
-            self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
-            self.udp_send[0] = 53
-            print("XH-right")
+        # if(self.DC_XH_RunStatus == 1):
+        self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        self.udp_send[0] = 53
+        print("XH-right")
     def DC_XHRun4(self):
-        if(self.DC_XH_RunStatus == 1):
-            self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-            self.udp_send[0] = 0
-            print("XH-none")
+        # if(self.DC_XH_RunStatus == 1):
+        self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        self.udp_send[0] = 0
+        print("XH-none")
 
 
 
@@ -241,10 +298,8 @@ class mainWin(QMainWindow, Ui_MainWindow):
     # QSystemTrayIcon.Warning
     # QSystemTrayIcon.Critical
     def closeEvent(self, event):
-        # if self.check_box.isChecked():
         event.ignore()
         self.hide()
-        # dx_SystemTray.showMsg(self)
         self.dx_SystemTray1.showMsg(1, "程序缩小至系统托盘!")
 
 
@@ -283,7 +338,6 @@ class mainWin(QMainWindow, Ui_MainWindow):
     # 线程信息打印
     def Thread_Info(self, str_info, count):
         self.textEdit_thread.setText(str_info)
-
         if(count == 10000):
             self.dx_SystemTray1.showMsg(1, "已成功发送10000次!")
 
@@ -400,158 +454,82 @@ class mainWin(QMainWindow, Ui_MainWindow):
         else:
             self.statusBar().showMessage('can not find city id.')
 
-
-    # --------显示UDP连接状态------------
-    def UDP_Show_Status(self):
-        if(self.UDP_Connect_Flag == False):
-            self.pushButton_bing.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
-            self.pushButton_bing.setText('绑定')
-        elif(self.UDP_Connect_Flag == True):
-            self.pushButton_bing.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-            self.pushButton_bing.setText('断开')
-
-
     # --------UDP连接--------
-    def UDP_Connect(self):
+    def UDP_Connect(self, tr):
+        # 获得线程运行的状态
+        if(self.udp_recv_thread.working_flag == False):
+            self.udp_recv_thread.setRun()
+            self.udp_recv_thread.start()
+            self.udp_connect_flag = True
+            self.pushButton_bing.setText('断开')
+            self.pushButton_bing.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
 
-        if(self.UDP_Connect_Flag == False):
-            self.UDP_Connect_Flag = True
-        elif(self.UDP_Connect_Flag == True):
-            self.UDP_Connect_Flag = False
+        elif(self.udp_recv_thread.working_flag == True):
+            self.udp_recv_thread.setRun()
+            self.udp_connect_flag = False
+            self.pushButton_bing.setText('绑定')
+            self.pushButton_bing.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
 
-        self.ConnectSignal.emit(self.UDP_Connect_Flag)
-
-        # 获得本地IP
-        local_ip = self.lineEdit_Local_IP.text()
-        
-        if(local_ip == ''):
-            local_ip = self.ip
-
-        # 获得本地Port
-        if(self.lineEdit_Local_Port.text() == ''):
-            local_port = 6000
-        else:
-            local_port = int(self.lineEdit_Local_Port.text())
-
-        try:
-            self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            #阻塞模式
-            # self.sock.setblocking(1)
-            #非阻塞模式
-            self.sock.setblocking(False)
-            self.sock.settimeout(1)
-            self.sock.bind((local_ip, local_port))
-
-        except Exception as e:
-            print('DX--->Error:', e)
-            self.sock.close()
-            self.UDP_Connect_Flag = False
-        else:
-            self.udp_sever_th = threading.Thread(target = self.udp_server_concurrency)
-            self.udp_sever_th.setDaemon(True)  #设置为后台线程
-            self.udp_sever_th.start()
-            # self.msg = 'UDP服务端正在监听端口:{}\n'.format(self.port)
-            # self.signal_write_msg.emit("写入")
-
-    def UDP_Recv_Show(self, count):
-        self.label_udp_recv_count.setText(str(count))
-
-    # UDP接收处理
-    def udp_server_concurrency(self):
-
-        while (self.UDP_Connect_Flag == True):
-            #实时刷新界面
-            # QApplication.processEvents()
-
-            # recv_msg 这个变量存储的是一个元组，(接收到的数据，(发送方的ip, port))
-            recv_msg, recv_addr = self.sock.recvfrom(1024)
-
-            msg = str((recv_msg.decode('utf-8')))
-
-            # print(str(len(msg)))  OK
-
-            # 确认IP
-            if(recv_addr[0] == '192.168.31.159'):
-
-                msg1 = struct.unpack('!20B',recv_msg)  #!网络字节顺序 20字节 B unsigned char
-                # print(msg1[5])
-
-                self.udp_recv_count += 1
-                if(self.udp_recv_count > 65535):
-                    self.udp_recv_count = 0
-                self.UDP_Recv_Signal.emit(self.udp_recv_count)
-
-                # temp = recv_msg[0]
-            
-            # self.msg = '来自IP:{}端口:{}:\n{}\n'.format(recv_addr[0], recv_addr[1], msg)
-            # print(self.msg)
-            # self.signal_write_msg.emit("写入")
-
-
-    # UDP连续发送
+    # UDP连续发送--------------------------
     def UDP_Send_Continue(self):
-
-        if(self.UDP_Connect_Flag == True):
-
-            # 获得远端IP
-            self.udp_continue_remote_ip = self.lineEdit_Remote_IP.text()
-            if(self.udp_continue_remote_ip == ''):
-                self.udp_continue_remote_ip = "224.100.23.200"
-
-            # 获得远端Port
-            if(self.lineEdit_Remote_Port.text() == ''):
-                self.udp_continue_remote_port = 6000
-            else:
-                self.udp_continue_remote_port = int(self.lineEdit_Remote_Port.text())
-
+        if(self.udp_connect_flag == True):
             # 获得线程运行的状态
             if(self.udp_send_thread.working_flag == False):
                 self.udp_send_thread.setRun()
                 self.udp_send_thread.start()
                 self.pushButton_udpSend_continue.setText('停止')
                 self.pushButton_udpSend_continue.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-
             elif(self.udp_send_thread.working_flag == True):
                 self.udp_send_thread.setRun()
                 self.pushButton_udpSend_continue.setText('连续发送')
                 self.pushButton_udpSend_continue.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
 
-    # UDP连续发送
-    def UDP_Send_Continue_Pro(self, str_info, count):
+    # UDP单次发送--------------------------
+    def UDP_Send_Single(self):
+        if(self.udp_connect_flag == True):
+            if(self.udp_send_thread.working_flag == False):
+                self.udp_send_thread.setOneShot()
+                self.udp_send_thread.start()
 
-        if(self.UDP_Connect_Flag == True):
-
-            data = bytes(self.udp_send)
-            # self.sock.sendto(b'Successful! Message! ',(remote_ip, remote_port))  #UDP发送字符串
-            self.sock.sendto(data,(self.udp_continue_remote_ip, self.udp_continue_remote_port))  #UDP发送Byte数据
-        else:
-            self.statusBar().showMessage('the udp net is not bing!')
-
-    # --------UDP发送--------
-    def UDP_Send(self):
-
-        data = bytes(self.udp_send)
- 
-        if(self.UDP_Connect_Flag == True):
-            # 获得远端IP
-            remote_ip = self.lineEdit_Remote_IP.text()
-            if(remote_ip == ''):
-                remote_ip = "224.100.23.200"
-
-            # 获得远端Port
-            if(self.lineEdit_Remote_Port.text() == ''):
-                remote_port = 6000
-            else:
-                remote_port = int(self.lineEdit_Remote_Port.text())
-
-            # self.sock.sendto(b'Successful! Message! ',(remote_ip, remote_port))  #UDP发送字符串
-            self.sock.sendto(data,(remote_ip, remote_port))  #UDP发送Byte数据
-
-        else:
-            self.statusBar().showMessage('the udp net is not bing!')
+    # UDP接收数据显示----------------------
+    def UDP_Recv_ShowInfo(self, str_info, count):
+        self.label_udp_recv_count.setText(str(count))
 
 
+
+
+    # # UDP接收函数--------------------------
+    # def udp_receiveInfo(self, udpSocket):
+    #     udp_recv_count = 0
+    #     while True:
+    #         try:
+    #             # receiveData = udpSocket.recvfrom(1024)
+    #             recv_msg, recv_addr = udpSocket.recvfrom(1024)
+    #             # print("<<%s:%s"%(str(receiveData[1]),str(receiveData[0])))
+    #             # print("<<"+str(recv_addr[0]))
+    #             if(str(recv_addr[0]) == "192.168.0.106"):
+    #                 # print("yes")
+    #                 udp_recv_count = udp_recv_count+1
+    #                 # # print("<<"+str(recv_addr[0]))
+    #                 print(udp_recv_count)
+    #             time.sleep(0.02) 
+    #         except Exception as e:
+    #             pass
+  
+# 主函数-------------------------------------
 if __name__ == '__main__':
+
+    # global udpSocket
+    # global tr
+    # global destIp
+    # global destPort
+    # global udp_recv_count
+    # global udp_send_count
+    # global udp_connect_flag
+    # global udp_send
+    # global recv_msg
+    # global recv_addr
+
     # 下面是使用PyQt5的固定用法
     app = QApplication(sys.argv)
 
@@ -585,4 +563,5 @@ if __name__ == '__main__':
     #禁止拉伸窗口大小
     main_win.setFixedSize(main_win.width(), main_win.height());  
     main_win.show()
+
     sys.exit(app.exec_())

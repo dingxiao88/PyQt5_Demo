@@ -13,11 +13,12 @@ class DX_Thread(QThread):
 
     DX_Thread_OutSingal = pyqtSignal(str, int)
 
-    def __init__(self, parent = None):
+    def __init__(self, name, parent = None):
         super(DX_Thread, self).__init__(parent)
+        self.name = name
         self.working_flag = False
         self.Run_Count = 0
-        # print('thread init')
+        print(self.name)
 
 
     # 线程运行控制
