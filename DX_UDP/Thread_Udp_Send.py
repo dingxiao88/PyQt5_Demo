@@ -47,5 +47,5 @@ class Thread_Udp_Send(QThread):
         else:
             while(self.working_flag == True):
                 data2 = bytes(self.udp_send)
-                self.socket.sendto(data2,("192.168.0.106", 6000))
+                self.socket.sendto(data2,("224.100.23.200", 6000))
                 time.sleep(0.02) 

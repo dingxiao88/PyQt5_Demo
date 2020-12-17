@@ -140,14 +140,21 @@ class mainWin(QMainWindow, Ui_MainWindow):
     
 
 
-        # 获得本地IP
+        # 获得本地IP---for PC
         self.hostname = socket.gethostname()
         self.ip = socket.gethostbyname(self.hostname)
+        # 获得本地IP---for PI4
+        # gw = os.popen("ip -4 route show default").read().split()
+        # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # s.connect((gw[2], 0))
+        # self.ip = s.getsockname()[0]
+
         print(self.ip)
         self.lineEdit_Local_IP.setPlaceholderText(self.ip)
 
         # 线程启动按钮绑定事件------------
         self.dx_thread = DX_Thread("dx")
+        self.dx_thread.DX_Thread_OutSingal.connect(self.Thread_Info)
         self.pushButton_thread_start.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.pushButton_thread_start.clicked.connect(self.Thread_Run)
 
