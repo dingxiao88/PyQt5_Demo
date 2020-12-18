@@ -194,7 +194,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         self.pushButton_DC_XHRun_Left.pressed.connect(self.DC_XHRun1)
         self.pushButton_DC_XHRun_Left.released.connect(self.DC_XHRun2)
-        self.pushButton_DC_XHRun_Right.pressed.connect(self.DC_XHRun3)
+        self.pushButton_DC_XHRun_Right.pressed.connect(self.DC_XHRun3)  
         self.pushButton_DC_XHRun_Right.released.connect(self.DC_XHRun4)
 
         #--------------------------DC 反馈信息--------------------------------------------------------------
@@ -281,6 +281,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
                         ipv4_add = '0.0.0.0'
             else:
                 return
+
+        # # 获得本地IP---for PI4
+        # # gw = os.popen("ip -4 route show default").read().split()
+        # # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # # s.connect((gw[2], 0))
+        # # ipv4_add = s.getsockname()[0]
+        
             self.label_InterfaceIP.setText(ipv4_add)
             self.lineEdit_Local_IP.setPlaceholderText(ipv4_add)
             self.localIp = ipv4_add
@@ -331,6 +338,12 @@ class mainWin(QMainWindow, Ui_MainWindow):
                 break
             else:
                 ipv4_add = '0.0.0.0'
+        
+        # # 获得本地IP---for PI4
+        # # gw = os.popen("ip -4 route show default").read().split()
+        # # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # # s.connect((gw[2], 0))
+        # # ipv4_add = s.getsockname()[0]
 
         self.label_InterfaceIP.setText(ipv4_add)
         self.lineEdit_Local_IP.setPlaceholderText(ipv4_add)

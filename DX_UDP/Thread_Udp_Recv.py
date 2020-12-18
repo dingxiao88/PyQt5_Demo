@@ -8,6 +8,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import sys
 import time
+import struct
 
 class Thread_Udp_Recv(QThread):
 
@@ -36,27 +37,16 @@ class Thread_Udp_Recv(QThread):
     # 线程运行主循环
     def run(self):
         while(self.working_flag == True):
-        #     send_str = 'send count:{0}'.format(self.Run_Count)
-        #     self.Run_Count += 1
-        #     # milliseconds = int(round(time.time() * 1000))
-        #     self.DX_Thread_OutSingal.emit(send_str, self.Run_Count)
-        #     # self.DX_Thread_OutSingal.emit('count:{0}'.format(self.Run_Count))
-        #     # self.DX_Thread_OutSingal.emit('time:{0}'.format(milliseconds))
-        #     # print('thread send')
-
-        #     if(self.Run_Count >= 10000):
-        #         self.Run_Count = 0
-
-        #     # time.sleep(0.01)  每秒100次
-        #     time.sleep(0.02) 
-
-        # while True:
             try:
                 # receiveData = udpSocket.recvfrom(1024)
                 recv_msg, recv_addr = self.socket.recvfrom(1024)
                 # print("<<%s:%s"%(str(receiveData[1]),str(receiveData[0])))
                 # print("<<"+str(recv_addr[0]))
                 if(str(recv_addr[0]) == "192.168.0.106"):
+
+                    # msg1 = struct.unpack('!50B',recv_msg)  #!网络字节顺序 20字节 B unsigned char
+                    # print(msg1[5])
+
                     # print("yes")
                     self.Run_Count = self.Run_Count + 1
                     send_str = 'send count:{0}'.format(self.Run_Count)
