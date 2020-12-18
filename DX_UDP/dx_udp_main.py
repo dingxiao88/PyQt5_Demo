@@ -13,6 +13,7 @@ import threading
 import struct
 import time
 import psutil
+from pathlib import Path
 # from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu)
 # from PyQt5.QtGui import QRegExpValidator, QIcon, QPixmap, QColor
 # from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
@@ -39,18 +40,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     # @2-全局量
     udpSocket = None
-    tr = None
     localIp = ""
     localPort = 0
     destIp = ""
     destPort = 0
-    udp_recv_count = 0
-    udp_send_count = 0
     udp_connect_flag = False
     udp_send = []
-    recv_msg = ()
-    recv_addr = ()
-    
+ 
 
     def __init__(self, parent=None):
 
@@ -93,6 +89,15 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.udp_send = []
         for x in range(50):
             self.udp_send.append(0x00)
+
+        # 创建配置文件
+        config_file = Path('config.json')
+        # 判断config文件是否存在
+        if config_file.exists():
+            self.config = json.load(open('config.json', 'r'))
+        else:
+            self.config = dict()
+            json.dump(self.config, open('config.json', 'w+'))
 
         # @2-创建udp连接标志量
         self.UDP_Connect_Flag = False
@@ -225,6 +230,16 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         # 显示界面
         self.show()
+
+    # 保存config文件
+    def save_config(self):
+        # interface_idx = self.config.get('Interface', 0)  ---config 读操作
+        # self.config['Interface'] = self.ui.comboBox_Interface.currentIndex()  ---config 写操作
+        # self.save_config()  ---config 文件保存
+        try:
+            json.dump(self.config, open('config.json', 'w+'))
+        except PermissionError as err:
+            pass
 
     # 配置Local Socket-----------------
     def Set_Local_Socket(self, set_flag):
@@ -636,17 +651,6 @@ class mainWin(QMainWindow, Ui_MainWindow):
   
 # 主函数-------------------------------------
 if __name__ == '__main__':
-
-    # global udpSocket
-    # global tr
-    # global destIp
-    # global destPort
-    # global udp_recv_count
-    # global udp_send_count
-    # global udp_connect_flag
-    # global udp_send
-    # global recv_msg
-    # global recv_addr
 
     # 下面是使用PyQt5的固定用法
     app = QApplication(sys.argv)
