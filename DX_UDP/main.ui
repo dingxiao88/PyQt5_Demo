@@ -194,6 +194,17 @@
       <string>连续发送</string>
      </property>
     </widget>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>10</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_led"/>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_Weather">
     <property name="geometry">
@@ -711,6 +722,16 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>20</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
      </property>
     </widget>
    </widget>

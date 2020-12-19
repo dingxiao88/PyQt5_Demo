@@ -14,6 +14,7 @@ import struct
 import time
 import psutil
 from pathlib import Path
+from pyqt_led import Led          # https://github.com/Neur1n/pyqt_led
 # from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu)
 # from PyQt5.QtGui import QRegExpValidator, QIcon, QPixmap, QColor
 # from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
@@ -26,6 +27,14 @@ from Thread_Main import DX_Thread
 from Thread_Udp_Recv import Thread_Udp_Recv
 from Thread_Udp_Send import Thread_Udp_Send
 from dx_SystemTray import dx_SystemTray
+
+# # 引入设计样式
+# # https://github.com/ColinDuquesnoy/QDarkStyleSheet
+# import qdarkstyle
+# # https://github.com/gmarull/qtmodern
+# import qtmodern.styles
+# import qtmodern.windows
+
 
 # ui_main.py中内容
 from ui_main import *
@@ -228,6 +237,15 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.label_DC_XHAngel.setText('5.99')
         self.label_DC_XHAngel.setText('-129.23')
 
+        # Led
+        # Led(parent, on_color=green, off_color=black, shape=rectangle, build='release') 
+        # self._shape = np.array(['capsule', 'circle', 'rectangle'])
+        # self._color = np.array(['blue', 'green', 'orange', 'purple', 'red','yellow'])
+        self.led_dx = Led(self, on_color=Led.red, off_color=Led.white, shape=Led.circle)
+        self.led_dx.setFocusPolicy(Qt.NoFocus)
+        self.led_dx.turn_on(False)
+        self.verticalLayout_led.addWidget(self.led_dx)
+
         # 显示界面
         self.show()
 
@@ -287,7 +305,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # # s.connect((gw[2], 0))
         # # ipv4_add = s.getsockname()[0]
-        
+
             self.label_InterfaceIP.setText(ipv4_add)
             self.lineEdit_Local_IP.setPlaceholderText(ipv4_add)
             self.localIp = ipv4_add
@@ -669,8 +687,9 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     app.setApplicationName("霄哥的神秘工具V1.0")
-    app.setStyle("Fusion")
 
+    # 设置成Fusion样式
+    app.setStyle("Fusion")
     # Fusion dark palette from https://gist.github.com/QuantumCD/6245215.
     palette = QPalette()
     palette.setColor(QPalette.Window, QColor(53, 53, 53))
@@ -690,6 +709,10 @@ if __name__ == '__main__':
     app.setStyleSheet(
         "QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }"
     )
+
+    # setup stylesheet
+    # app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+    # qtmodern.styles.dark(app)
 
     main_win = mainWin()
     main_win.setWindowTitle('霄哥的神秘工具V1.0')
