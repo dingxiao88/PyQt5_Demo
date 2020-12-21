@@ -49,6 +49,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     # @2-全局量
     udpSocket = None
+    current_net_interface = None
     localIp = ""
     localPort = 0
     destIp = ""
@@ -241,7 +242,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # Led(parent, on_color=green, off_color=black, shape=rectangle, build='release') 
         # self._shape = np.array(['capsule', 'circle', 'rectangle'])
         # self._color = np.array(['blue', 'green', 'orange', 'purple', 'red','yellow'])
-        self.led_dx = Led(self, on_color=Led.red, off_color=Led.white, shape=Led.circle)
+        self.led_dx = Led(self, on_color  =Led.red, off_color = Led.white, shape = Led.circle)
         self.led_dx.setFocusPolicy(Qt.NoFocus)
         self.led_dx.turn_on(False)
         self.verticalLayout_led.addWidget(self.led_dx)
@@ -289,6 +290,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
     def on_interface_selection_change(self):
         if(self.udp_connect_flag == False):
             current_interface = self.comboBox_LocalInterface.currentText()
+            self.current_net_interface = current_interface
 
             if current_interface in self.net_if:
                 for snicaddr in self.net_if[current_interface]:
@@ -349,6 +351,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
                 self.comboBox_LocalInterface.addItem(if_name)
             
         current_interface = self.comboBox_LocalInterface.currentText()
+        self.current_net_interface = current_interface
 
         for snicaddr in self.net_if[current_interface]:
             if snicaddr.family == socket.AF_INET:
@@ -532,80 +535,82 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     # --------天气查询------------
     def Weather_Check(self):
+        if(self.current_net_interface == "WLAN"):
+            res = self.City_Check()
 
-        res = self.City_Check()
+            if(res == True):
+                rep = requests.get('http://wthrcdn.etouch.cn/weather_mini?citykey='+self.Weather_ID)
+                rep.encoding = 'utf-8'
+                str_x = rep.json()
+                weatcher_result_txt = json.dumps(str_x, ensure_ascii = False, indent = 6)
+                # 将 JSON 对象转换为 Python 字典
+                json_data = json.loads(weatcher_result_txt)
+                self.textEdit_Weather.setText('')
+                # self.textEdit_Weather.setText(weatcher_result_txt)
+                txt_city = json_data['data']['city']
+                txt_current_temp = json_data['data']['wendu']   #实时温度
+                txt_info = json_data['data']['ganmao']          #贴士
 
-        if(res == True):
-            rep = requests.get('http://wthrcdn.etouch.cn/weather_mini?citykey='+self.Weather_ID)
-            rep.encoding = 'utf-8'
-            str_x = rep.json()
-            weatcher_result_txt = json.dumps(str_x, ensure_ascii = False, indent = 6)
-            # 将 JSON 对象转换为 Python 字典
-            json_data = json.loads(weatcher_result_txt)
-            self.textEdit_Weather.setText('')
-            # self.textEdit_Weather.setText(weatcher_result_txt)
-            txt_city = json_data['data']['city']
-            txt_current_temp = json_data['data']['wendu']   #实时温度
-            txt_info = json_data['data']['ganmao']          #贴士
+                txt_forecast_0_date = json_data['data']['forecast'][0]['date']
+                txt_forecast_0_type = json_data['data']['forecast'][0]['type']
+                txt_forecast_0_high = json_data['data']['forecast'][0]['high']
+                txt_forecast_0_low  = json_data['data']['forecast'][0]['low']
 
-            txt_forecast_0_date = json_data['data']['forecast'][0]['date']
-            txt_forecast_0_type = json_data['data']['forecast'][0]['type']
-            txt_forecast_0_high = json_data['data']['forecast'][0]['high']
-            txt_forecast_0_low  = json_data['data']['forecast'][0]['low']
+                txt_forecast_1_date = json_data['data']['forecast'][1]['date']
+                txt_forecast_1_type = json_data['data']['forecast'][1]['type']
+                txt_forecast_1_high = json_data['data']['forecast'][1]['high']
+                txt_forecast_1_low  = json_data['data']['forecast'][1]['low']
+                
+                txt_forecast_2_date = json_data['data']['forecast'][2]['date']
+                txt_forecast_2_type = json_data['data']['forecast'][2]['type']
+                txt_forecast_2_high = json_data['data']['forecast'][2]['high']
+                txt_forecast_2_low  = json_data['data']['forecast'][2]['low']
 
-            txt_forecast_1_date = json_data['data']['forecast'][1]['date']
-            txt_forecast_1_type = json_data['data']['forecast'][1]['type']
-            txt_forecast_1_high = json_data['data']['forecast'][1]['high']
-            txt_forecast_1_low  = json_data['data']['forecast'][1]['low']
-            
-            txt_forecast_2_date = json_data['data']['forecast'][2]['date']
-            txt_forecast_2_type = json_data['data']['forecast'][2]['type']
-            txt_forecast_2_high = json_data['data']['forecast'][2]['high']
-            txt_forecast_2_low  = json_data['data']['forecast'][2]['low']
+                txt_forecast_3_date = json_data['data']['forecast'][3]['date']
+                txt_forecast_3_type = json_data['data']['forecast'][3]['type']
+                txt_forecast_3_high = json_data['data']['forecast'][3]['high']
+                txt_forecast_3_low  = json_data['data']['forecast'][3]['low']
 
-            txt_forecast_3_date = json_data['data']['forecast'][3]['date']
-            txt_forecast_3_type = json_data['data']['forecast'][3]['type']
-            txt_forecast_3_high = json_data['data']['forecast'][3]['high']
-            txt_forecast_3_low  = json_data['data']['forecast'][3]['low']
+                txt_forecast_4_date = json_data['data']['forecast'][4]['date']
+                txt_forecast_4_type = json_data['data']['forecast'][4]['type']
+                txt_forecast_4_high = json_data['data']['forecast'][4]['high']
+                txt_forecast_4_low  = json_data['data']['forecast'][4]['low']
 
-            txt_forecast_4_date = json_data['data']['forecast'][4]['date']
-            txt_forecast_4_type = json_data['data']['forecast'][4]['type']
-            txt_forecast_4_high = json_data['data']['forecast'][4]['high']
-            txt_forecast_4_low  = json_data['data']['forecast'][4]['low']
-
-            self.textEdit_Weather.setText(txt_city + '\n' 
-                                        + txt_current_temp + '\n'
-                                        + txt_info + '\n'
-                                        + '-----------------' + '\n'
-                                        + txt_forecast_0_date + '\n' 
-                                        + txt_forecast_0_type + '\n' 
-                                        + txt_forecast_0_high + '\n' 
-                                        + txt_forecast_0_low  + '\n'
-                                        + '-----------------' + '\n'
-                                        + txt_forecast_1_date + '\n' 
-                                        + txt_forecast_1_type + '\n' 
-                                        + txt_forecast_1_high + '\n' 
-                                        + txt_forecast_1_low  + '\n'
-                                        + '-----------------' + '\n'
-                                        + txt_forecast_2_date + '\n' 
-                                        + txt_forecast_2_type + '\n' 
-                                        + txt_forecast_2_high + '\n' 
-                                        + txt_forecast_2_low  + '\n'
-                                        + '-----------------' + '\n'
-                                        + txt_forecast_3_date + '\n' 
-                                        + txt_forecast_3_type + '\n' 
-                                        + txt_forecast_3_high + '\n' 
-                                        + txt_forecast_3_low  + '\n'
-                                        + '-----------------' + '\n'
-                                        + txt_forecast_4_date + '\n' 
-                                        + txt_forecast_4_type + '\n' 
-                                        + txt_forecast_4_high + '\n' 
-                                        + txt_forecast_4_low  + '\n'
-                                        + '-----------------' + '\n'
-                                        )
-            # print (weatcher_result_txt)
+                self.textEdit_Weather.setText(txt_city + '\n' 
+                                            + txt_current_temp + '\n'
+                                            + txt_info + '\n'
+                                            + '-----------------' + '\n'
+                                            + txt_forecast_0_date + '\n' 
+                                            + txt_forecast_0_type + '\n' 
+                                            + txt_forecast_0_high + '\n' 
+                                            + txt_forecast_0_low  + '\n'
+                                            + '-----------------' + '\n'
+                                            + txt_forecast_1_date + '\n' 
+                                            + txt_forecast_1_type + '\n' 
+                                            + txt_forecast_1_high + '\n' 
+                                            + txt_forecast_1_low  + '\n'
+                                            + '-----------------' + '\n'
+                                            + txt_forecast_2_date + '\n' 
+                                            + txt_forecast_2_type + '\n' 
+                                            + txt_forecast_2_high + '\n' 
+                                            + txt_forecast_2_low  + '\n'
+                                            + '-----------------' + '\n'
+                                            + txt_forecast_3_date + '\n' 
+                                            + txt_forecast_3_type + '\n' 
+                                            + txt_forecast_3_high + '\n' 
+                                            + txt_forecast_3_low  + '\n'
+                                            + '-----------------' + '\n'
+                                            + txt_forecast_4_date + '\n' 
+                                            + txt_forecast_4_type + '\n' 
+                                            + txt_forecast_4_high + '\n' 
+                                            + txt_forecast_4_low  + '\n'
+                                            + '-----------------' + '\n'
+                                            )
+                # print (weatcher_result_txt)
+            else:
+                self.statusBar().showMessage('can not find city id.')
         else:
-            self.statusBar().showMessage('can not find city id.')
+            self.statusBar().showMessage('the net interface is not wlan.')
 
     # --------UDP连接--------
     def UDP_Connect(self):
