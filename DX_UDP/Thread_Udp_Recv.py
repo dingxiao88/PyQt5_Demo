@@ -42,7 +42,8 @@ class Thread_Udp_Recv(QThread):
                 recv_msg, recv_addr = self.socket.recvfrom(1024)
                 # print("<<%s:%s"%(str(receiveData[1]),str(receiveData[0])))
                 # print("<<"+str(recv_addr[0]))
-                if(str(recv_addr[0]) == "192.168.0.106"):
+                # if(str(recv_addr[0]) == "192.168.0.106"):
+                if(str(recv_addr[0]) == "10.0.0.18"):
 
                     # msg1 = struct.unpack('!50B',recv_msg)  #!网络字节顺序 20字节 B unsigned char
                     # print(msg1[5])
