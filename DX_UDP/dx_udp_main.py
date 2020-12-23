@@ -121,6 +121,12 @@ class mainWin(QMainWindow, Ui_MainWindow):
         
         # 软件状态栏显示
         self.statusBar().showMessage('reday.')
+        self.label_1 = QLabel("Label 1") 
+        self.label_1.setStyleSheet("border :2px solid blue;") 
+        self.label_2 = QLabel("Label 2") 
+        self.label_2.setStyleSheet("border :2px solid blue;") 
+        self.statusBar().addPermanentWidget(self.label_1) 
+        self.statusBar().addPermanentWidget(self.label_2) 
 
         # 显示软件图标  -- 运行python命令的目录必须在文件目录，不然会报错
         # path = os.path.abspath('.')
