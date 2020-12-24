@@ -285,7 +285,7 @@
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>401</width>
+       <width>411</width>
        <height>51</height>
       </rect>
      </property>
@@ -519,6 +519,21 @@
         <height>51</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: rgb(234,237,237);
+	background-position: center;
+	background-repeat: no-reperat;
+	border: none;
+	background-color: rgb(27, 29, 35);
+}
+QPushButton:hover {
+	background-color: rgb(33, 37, 43);
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+}</string>
+      </property>
       <property name="text">
        <string>启动</string>
       </property>
@@ -532,8 +547,23 @@
         <height>51</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-top.png);
+	background-position: center;
+	background-repeat: no-reperat;
+	border: none;
+	background-color: rgb(27, 29, 35);
+}
+QPushButton:hover {
+	background-color: rgb(33, 37, 43);
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+}</string>
+      </property>
       <property name="text">
-       <string>上</string>
+       <string/>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_DC_FYRun_Down">
@@ -545,8 +575,23 @@
         <height>51</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-bottom.png);
+	background-position: center;
+	background-repeat: no-reperat;
+	border: none;
+	background-color: rgb(27, 29, 35);
+}
+QPushButton:hover {
+	background-color: rgb(33, 37, 43);
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+}</string>
+      </property>
       <property name="text">
-       <string>下</string>
+       <string/>
       </property>
      </widget>
     </widget>
@@ -571,6 +616,21 @@
         <height>51</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: rgb(234,237,237);
+	background-position: center;
+	background-repeat: no-reperat;
+	border: none;
+	background-color: rgb(27, 29, 35);
+}
+QPushButton:hover {
+	background-color: rgb(33, 37, 43);
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+}</string>
+      </property>
       <property name="text">
        <string>启动</string>
       </property>
@@ -584,8 +644,23 @@
         <height>51</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-left.png);
+	background-position: center;
+	background-repeat: no-reperat;
+	border: none;
+	background-color: rgb(27, 29, 35);
+}
+QPushButton:hover {
+	background-color: rgb(33, 37, 43);
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+}</string>
+      </property>
       <property name="text">
-       <string>左</string>
+       <string/>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_DC_XHRun_Right">
@@ -597,8 +672,23 @@
         <height>51</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-right.png);
+	background-position: center;
+	background-repeat: no-reperat;
+	border: none;
+	background-color: rgb(27, 29, 35);
+}
+QPushButton:hover {
+	background-color: rgb(33, 37, 43);
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+}</string>
+      </property>
       <property name="text">
-       <string>右</string>
+       <string/>
       </property>
      </widget>
     </widget>
@@ -836,7 +926,9 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="dx_rc.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>pushButton_thread_clean</sender>

@@ -189,15 +189,15 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
 
-        self.pushButton_DC_FYRun_Up.setIcon(QIcon(QPixmap('./images/up.png')))
-        self.pushButton_DC_FYRun_Down.setIcon(QIcon(QPixmap('./images/down.png')))
-        self.pushButton_DC_XHRun_Left.setIcon(QIcon(QPixmap('./images/left.png')))
-        self.pushButton_DC_XHRun_Right.setIcon(QIcon(QPixmap('./images/right.png')))
+        # self.pushButton_DC_FYRun_Up.setIcon(QIcon(QPixmap('./images/up.png')))
+        # self.pushButton_DC_FYRun_Down.setIcon(QIcon(QPixmap('./images/down.png')))
+        # self.pushButton_DC_XHRun_Left.setIcon(QIcon(QPixmap('./images/left.png')))
+        # self.pushButton_DC_XHRun_Right.setIcon(QIcon(QPixmap('./images/right.png')))
 
-        self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-        self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-        self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
-        self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        # self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        # self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        # self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        # self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
 
         # 绑定信号
         self.pushButton_DC_FYRunCtl.clicked.connect(self.DC_FYRun)
@@ -395,22 +395,22 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     def DC_FYRun1(self):
         # if(self.DC_FY_RunStatus == 1):
-        self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        # self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.udp_send[0] = 54
         print("FY-up")
     def DC_FYRun2(self):
         # if(self.DC_FY_RunStatus == 1):
-        self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        # self.pushButton_DC_FYRun_Up.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
         self.udp_send[0] = 0
         print("FY-none")
     def DC_FYRun3(self):
         # if(self.DC_FY_RunStatus == 1):
-        self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        # self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.udp_send[0] = 51
         print("FY-down")
     def DC_FYRun4(self):
         # if(self.DC_FY_RunStatus == 1):
-        self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        # self.pushButton_DC_FYRun_Down.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
         self.udp_send[0] = 0
         print("FY-none")
 
@@ -431,22 +431,22 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     def DC_XHRun1(self):
         # if(self.DC_XH_RunStatus == 1):
-        self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        # self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.udp_send[0] = 38
         print("XH-left")
     def DC_XHRun2(self):
         # if(self.DC_XH_RunStatus == 1):
-        self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        # self.pushButton_DC_XHRun_Left.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
         self.udp_send[0] = 0
         print("XH-none")
     def DC_XHRun3(self):
         # if(self.DC_XH_RunStatus == 1):
-        self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
+        # self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.udp_send[0] = 53
         print("XH-right")
     def DC_XHRun4(self):
         # if(self.DC_XH_RunStatus == 1):
-        self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
+        # self.pushButton_DC_XHRun_Right.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
         self.udp_send[0] = 0
         print("XH-none")
 

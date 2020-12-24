@@ -110,7 +110,7 @@ class Ui_MainWindow(object):
         self.groupBox.setGeometry(QtCore.QRect(20, 370, 571, 80))
         self.groupBox.setObjectName("groupBox")
         self.textEdit_thread = QtWidgets.QTextEdit(self.groupBox)
-        self.textEdit_thread.setGeometry(QtCore.QRect(20, 20, 401, 51))
+        self.textEdit_thread.setGeometry(QtCore.QRect(20, 20, 411, 51))
         self.textEdit_thread.setObjectName("textEdit_thread")
         self.pushButton_thread_clean = QtWidgets.QPushButton(self.groupBox)
         self.pushButton_thread_clean.setGeometry(QtCore.QRect(460, 50, 75, 23))
@@ -179,24 +179,106 @@ class Ui_MainWindow(object):
         self.groupBox_3.setObjectName("groupBox_3")
         self.pushButton_DC_FYRunCtl = QtWidgets.QPushButton(self.groupBox_3)
         self.pushButton_DC_FYRunCtl.setGeometry(QtCore.QRect(40, 30, 81, 51))
+        self.pushButton_DC_FYRunCtl.setStyleSheet("QPushButton {\n"
+"    color: rgb(234,237,237);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
         self.pushButton_DC_FYRunCtl.setObjectName("pushButton_DC_FYRunCtl")
         self.pushButton_DC_FYRun_Up = QtWidgets.QPushButton(self.groupBox_3)
         self.pushButton_DC_FYRun_Up.setGeometry(QtCore.QRect(20, 100, 51, 51))
+        self.pushButton_DC_FYRun_Up.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-top.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_DC_FYRun_Up.setText("")
         self.pushButton_DC_FYRun_Up.setObjectName("pushButton_DC_FYRun_Up")
         self.pushButton_DC_FYRun_Down = QtWidgets.QPushButton(self.groupBox_3)
         self.pushButton_DC_FYRun_Down.setGeometry(QtCore.QRect(90, 100, 51, 51))
+        self.pushButton_DC_FYRun_Down.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-bottom.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_DC_FYRun_Down.setText("")
         self.pushButton_DC_FYRun_Down.setObjectName("pushButton_DC_FYRun_Down")
         self.groupBox_4 = QtWidgets.QGroupBox(self.groupBox_2)
         self.groupBox_4.setGeometry(QtCore.QRect(220, 250, 161, 171))
         self.groupBox_4.setObjectName("groupBox_4")
         self.pushButton_DC_XHRunCtl = QtWidgets.QPushButton(self.groupBox_4)
         self.pushButton_DC_XHRunCtl.setGeometry(QtCore.QRect(40, 30, 81, 51))
+        self.pushButton_DC_XHRunCtl.setStyleSheet("QPushButton {\n"
+"    color: rgb(234,237,237);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
         self.pushButton_DC_XHRunCtl.setObjectName("pushButton_DC_XHRunCtl")
         self.pushButton_DC_XHRun_Left = QtWidgets.QPushButton(self.groupBox_4)
         self.pushButton_DC_XHRun_Left.setGeometry(QtCore.QRect(20, 100, 51, 51))
+        self.pushButton_DC_XHRun_Left.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-left.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_DC_XHRun_Left.setText("")
         self.pushButton_DC_XHRun_Left.setObjectName("pushButton_DC_XHRun_Left")
         self.pushButton_DC_XHRun_Right = QtWidgets.QPushButton(self.groupBox_4)
         self.pushButton_DC_XHRun_Right.setGeometry(QtCore.QRect(90, 100, 51, 51))
+        self.pushButton_DC_XHRun_Right.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-right.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_DC_XHRun_Right.setText("")
         self.pushButton_DC_XHRun_Right.setObjectName("pushButton_DC_XHRun_Right")
         self.label_DC_FYStatus = QtWidgets.QLabel(self.groupBox_2)
         self.label_DC_FYStatus.setGeometry(QtCore.QRect(150, 150, 41, 21))
@@ -314,12 +396,8 @@ class Ui_MainWindow(object):
         self.label_9.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">旋回</span></p></body></html>"))
         self.groupBox_3.setTitle(_translate("MainWindow", "俯仰控制"))
         self.pushButton_DC_FYRunCtl.setText(_translate("MainWindow", "启动"))
-        self.pushButton_DC_FYRun_Up.setText(_translate("MainWindow", "上"))
-        self.pushButton_DC_FYRun_Down.setText(_translate("MainWindow", "下"))
         self.groupBox_4.setTitle(_translate("MainWindow", "旋回控制"))
         self.pushButton_DC_XHRunCtl.setText(_translate("MainWindow", "启动"))
-        self.pushButton_DC_XHRun_Left.setText(_translate("MainWindow", "左"))
-        self.pushButton_DC_XHRun_Right.setText(_translate("MainWindow", "右"))
         self.label_DC_FYStatus.setText(_translate("MainWindow", "未知"))
         self.label_DC_XHStatus.setText(_translate("MainWindow", "未知"))
         self.label_udp_recv_count.setText(_translate("MainWindow", "0"))
@@ -328,3 +406,4 @@ class Ui_MainWindow(object):
         self.label_7.setText(_translate("MainWindow", "IP: "))
         self.label_InterfaceIP.setText(_translate("MainWindow", "255.255.255.255"))
         self.pushButton_Refresh.setText(_translate("MainWindow", "Refresh"))
+import dx_rc_rc
