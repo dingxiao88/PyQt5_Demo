@@ -189,7 +189,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_DC_FYRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.pushButton_DC_XHRunCtl.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
 
-        # self.pushButton_DC_FYRun_Up.setIcon(QIcon(QPixmap('./images/up.png')))
+        # self.pushButton_DC_FYRun_Up.setIcon(QIcon(QPixmap(':/images_icons_20/images/icons/20x20/cil-arrow-top.png')))
         # self.pushButton_DC_FYRun_Down.setIcon(QIcon(QPixmap('./images/down.png')))
         # self.pushButton_DC_XHRun_Left.setIcon(QIcon(QPixmap('./images/left.png')))
         # self.pushButton_DC_XHRun_Right.setIcon(QIcon(QPixmap('./images/right.png')))
@@ -277,7 +277,9 @@ class mainWin(QMainWindow, Ui_MainWindow):
             # 超时
             self.udpSocket.settimeout(1)
             # # 绑定本地端口
-            self.udpSocket.bind((self.localIp,self.localPort))
+            # self.udpSocket.bind((self.localIp,self.localPort))
+            self.udpSocket.bind(('0.0.0.0',self.localPort))
+            
             #告诉内核这是一个多播类型的socket
             self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 255) 
             # 加入组播地址
