@@ -27,6 +27,13 @@ class MainWindow(QMainWindow):
 
         self.canvas = MplCanvas(self, width=5, height=4, dpi=100)
 
+        self.canvas.axes.set_facecolor('#eafff5')
+        self.canvas.axes.set_title('Voltage vs. time chart', color='0.7')
+        self.canvas.axes.set_xlabel('time (s)', color='c')
+        self.canvas.axes.set_ylabel('voltage (mV)', color='peachpuff')
+        self.canvas.axes.tick_params(labelcolor='tab:orange')
+        
+
         # Create toolbar, passing canvas as first parament, parent (self, the MainWindow) as second.
         self.toolbar = NavigationToolbar(self.canvas, self)
 
