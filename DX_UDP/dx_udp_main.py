@@ -13,6 +13,8 @@ import threading
 import struct
 import time
 import psutil
+# from numba import jit  #提高运行效率
+# import pysnooper       #代码调试工具
 from pathlib import Path
 from pyqt_led import Led          # https://github.com/Neur1n/pyqt_led
 # from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu)
@@ -276,7 +278,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.udpSocket.setblocking(False)
             # 超时
             self.udpSocket.settimeout(1)
-            # # 绑定本地端口
+            # # 绑定本地端口--可以使用该项区别组播和点播
             # self.udpSocket.bind((self.localIp,self.localPort))
             self.udpSocket.bind(('0.0.0.0',self.localPort))
             
