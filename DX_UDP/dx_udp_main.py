@@ -280,7 +280,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.udpSocket.settimeout(1)
             # # 绑定本地端口--可以使用该项区别组播和点播
             # self.udpSocket.bind((self.localIp,self.localPort))
-            self.udpSocket.bind(('0.0.0.0',self.localPort))
+            self.udpSocket.bind(('0.0.0.0',self.localPort))  
             
             #告诉内核这是一个多播类型的socket
             self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 255) 
