@@ -51,6 +51,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     # @2-全局量
     udpSocket = None
+    udpSocket_send = None
     current_net_interface = None
     localIp = ""
     localPort = 0
@@ -281,18 +282,37 @@ class mainWin(QMainWindow, Ui_MainWindow):
             # # 绑定本地端口--可以使用该项区别组播和点播
             # self.udpSocket.bind((self.localIp,self.localPort))
             self.udpSocket.bind(('0.0.0.0',self.localPort))  
-            
-            #告诉内核这是一个多播类型的socket
+            # 声明该socket为多播类型
             self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 255) 
             # 加入组播地址
             mreq = struct.pack('4sl', socket.inet_aton('224.100.23.200'), socket.INADDR_ANY)
             self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+            # self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton('224.100.23.200') + socket.inet_aton('0.0.0.0'))
+
+            # 创建一个发送socket
+            self.udpSocket_send = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+            self.udpSocket_send.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            #非阻塞模式
+            self.udpSocket_send.setblocking(False)
+            # 超时
+            self.udpSocket_send.settimeout(1)
+            # # 绑定本地端口--可以使用该项区别组播和点播
+            self.udpSocket_send.bind((self.localIp,6001))
+            # self.udpSocket_send.bind(('0.0.0.0',self.localPort)) 
+            #告诉内核这是一个多播类型的socket
+            self.udpSocket_send.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 255) 
+            # 加入组播地址
+            mreq = struct.pack('4sl', socket.inet_aton('224.100.23.200'), socket.INADDR_ANY)
+            self.udpSocket_send.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
             # 创建thread
             self.udp_recv_thread = Thread_Udp_Recv(self.udpSocket)
             self.udp_recv_thread.DX_Thread_OutSingal.connect(self.UDP_Recv_ShowInfo)
-            self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send, self.destIp, self.destPort)
+            self.udp_send_thread = Thread_Udp_Send(self.udpSocket_send, self.udp_send, self.destIp, self.destPort)
+        
         else:
             self.udpSocket.close()
+            self.udpSocket_send.close()
             time.sleep(1)
 
 
