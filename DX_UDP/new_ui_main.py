@@ -197,11 +197,7 @@ class Ui_MainWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("images/icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
-        MainWindow.setStyleSheet("QMainWindow {background: transparent; }\n"
-"QToolTip {\n"
-"    color: #ffffff;\n"
-"    background-color: rgba(27, 29, 35, 160);\n"
-"}")
+        MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("background: transparent;\n"
 "color: rgb(210, 210, 210);")
@@ -510,7 +506,7 @@ class Ui_MainWindow(object):
 "    border: 5px solid rgb(39, 44, 54);\n"
 "    background-position: center;\n"
 "    background-repeat: no-repeat;\n"
-"    background-image: url(:/images_icons_20/images/icons/20x20/cil-3d.png);\n"
+"    background-image: url(:/images/images/me.png);\n"
 "}")
         self.label_user_icon.setText("")
         self.label_user_icon.setAlignment(QtCore.Qt.AlignCenter)

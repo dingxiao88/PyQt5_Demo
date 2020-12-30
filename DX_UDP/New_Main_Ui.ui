@@ -10,7 +10,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>965</width>
+    <width>883</width>
     <height>800</height>
    </rect>
   </property>
@@ -557,11 +557,7 @@
     <normaloff>images/icon.ico</normaloff>images/icon.ico</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow {background: transparent; }
-QToolTip {
-	color: #ffffff;
-	background-color: rgba(27, 29, 35, 160);
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -1289,7 +1285,7 @@ QPushButton:pressed {
 	border: 5px solid rgb(39, 44, 54);
 	background-position: center;
 	background-repeat: no-repeat;
-	background-image: url(:/images_icons_20/images/icons/20x20/cil-3d.png);
+	background-image: url(:/images/images/me.png);
 }</string>
                   </property>
                   <property name="text">

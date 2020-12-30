@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QMouseEvent, QCursor
 
-from new_ui_main import *
+from ui_dx_new import *
 
 # 创建mainWin类并传入Ui_MainWindow
 class mainWin(QMainWindow, Ui_MainWindow):
@@ -13,6 +13,26 @@ class mainWin(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(mainWin, self).__init__(parent)
         self.setupUi(self)
+
+        # 绑定窗口设置函数
+        self.btn_close.clicked.connect(self.APP_Close)
+        self.btn_maximize_restore.clicked.connect(self.APP_Max)
+        self.btn_minimize.clicked.connect(self.APP_Min)
+
+    def APP_Close(self):
+        # 关闭程序
+        self.close()
+
+    def APP_Max(self):
+        # 最大化与复原
+        if self.isMaximized():
+            self.showNormal()   
+        else:
+            self.showMaximized()
+
+    def APP_Min(self):
+        # 最小化
+        self.showMinimized()   
 
     # 全局监听鼠标点击事件
     def mousePressEvent(self, event):
@@ -38,6 +58,8 @@ if __name__ == '__main__':
     # 下面是使用PyQt5的固定用法
     app = QApplication(sys.argv)
     main_win = mainWin()
-    main_win.setWindowFlags(Qt.FramelessWindowHint)  # 无边框
+    main_win.setWindowTitle('霄哥的神秘工具V1.0')
+    main_win.setWindowFlags(Qt.FramelessWindowHint)     # 无边框
+    main_win.setAttribute(Qt.WA_TranslucentBackground)  # 设置背景透明
     main_win.show()
     sys.exit(app.exec_())
