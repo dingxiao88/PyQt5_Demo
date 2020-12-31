@@ -22,10 +22,10 @@ class Ui_MainWindow(object):
         self.centralwidget.setStyleSheet("background: transparent;\n"
 "color: rgb(210, 210, 210);")
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout_5.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_5.setSpacing(0)
-        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout_9.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_9.setSpacing(0)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.frame_main = QtWidgets.QFrame(self.centralwidget)
         self.frame_main.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_main.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -113,7 +113,7 @@ class Ui_MainWindow(object):
         self.frame = QtWidgets.QFrame(self.frame_label_top_btns)
         self.frame.setMaximumSize(QtCore.QSize(30, 30))
         self.frame.setStyleSheet("background: transparent;\n"
-"background-image: url(:/16x16/icons/16x16/cil-av-timer.png);\n"
+"background-image: url(:/images_icons_20/images/icons/20x20/cil-3d.png);\n"
 "background-position: center;\n"
 "background-repeat: no-repeat;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -270,6 +270,107 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.pushButton_dc_run = QtWidgets.QPushButton(self.frame_menus)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_dc_run.sizePolicy().hasHeightForWidth())
+        self.pushButton_dc_run.setSizePolicy(sizePolicy)
+        self.pushButton_dc_run.setMinimumSize(QtCore.QSize(0, 60))
+        self.pushButton_dc_run.setStyleSheet("QPushButton {    \n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-monitor.png);\n"
+"    background-position: left center;\n"
+"    background-repeat: no-repeat;\n"
+"    border: none;\n"
+"    border-left: 28px solid rgb(27, 29, 35);\n"
+"    border-right: 5px solid rgb(44, 49, 60);\n"
+"    background-color: rgb(27, 29, 35);\n"
+"    text-align: left;\n"
+"    padding-left: 45px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-left: 28px solid rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"    border-left: 28px solid rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_dc_run.setObjectName("pushButton_dc_run")
+        self.verticalLayout_8.addWidget(self.pushButton_dc_run)
+        self.pushButton_weather = QtWidgets.QPushButton(self.frame_menus)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_weather.sizePolicy().hasHeightForWidth())
+        self.pushButton_weather.setSizePolicy(sizePolicy)
+        self.pushButton_weather.setMinimumSize(QtCore.QSize(0, 60))
+        self.pushButton_weather.setStyleSheet("QPushButton {    \n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-rain.png);\n"
+"    background-position: left center;\n"
+"    background-repeat: no-repeat;\n"
+"    border: none;\n"
+"    border-left: 28px solid rgb(27, 29, 35);\n"
+"    background-color: rgb(27, 29, 35);\n"
+"    text-align: left;\n"
+"    padding-left: 45px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-left: 28px solid rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"    border-left: 28px solid rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_weather.setObjectName("pushButton_weather")
+        self.verticalLayout_8.addWidget(self.pushButton_weather)
+        self.pushButton_config = QtWidgets.QPushButton(self.frame_menus)
+        self.pushButton_config.setMinimumSize(QtCore.QSize(0, 60))
+        self.pushButton_config.setStyleSheet("QPushButton {    \n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-equalizer.png);\n"
+"    background-position: left center;\n"
+"    background-repeat: no-repeat;\n"
+"    border: none;\n"
+"    border-left: 28px solid rgb(27, 29, 35);\n"
+"    background-color: rgb(27, 29, 35);\n"
+"    text-align: left;\n"
+"    padding-left: 45px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-left: 28px solid rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"    border-left: 28px solid rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_config.setObjectName("pushButton_config")
+        self.verticalLayout_8.addWidget(self.pushButton_config)
+        self.pushButton_setting = QtWidgets.QPushButton(self.frame_menus)
+        self.pushButton_setting.setMinimumSize(QtCore.QSize(0, 60))
+        self.pushButton_setting.setStyleSheet("QPushButton {    \n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-settings.png);\n"
+"    background-position: left center;\n"
+"    background-repeat: no-repeat;\n"
+"    border: none;\n"
+"    border-left: 28px solid rgb(27, 29, 35);\n"
+"    background-color: rgb(27, 29, 35);\n"
+"    text-align: left;\n"
+"    padding-left: 45px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-left: 28px solid rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"    border-left: 28px solid rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_setting.setObjectName("pushButton_setting")
+        self.verticalLayout_8.addWidget(self.pushButton_setting)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem)
         self.verticalLayout_4.addWidget(self.frame_menus)
         self.frame_extra_menus = QtWidgets.QFrame(self.frame_left_menu)
         self.frame_extra_menus.setMaximumSize(QtCore.QSize(16777215, 85))
@@ -280,26 +381,34 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setContentsMargins(0, 0, 0, 25)
         self.horizontalLayout_9.setSpacing(10)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
-        self.label_user_icon = QtWidgets.QLabel(self.frame_extra_menus)
+        self.pushButton = QtWidgets.QPushButton(self.frame_extra_menus)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_user_icon.sizePolicy().hasHeightForWidth())
-        self.label_user_icon.setSizePolicy(sizePolicy)
-        self.label_user_icon.setMinimumSize(QtCore.QSize(60, 60))
-        self.label_user_icon.setMaximumSize(QtCore.QSize(60, 60))
-        self.label_user_icon.setStyleSheet("QLabel {\n"
+        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy)
+        self.pushButton.setMinimumSize(QtCore.QSize(60, 60))
+        self.pushButton.setMaximumSize(QtCore.QSize(60, 60))
+        self.pushButton.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images/images/me.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
 "    border-radius: 30px;\n"
 "    background-color: rgb(44, 49, 60);\n"
 "    border: 5px solid rgb(39, 44, 54);\n"
-"    background-position: center;\n"
-"    background-repeat: no-repeat;\n"
-"    background-image: url(:/images/images/me.png);\n"
-"}")
-        self.label_user_icon.setText("")
-        self.label_user_icon.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_user_icon.setObjectName("label_user_icon")
-        self.horizontalLayout_9.addWidget(self.label_user_icon)
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}\n"
+"\n"
+"")
+        self.pushButton.setText("")
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout_9.addWidget(self.pushButton)
         self.verticalLayout_4.addWidget(self.frame_extra_menus)
         self.horizontalLayout_2.addWidget(self.frame_left_menu)
         self.frame_content_right = QtWidgets.QFrame(self.frame_center)
@@ -320,9 +429,53 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setContentsMargins(5, 5, 5, 5)
         self.verticalLayout_7.setSpacing(0)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.stackedWidget = QtWidgets.QStackedWidget(self.frame_content)
+        self.stackedWidget.setStyleSheet("background: transparent;")
+        self.stackedWidget.setObjectName("stackedWidget")
+        self.page_dc_run = QtWidgets.QWidget()
+        self.page_dc_run.setObjectName("page_dc_run")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.page_dc_run)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.frame_2 = QtWidgets.QFrame(self.page_dc_run)
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.label_2 = QtWidgets.QLabel(self.frame_2)
+        self.label_2.setGeometry(QtCore.QRect(290, 220, 54, 12))
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_5.addWidget(self.frame_2)
+        self.stackedWidget.addWidget(self.page_dc_run)
+        self.page_weather = QtWidgets.QWidget()
+        self.page_weather.setObjectName("page_weather")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.page_weather)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.frame_3 = QtWidgets.QFrame(self.page_weather)
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.label_3 = QtWidgets.QLabel(self.frame_3)
+        self.label_3.setGeometry(QtCore.QRect(280, 240, 54, 12))
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout_10.addWidget(self.frame_3)
+        self.stackedWidget.addWidget(self.page_weather)
+        self.page_config = QtWidgets.QWidget()
+        self.page_config.setObjectName("page_config")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.page_config)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.frame_4 = QtWidgets.QFrame(self.page_config)
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.label_4 = QtWidgets.QLabel(self.frame_4)
+        self.label_4.setGeometry(QtCore.QRect(280, 240, 54, 12))
+        self.label_4.setObjectName("label_4")
+        self.verticalLayout_11.addWidget(self.frame_4)
+        self.stackedWidget.addWidget(self.page_config)
+        self.verticalLayout_7.addWidget(self.stackedWidget)
         self.verticalLayout_6.addWidget(self.frame_content)
         self.frame_grip = QtWidgets.QFrame(self.frame_content_right)
-        self.frame_grip.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.frame_grip.setMinimumSize(QtCore.QSize(0, 25))
+        self.frame_grip.setMaximumSize(QtCore.QSize(16777215, 35))
         self.frame_grip.setStyleSheet("background-color: rgb(33, 37, 43);")
         self.frame_grip.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_grip.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -353,11 +506,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_7.addWidget(self.frame_label_bottom)
         self.frame_size_grip = QtWidgets.QFrame(self.frame_grip)
         self.frame_size_grip.setMaximumSize(QtCore.QSize(20, 20))
-        self.frame_size_grip.setStyleSheet("QSizeGrip {\n"
-"    background-image: url(:/images_icons_20/images/icons/20x20/cil-menu.png);\n"
-"    background-position: center;\n"
-"    background-repeat: no-reperat;\n"
-"}")
+        self.frame_size_grip.setStyleSheet("background: transparent;\n"
+"background-image: url(:/images_icons_20/images/icons/20x20/cil-link-broken.png);\n"
+"background-position: center;\n"
+"background-repeat: no-repeat;")
         self.frame_size_grip.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_size_grip.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_size_grip.setObjectName("frame_size_grip")
@@ -365,10 +517,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.addWidget(self.frame_grip)
         self.horizontalLayout_2.addWidget(self.frame_content_right)
         self.verticalLayout_2.addWidget(self.frame_center)
-        self.verticalLayout_5.addWidget(self.frame_main)
+        self.verticalLayout_9.addWidget(self.frame_main)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -377,6 +530,13 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "霄哥的神秘工具"))
         self.label_top_info_1.setText(_translate("MainWindow", "一切只是因为好玩！"))
         self.label_top_info_2.setText(_translate("MainWindow", "| HOME"))
+        self.pushButton_dc_run.setText(_translate("MainWindow", "DC远程控制"))
+        self.pushButton_weather.setText(_translate("MainWindow", "天气查询"))
+        self.pushButton_config.setText(_translate("MainWindow", "配置参数"))
+        self.pushButton_setting.setText(_translate("MainWindow", "软件设置"))
+        self.label_2.setText(_translate("MainWindow", "PAGE 1"))
+        self.label_3.setText(_translate("MainWindow", "PAGE 2"))
+        self.label_4.setText(_translate("MainWindow", "PAGE 3"))
         self.label_credits.setText(_translate("MainWindow", "Design by: Jack Din"))
         self.label_version.setText(_translate("MainWindow", "v1.0.0"))
 import dx_rc_rc
