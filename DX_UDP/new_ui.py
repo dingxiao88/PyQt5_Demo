@@ -158,7 +158,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
                                                 }\
                                                 QPushButton:pressed {	\
                                                 background-color: rgb(85, 170, 255);\
-                                                border-left: 28px solid rgb(85, 170, 255);\
+                                                border-left: 28px solid rgb(85, 170, 255);\  
                                                 }')
             self.stackedWidget.setCurrentIndex(2)
 
