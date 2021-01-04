@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="images">
     <file>images/down.png</file>
+    <file>images/setting_backpic.png</file>
     <file>images/left.png</file>
     <file>images/me.png</file>
     <file>images/right.png</file>

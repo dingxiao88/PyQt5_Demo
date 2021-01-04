@@ -30,7 +30,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_dc_run.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,1))
         self.pushButton_weather.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,2))
         self.pushButton_config.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,3))
-        self.pushButton_setting.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,4))
+        self.pushButton_about.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,4))
+
+        # 模式显示DC_Run界面
+        self.stackedWidget.setCurrentIndex(0)
         
 
     # 全局监听鼠标点击事件
