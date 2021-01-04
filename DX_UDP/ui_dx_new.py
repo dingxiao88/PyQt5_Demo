@@ -437,13 +437,253 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.page_dc_run)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.frame_2 = QtWidgets.QFrame(self.page_dc_run)
+        self.frame_2.setMaximumSize(QtCore.QSize(16777215, 300))
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_2)
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setSpacing(1)
+        self.gridLayout.setObjectName("gridLayout")
+        self.label_6 = QtWidgets.QLabel(self.frame_2)
+        self.label_6.setMaximumSize(QtCore.QSize(16777215, 35))
+        self.label_6.setStyleSheet("background-color:#d3b17d;\n"
+"margin:1px;\n"
+"color:#f3f9f1;")
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.gridLayout.addWidget(self.label_6, 2, 0, 1, 1)
+        self.label_9 = QtWidgets.QLabel(self.frame_2)
+        font = QtGui.QFont()
+        font.setFamily("Pixel LCD7")
+        font.setPointSize(28)
+        self.label_9.setFont(font)
+        self.label_9.setStyleSheet("color: rgb(85, 170, 255);\n"
+"margin:1px;\n"
+"background-color: rgb(33, 37, 43);")
+        self.label_9.setFrameShape(QtWidgets.QFrame.Box)
+        self.label_9.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_9.setObjectName("label_9")
+        self.gridLayout.addWidget(self.label_9, 3, 0, 1, 1)
+        self.label_10 = QtWidgets.QLabel(self.frame_2)
+        font = QtGui.QFont()
+        font.setFamily("Pixel LCD7")
+        font.setPointSize(28)
+        self.label_10.setFont(font)
+        self.label_10.setStyleSheet("color: rgb(85, 170, 255);\n"
+"margin:1px;\n"
+"background-color: rgb(33, 37, 43);")
+        self.label_10.setFrameShape(QtWidgets.QFrame.Box)
+        self.label_10.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_10.setObjectName("label_10")
+        self.gridLayout.addWidget(self.label_10, 3, 1, 1, 1)
+        self.label_5 = QtWidgets.QLabel(self.frame_2)
+        self.label_5.setMaximumSize(QtCore.QSize(16777215, 35))
+        self.label_5.setStyleSheet("background-color:#d3b17d;\n"
+"margin:1px;\n"
+"color:#f3f9f1;")
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.gridLayout.addWidget(self.label_5, 2, 1, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.frame_2)
-        self.label_2.setGeometry(QtCore.QRect(290, 220, 54, 12))
+        self.label_2.setMaximumSize(QtCore.QSize(16777215, 35))
+        self.label_2.setStyleSheet("background-color:#d3b17d;\n"
+"margin:1px;\n"
+"color:#f3f9f1;")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 0, 1, 1, 1)
+        self.label_7 = QtWidgets.QLabel(self.frame_2)
+        self.label_7.setMaximumSize(QtCore.QSize(16777215, 35))
+        self.label_7.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding-right:6px;\n"
+"margin:1px;\n"
+"color: rgb(0, 255, 127);")
+        self.label_7.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_7.setObjectName("label_7")
+        self.gridLayout.addWidget(self.label_7, 4, 0, 1, 2)
+        self.horizontalLayout_10.addLayout(self.gridLayout)
         self.verticalLayout_5.addWidget(self.frame_2)
+        self.frame_5 = QtWidgets.QFrame(self.page_dc_run)
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_5)
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        self.gridLayout_2 = QtWidgets.QGridLayout()
+        self.gridLayout_2.setSpacing(3)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.pushButton_7 = QtWidgets.QPushButton(self.frame_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
+        self.pushButton_7.setSizePolicy(sizePolicy)
+        self.pushButton_7.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_7.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_7.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-bottom.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_7.setText("")
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.gridLayout_2.addWidget(self.pushButton_7, 2, 1, 1, 1)
+        self.pushButton_4 = QtWidgets.QPushButton(self.frame_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_4.sizePolicy().hasHeightForWidth())
+        self.pushButton_4.setSizePolicy(sizePolicy)
+        self.pushButton_4.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_4.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_4.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-top.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_4.setText("")
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.gridLayout_2.addWidget(self.pushButton_4, 2, 0, 1, 1)
+        self.label_8 = QtWidgets.QLabel(self.frame_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
+        self.label_8.setSizePolicy(sizePolicy)
+        self.label_8.setMaximumSize(QtCore.QSize(16777215, 45))
+        self.label_8.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"margin:1px;\n"
+"color: rgb(0, 255, 127);")
+        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_8.setObjectName("label_8")
+        self.gridLayout_2.addWidget(self.label_8, 0, 0, 1, 2)
+        self.pushButton_5 = QtWidgets.QPushButton(self.frame_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
+        self.pushButton_5.setSizePolicy(sizePolicy)
+        self.pushButton_5.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_5.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_5.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-right.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_5.setText("")
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.gridLayout_2.addWidget(self.pushButton_5, 2, 3, 1, 1)
+        self.pushButton_6 = QtWidgets.QPushButton(self.frame_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_6.sizePolicy().hasHeightForWidth())
+        self.pushButton_6.setSizePolicy(sizePolicy)
+        self.pushButton_6.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_6.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_6.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-left.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_6.setText("")
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.gridLayout_2.addWidget(self.pushButton_6, 2, 2, 1, 1)
+        self.pushButton_3 = QtWidgets.QPushButton(self.frame_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
+        self.pushButton_3.setSizePolicy(sizePolicy)
+        self.pushButton_3.setMinimumSize(QtCore.QSize(0, 70))
+        self.pushButton_3.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_3.setStyleSheet("QPushButton {\n"
+"    color: rgb(234,237,237);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.gridLayout_2.addWidget(self.pushButton_3, 1, 2, 1, 2)
+        self.label_11 = QtWidgets.QLabel(self.frame_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
+        self.label_11.setSizePolicy(sizePolicy)
+        self.label_11.setMaximumSize(QtCore.QSize(16777215, 45))
+        self.label_11.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"margin:1px;\n"
+"color: rgb(0, 255, 127);")
+        self.label_11.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_11.setObjectName("label_11")
+        self.gridLayout_2.addWidget(self.label_11, 0, 2, 1, 2)
+        self.pushButton_2 = QtWidgets.QPushButton(self.frame_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
+        self.pushButton_2.setSizePolicy(sizePolicy)
+        self.pushButton_2.setMinimumSize(QtCore.QSize(0, 70))
+        self.pushButton_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_2.setStyleSheet("QPushButton {\n"
+"    color: rgb(234,237,237);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.gridLayout_2.addWidget(self.pushButton_2, 1, 0, 1, 2)
+        self.horizontalLayout_11.addLayout(self.gridLayout_2)
+        self.verticalLayout_5.addWidget(self.frame_5)
         self.stackedWidget.addWidget(self.page_dc_run)
         self.page_weather = QtWidgets.QWidget()
         self.page_weather.setObjectName("page_weather")
@@ -472,6 +712,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.addWidget(self.frame_4)
         self.stackedWidget.addWidget(self.page_config)
         self.verticalLayout_7.addWidget(self.stackedWidget)
+        self.label_12 = QtWidgets.QLabel(self.frame_content)
+        self.label_12.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"border-radius: 10px;\n"
+"padding: 5px;\n"
+"padding-bottom: 7px;\n"
+"margin-top: 8px;\n"
+"color: rgb(255, 0, 127);")
+        self.label_12.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_12.setObjectName("label_12")
+        self.verticalLayout_7.addWidget(self.label_12)
         self.verticalLayout_6.addWidget(self.frame_content)
         self.frame_grip = QtWidgets.QFrame(self.frame_content_right)
         self.frame_grip.setMinimumSize(QtCore.QSize(0, 25))
@@ -534,9 +784,19 @@ class Ui_MainWindow(object):
         self.pushButton_weather.setText(_translate("MainWindow", "天气查询"))
         self.pushButton_config.setText(_translate("MainWindow", "配置参数"))
         self.pushButton_setting.setText(_translate("MainWindow", "软件设置"))
-        self.label_2.setText(_translate("MainWindow", "PAGE 1"))
+        self.label_6.setText(_translate("MainWindow", "俯仰"))
+        self.label_9.setText(_translate("MainWindow", "0.00"))
+        self.label_10.setText(_translate("MainWindow", "0.00"))
+        self.label_5.setText(_translate("MainWindow", "旋回"))
+        self.label_2.setText(_translate("MainWindow", "随动设备状态:未知"))
+        self.label_7.setText(_translate("MainWindow", "Info"))
+        self.label_8.setText(_translate("MainWindow", "俯仰"))
+        self.pushButton_3.setText(_translate("MainWindow", "启动"))
+        self.label_11.setText(_translate("MainWindow", "旋回"))
+        self.pushButton_2.setText(_translate("MainWindow", "启动"))
         self.label_3.setText(_translate("MainWindow", "PAGE 2"))
         self.label_4.setText(_translate("MainWindow", "PAGE 3"))
+        self.label_12.setText(_translate("MainWindow", "00<small>d</small> 00<small>h</small> 00<small>m</small> 00<small>s"))
         self.label_credits.setText(_translate("MainWindow", "Design by: Jack Din"))
         self.label_version.setText(_translate("MainWindow", "v1.0.0"))
 import dx_rc_rc
