@@ -135,7 +135,7 @@ def Choose_Menu(self, btn_index):
         self.stackedWidget.setCurrentIndex(2)
 
     elif(btn_index == 4):
-        self.pushButton_about.setStyleSheet('QPushButton {background-image: url(:/images_icons_20/images/icons/20x20/cil-settings.png);\
+        self.pushButton_about.setStyleSheet('QPushButton {background-image: url(:/images_icons_20/images/icons/20x20/cil-comment-bubble.png);\
                                             background-position: left center;\
                                             background-repeat: no-repeat;\
                                             border: none;\
@@ -152,6 +152,7 @@ def Choose_Menu(self, btn_index):
                                             background-color: rgb(85, 170, 255);\
                                             border-left: 28px solid rgb(85, 170, 255);\
                                             }')
+        self.stackedWidget.setCurrentIndex(3)
 
 
 # 显示菜单过度动画

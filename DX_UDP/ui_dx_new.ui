@@ -1576,7 +1576,7 @@ margin:1px;</string>
                           <item>
                            <layout class="QGridLayout" name="gridLayout_3">
                             <item row="0" column="0">
-                             <widget class="QComboBox" name="comboBox">
+                             <widget class="QComboBox" name="comboBox_LocalInterface">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -1595,7 +1595,7 @@ margin:1px;</string>
                              </widget>
                             </item>
                             <item row="0" column="1">
-                             <widget class="QLabel" name="label_14">
+                             <widget class="QLabel" name="label_InterfaceIP">
                               <property name="maximumSize">
                                <size>
                                 <width>16777215</width>
@@ -1780,7 +1780,7 @@ margin:1px;</string>
                              </widget>
                             </item>
                             <item row="1" column="1">
-                             <widget class="QLineEdit" name="lineEdit_2">
+                             <widget class="QLineEdit" name="lineEdit_Remote_IP">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -1811,7 +1811,7 @@ margin:1px;</string>
                              </widget>
                             </item>
                             <item row="1" column="3">
-                             <widget class="QLineEdit" name="lineEdit_4">
+                             <widget class="QLineEdit" name="lineEdit_Remote_Port">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -1842,7 +1842,7 @@ margin:1px;</string>
                              </widget>
                             </item>
                             <item row="0" column="1">
-                             <widget class="QLineEdit" name="lineEdit_3">
+                             <widget class="QLineEdit" name="lineEdit_Local_IP">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -1873,7 +1873,7 @@ margin:1px;</string>
                              </widget>
                             </item>
                             <item row="0" column="3">
-                             <widget class="QLineEdit" name="lineEdit">
+                             <widget class="QLineEdit" name="lineEdit_Local_Port">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -1923,7 +1923,7 @@ margin:1px;</string>
                              </widget>
                             </item>
                             <item row="2" column="0" colspan="2">
-                             <widget class="QPushButton" name="pushButton_9">
+                             <widget class="QPushButton" name="pushButton_udpSend">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -1957,7 +1957,7 @@ QPushButton:pressed {
                              </widget>
                             </item>
                             <item row="2" column="2" colspan="2">
-                             <widget class="QPushButton" name="pushButton_10">
+                             <widget class="QPushButton" name="pushButton_udpSend_continue">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -1991,7 +1991,7 @@ QPushButton:pressed {
                              </widget>
                             </item>
                             <item row="0" column="4" rowspan="2">
-                             <widget class="QPushButton" name="pushButton_8">
+                             <widget class="QPushButton" name="pushButton_bing">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -2026,7 +2026,7 @@ QPushButton:pressed {
                              </widget>
                             </item>
                             <item row="2" column="4">
-                             <widget class="QPushButton" name="pushButton_11">
+                             <widget class="QPushButton" name="pushButton_udp_multicast">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -2070,10 +2070,197 @@ QPushButton:pressed {
                     </item>
                    </layout>
                   </widget>
+                  <widget class="QWidget" name="page_about">
+                   <layout class="QVBoxLayout" name="verticalLayout_16">
+                    <item>
+                     <widget class="QFrame" name="frame_10">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_15">
+                       <item>
+                        <layout class="QGridLayout" name="gridLayout_5">
+                         <property name="spacing">
+                          <number>6</number>
+                         </property>
+                         <item row="0" column="0">
+                          <widget class="QFrame" name="frame_11">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>370</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-image: url(:/images/images/about_pic.jpg);
+background-position: center;
+background-repeat: no-repeat;
+border-radius: 10px;</string>
+                           </property>
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="3" column="0">
+                          <widget class="QLabel" name="label_23">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>0</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Segoe UI</family>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">color: rgb(98, 103, 111);</string>
+                           </property>
+                           <property name="text">
+                            <string>霄哥的神秘工具是一个简单程序应用的框架，其中包含了一些工作中需要使用的模拟器。</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="4" column="0">
+                          <widget class="QLabel" name="label_24">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Segoe UI</family>
+                             <pointsize>10</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background: transparent;
+</string>
+                           </property>
+                           <property name="text">
+                            <string>官方网址：</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="0">
+                          <widget class="QLabel" name="label_22">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>0</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Segoe UI</family>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">color: rgb(98, 103, 111);</string>
+                           </property>
+                           <property name="text">
+                            <string>Design by:Jack Din</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="0">
+                          <widget class="QLabel" name="label_21">
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Segoe UI</family>
+                             <pointsize>10</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background: transparent;
+</string>
+                           </property>
+                           <property name="text">
+                            <string>霄哥的神秘工具</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="5" column="0">
+                          <widget class="QCommandLinkButton" name="commandLinkButton">
+                           <property name="styleSheet">
+                            <string notr="true">QCommandLinkButton {	
+	color: rgb(85, 170, 255);
+	border-radius: 5px;
+	padding: 5px;
+}
+QCommandLinkButton:hover {	
+	color: rgb(210, 210, 210);
+	background-color: rgb(44, 49, 60);
+}
+QCommandLinkButton:pressed {	
+	color: rgb(210, 210, 210);
+	background-color: rgb(52, 58, 71);
+}</string>
+                           </property>
+                           <property name="text">
+                            <string>www.dx1023.com</string>
+                           </property>
+                           <property name="icon">
+                            <iconset resource="dx_rc.qrc">
+                             <normaloff>:/images_icons_20/images/icons/20x20/cil-home.png</normaloff>:/images_icons_20/images/icons/20x20/cil-home.png</iconset>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_12">
+                 <widget class="QLabel" name="label_systemTime">
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(33, 37, 43);
 border-radius: 10px;
