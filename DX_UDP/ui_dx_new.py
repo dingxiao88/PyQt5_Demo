@@ -446,14 +446,6 @@ class Ui_MainWindow(object):
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setSpacing(1)
         self.gridLayout.setObjectName("gridLayout")
-        self.label_6 = QtWidgets.QLabel(self.frame_2)
-        self.label_6.setMaximumSize(QtCore.QSize(16777215, 35))
-        self.label_6.setStyleSheet("background-color:#d3b17d;\n"
-"margin:1px;\n"
-"color:#f3f9f1;")
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
-        self.gridLayout.addWidget(self.label_6, 2, 0, 1, 1)
         self.label_9 = QtWidgets.QLabel(self.frame_2)
         font = QtGui.QFont()
         font.setFamily("Pixel LCD7")
@@ -478,6 +470,15 @@ class Ui_MainWindow(object):
         self.label_10.setAlignment(QtCore.Qt.AlignCenter)
         self.label_10.setObjectName("label_10")
         self.gridLayout.addWidget(self.label_10, 3, 1, 1, 1)
+        self.label_dc_Info = QtWidgets.QLabel(self.frame_2)
+        self.label_dc_Info.setMaximumSize(QtCore.QSize(16777215, 35))
+        self.label_dc_Info.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding-right:6px;\n"
+"margin:1px;\n"
+"color: rgb(0, 255, 127);")
+        self.label_dc_Info.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_dc_Info.setObjectName("label_dc_Info")
+        self.gridLayout.addWidget(self.label_dc_Info, 4, 0, 1, 2)
         self.label_5 = QtWidgets.QLabel(self.frame_2)
         self.label_5.setMaximumSize(QtCore.QSize(16777215, 35))
         self.label_5.setStyleSheet("background-color:#d3b17d;\n"
@@ -486,6 +487,14 @@ class Ui_MainWindow(object):
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.gridLayout.addWidget(self.label_5, 2, 1, 1, 1)
+        self.label_6 = QtWidgets.QLabel(self.frame_2)
+        self.label_6.setMaximumSize(QtCore.QSize(16777215, 35))
+        self.label_6.setStyleSheet("background-color:#d3b17d;\n"
+"margin:1px;\n"
+"color:#f3f9f1;")
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.gridLayout.addWidget(self.label_6, 2, 0, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.frame_2)
         self.label_2.setMaximumSize(QtCore.QSize(16777215, 35))
         self.label_2.setStyleSheet("background-color:#d3b17d;\n"
@@ -494,15 +503,6 @@ class Ui_MainWindow(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 1, 1, 1)
-        self.label_7 = QtWidgets.QLabel(self.frame_2)
-        self.label_7.setMaximumSize(QtCore.QSize(16777215, 35))
-        self.label_7.setStyleSheet("background-color: rgb(33, 37, 43);\n"
-"padding-right:6px;\n"
-"margin:1px;\n"
-"color: rgb(0, 255, 127);")
-        self.label_7.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_7.setObjectName("label_7")
-        self.gridLayout.addWidget(self.label_7, 4, 0, 1, 2)
         self.horizontalLayout_10.addLayout(self.gridLayout)
         self.verticalLayout_5.addWidget(self.frame_2)
         self.frame_5 = QtWidgets.QFrame(self.page_dc_run)
@@ -514,15 +514,15 @@ class Ui_MainWindow(object):
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setSpacing(3)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.pushButton_7 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_DC_FYRun_Down = QtWidgets.QPushButton(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
-        self.pushButton_7.setSizePolicy(sizePolicy)
-        self.pushButton_7.setMinimumSize(QtCore.QSize(0, 50))
-        self.pushButton_7.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.pushButton_7.setStyleSheet("QPushButton {\n"
+        sizePolicy.setHeightForWidth(self.pushButton_DC_FYRun_Down.sizePolicy().hasHeightForWidth())
+        self.pushButton_DC_FYRun_Down.setSizePolicy(sizePolicy)
+        self.pushButton_DC_FYRun_Down.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_DC_FYRun_Down.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_DC_FYRun_Down.setStyleSheet("QPushButton {\n"
 "    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-bottom.png);\n"
 "    background-position: center;\n"
 "    background-repeat: no-reperat;\n"
@@ -535,18 +535,18 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_7.setText("")
-        self.pushButton_7.setObjectName("pushButton_7")
-        self.gridLayout_2.addWidget(self.pushButton_7, 2, 1, 1, 1)
-        self.pushButton_4 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_DC_FYRun_Down.setText("")
+        self.pushButton_DC_FYRun_Down.setObjectName("pushButton_DC_FYRun_Down")
+        self.gridLayout_2.addWidget(self.pushButton_DC_FYRun_Down, 2, 1, 1, 1)
+        self.pushButton_DC_FYRun_Up = QtWidgets.QPushButton(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_4.sizePolicy().hasHeightForWidth())
-        self.pushButton_4.setSizePolicy(sizePolicy)
-        self.pushButton_4.setMinimumSize(QtCore.QSize(0, 50))
-        self.pushButton_4.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.pushButton_4.setStyleSheet("QPushButton {\n"
+        sizePolicy.setHeightForWidth(self.pushButton_DC_FYRun_Up.sizePolicy().hasHeightForWidth())
+        self.pushButton_DC_FYRun_Up.setSizePolicy(sizePolicy)
+        self.pushButton_DC_FYRun_Up.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_DC_FYRun_Up.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_DC_FYRun_Up.setStyleSheet("QPushButton {\n"
 "    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-top.png);\n"
 "    background-position: center;\n"
 "    background-repeat: no-reperat;\n"
@@ -559,9 +559,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_4.setText("")
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.gridLayout_2.addWidget(self.pushButton_4, 2, 0, 1, 1)
+        self.pushButton_DC_FYRun_Up.setText("")
+        self.pushButton_DC_FYRun_Up.setObjectName("pushButton_DC_FYRun_Up")
+        self.gridLayout_2.addWidget(self.pushButton_DC_FYRun_Up, 2, 0, 1, 1)
         self.label_8 = QtWidgets.QLabel(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -575,15 +575,15 @@ class Ui_MainWindow(object):
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.label_8.setObjectName("label_8")
         self.gridLayout_2.addWidget(self.label_8, 0, 0, 1, 2)
-        self.pushButton_5 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_DC_XHRun_Right = QtWidgets.QPushButton(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
-        self.pushButton_5.setSizePolicy(sizePolicy)
-        self.pushButton_5.setMinimumSize(QtCore.QSize(0, 50))
-        self.pushButton_5.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.pushButton_5.setStyleSheet("QPushButton {\n"
+        sizePolicy.setHeightForWidth(self.pushButton_DC_XHRun_Right.sizePolicy().hasHeightForWidth())
+        self.pushButton_DC_XHRun_Right.setSizePolicy(sizePolicy)
+        self.pushButton_DC_XHRun_Right.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_DC_XHRun_Right.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_DC_XHRun_Right.setStyleSheet("QPushButton {\n"
 "    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-right.png);\n"
 "    background-position: center;\n"
 "    background-repeat: no-reperat;\n"
@@ -596,18 +596,18 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_5.setText("")
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.gridLayout_2.addWidget(self.pushButton_5, 2, 3, 1, 1)
-        self.pushButton_6 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_DC_XHRun_Right.setText("")
+        self.pushButton_DC_XHRun_Right.setObjectName("pushButton_DC_XHRun_Right")
+        self.gridLayout_2.addWidget(self.pushButton_DC_XHRun_Right, 2, 3, 1, 1)
+        self.pushButton_DC_XHRun_Left = QtWidgets.QPushButton(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_6.sizePolicy().hasHeightForWidth())
-        self.pushButton_6.setSizePolicy(sizePolicy)
-        self.pushButton_6.setMinimumSize(QtCore.QSize(0, 50))
-        self.pushButton_6.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.pushButton_6.setStyleSheet("QPushButton {\n"
+        sizePolicy.setHeightForWidth(self.pushButton_DC_XHRun_Left.sizePolicy().hasHeightForWidth())
+        self.pushButton_DC_XHRun_Left.setSizePolicy(sizePolicy)
+        self.pushButton_DC_XHRun_Left.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_DC_XHRun_Left.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_DC_XHRun_Left.setStyleSheet("QPushButton {\n"
 "    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-left.png);\n"
 "    background-position: center;\n"
 "    background-repeat: no-reperat;\n"
@@ -620,18 +620,18 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_6.setText("")
-        self.pushButton_6.setObjectName("pushButton_6")
-        self.gridLayout_2.addWidget(self.pushButton_6, 2, 2, 1, 1)
-        self.pushButton_3 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_DC_XHRun_Left.setText("")
+        self.pushButton_DC_XHRun_Left.setObjectName("pushButton_DC_XHRun_Left")
+        self.gridLayout_2.addWidget(self.pushButton_DC_XHRun_Left, 2, 2, 1, 1)
+        self.pushButton_DC_XHRunCtl = QtWidgets.QPushButton(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
-        self.pushButton_3.setSizePolicy(sizePolicy)
-        self.pushButton_3.setMinimumSize(QtCore.QSize(0, 70))
-        self.pushButton_3.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.pushButton_3.setStyleSheet("QPushButton {\n"
+        sizePolicy.setHeightForWidth(self.pushButton_DC_XHRunCtl.sizePolicy().hasHeightForWidth())
+        self.pushButton_DC_XHRunCtl.setSizePolicy(sizePolicy)
+        self.pushButton_DC_XHRunCtl.setMinimumSize(QtCore.QSize(0, 70))
+        self.pushButton_DC_XHRunCtl.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_DC_XHRunCtl.setStyleSheet("QPushButton {\n"
 "    color: rgb(234,237,237);\n"
 "    background-position: center;\n"
 "    background-repeat: no-reperat;\n"
@@ -644,8 +644,8 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.gridLayout_2.addWidget(self.pushButton_3, 1, 2, 1, 2)
+        self.pushButton_DC_XHRunCtl.setObjectName("pushButton_DC_XHRunCtl")
+        self.gridLayout_2.addWidget(self.pushButton_DC_XHRunCtl, 1, 2, 1, 2)
         self.label_11 = QtWidgets.QLabel(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -659,15 +659,15 @@ class Ui_MainWindow(object):
         self.label_11.setAlignment(QtCore.Qt.AlignCenter)
         self.label_11.setObjectName("label_11")
         self.gridLayout_2.addWidget(self.label_11, 0, 2, 1, 2)
-        self.pushButton_2 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_DC_FYRunCtl = QtWidgets.QPushButton(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
-        self.pushButton_2.setSizePolicy(sizePolicy)
-        self.pushButton_2.setMinimumSize(QtCore.QSize(0, 70))
-        self.pushButton_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.pushButton_2.setStyleSheet("QPushButton {\n"
+        sizePolicy.setHeightForWidth(self.pushButton_DC_FYRunCtl.sizePolicy().hasHeightForWidth())
+        self.pushButton_DC_FYRunCtl.setSizePolicy(sizePolicy)
+        self.pushButton_DC_FYRunCtl.setMinimumSize(QtCore.QSize(0, 70))
+        self.pushButton_DC_FYRunCtl.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_DC_FYRunCtl.setStyleSheet("QPushButton {\n"
 "    color: rgb(234,237,237);\n"
 "    background-position: center;\n"
 "    background-repeat: no-reperat;\n"
@@ -680,8 +680,8 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout_2.addWidget(self.pushButton_2, 1, 0, 1, 2)
+        self.pushButton_DC_FYRunCtl.setObjectName("pushButton_DC_FYRunCtl")
+        self.gridLayout_2.addWidget(self.pushButton_DC_FYRunCtl, 1, 0, 1, 2)
         self.horizontalLayout_11.addLayout(self.gridLayout_2)
         self.verticalLayout_5.addWidget(self.frame_5)
         self.stackedWidget.addWidget(self.page_dc_run)
@@ -1143,7 +1143,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1156,16 +1156,16 @@ class Ui_MainWindow(object):
         self.pushButton_weather.setText(_translate("MainWindow", "天气查询"))
         self.pushButton_config.setText(_translate("MainWindow", "配置参数"))
         self.pushButton_about.setText(_translate("MainWindow", "软件设置"))
-        self.label_6.setText(_translate("MainWindow", "俯仰"))
         self.label_9.setText(_translate("MainWindow", "0.00"))
         self.label_10.setText(_translate("MainWindow", "0.00"))
+        self.label_dc_Info.setText(_translate("MainWindow", "Info"))
         self.label_5.setText(_translate("MainWindow", "旋回"))
+        self.label_6.setText(_translate("MainWindow", "俯仰"))
         self.label_2.setText(_translate("MainWindow", "随动设备状态:未知"))
-        self.label_7.setText(_translate("MainWindow", "Info"))
         self.label_8.setText(_translate("MainWindow", "俯仰"))
-        self.pushButton_3.setText(_translate("MainWindow", "启动"))
+        self.pushButton_DC_XHRunCtl.setText(_translate("MainWindow", "启动"))
         self.label_11.setText(_translate("MainWindow", "旋回"))
-        self.pushButton_2.setText(_translate("MainWindow", "启动"))
+        self.pushButton_DC_FYRunCtl.setText(_translate("MainWindow", "启动"))
         self.label_3.setText(_translate("MainWindow", "PAGE 2"))
         self.label_4.setText(_translate("MainWindow", "网卡设置"))
         self.label_InterfaceIP.setText(_translate("MainWindow", "IP:255.255.255.255"))

@@ -5,6 +5,7 @@ import socket
 import os
 import struct
 import time
+from APP import Element_Style
 from Thread_Udp_Recv import Thread_Udp_Recv
 from Thread_Udp_Send import Thread_Udp_Send
 
@@ -109,13 +110,16 @@ def Set_Local_Socket(self, set_flag):
 
         # 创建thread
         self.udp_recv_thread = Thread_Udp_Recv(self.udpSocket)
-        # self.udp_recv_thread.DX_Thread_OutSingal.connect(self.UDP_Recv_ShowInfo)
+        self.udp_recv_thread.DX_Thread_OutSingal.connect(self.DC_Recv_Info_Display)
         self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send, self.destIp, self.destPort)
     
     else:
         self.udpSocket.close()
         # self.udpSocket_send.close()
         time.sleep(1)
+
+
+
 
 # --------UDP连接--------
 def UDP_Connect(self):
@@ -124,10 +128,19 @@ def UDP_Connect(self):
         Get_IP_Port(self,6000)
         # 创建socket
         Set_Local_Socket(self,True)
+        self.frame_size_grip.setStyleSheet('background: transparent;\
+                                            background-image: url(:/images_icons_20/images/icons/20x20/cil-link.png);\
+                                            background-position: center;\
+                                            background-repeat: no-repeat;')
+                                            
 
     elif(self.udp_connect_flag == True):
         # 关闭socket
         Set_Local_Socket(self,False)
+        self.frame_size_grip.setStyleSheet('background: transparent;\
+                                            background-image: url(:/images_icons_20/images/icons/20x20/cil-link-broken.png);\
+                                            background-position: center;\
+                                            background-repeat: no-repeat;')
 
     # 获得线程运行的状态
     if(self.udp_recv_thread.working_flag == False):
@@ -135,36 +148,34 @@ def UDP_Connect(self):
         self.udp_recv_thread.start()
         self.udp_connect_flag = True
         self.pushButton_bing.setText('断开')
-        pushButton_setStyle(self.pushButton_bing, 1)
+        Element_Style.pushButton_setStyle(self.pushButton_bing, 1)
 
     elif(self.udp_recv_thread.working_flag == True):
         self.udp_recv_thread.setRun()
         self.udp_connect_flag = False
         self.pushButton_bing.setText('绑定')
-        pushButton_setStyle(self.pushButton_bing, 0)
+        Element_Style.pushButton_setStyle(self.pushButton_bing, 0)
 
 
-# 按钮设置样式
-def pushButton_setStyle(which_pushButton,setFlag):
-    if(setFlag == 1):
-        which_pushButton.setStyleSheet('QPushButton {\
-                                        color: rgb(234,237,237);\
-                                        background-position: center;\
-                                        background-repeat: no-reperat;\
-                                        border: none;\
-                                        background-color: rgb(85, 170, 255);\
-                                        }')
-    elif(setFlag == 0):
-        which_pushButton.setStyleSheet('QPushButton {\
-                                        color: rgb(234,237,237);\
-                                        background-position: center;\
-                                        background-repeat: no-reperat;\
-                                        border: none;\
-                                        background-color: rgb(27, 29, 35);\
-                                        }\
-                                        QPushButton:hover {\
-                                        background-color: rgb(33, 37, 43);\
-                                        }\
-                                        QPushButton:pressed {	\
-                                        background-color: rgb(85, 170, 255);\
-                                        }')
+# UDP连续发送--------------------------
+def UDP_Send_Continue(self):
+    if(self.udp_connect_flag == True):
+        # 获得线程运行的状态
+        if(self.udp_send_thread.working_flag == False):
+            self.udp_send_thread.setRun()
+            self.udp_send_thread.start()
+            self.pushButton_udpSend_continue.setText('停止')
+            Element_Style.pushButton_setStyle(self.pushButton_udpSend_continue, 1)
+
+        elif(self.udp_send_thread.working_flag == True):
+            self.udp_send_thread.setRun()
+            self.pushButton_udpSend_continue.setText('连续发送')
+            Element_Style.pushButton_setStyle(self.pushButton_udpSend_continue, 0)
+
+# UDP单次发送--------------------------
+def UDP_Send_Single(self):
+    if(self.udp_connect_flag == True):
+        if(self.udp_send_thread.working_flag == False):
+            self.udp_send_thread.setOneShot()
+            self.udp_send_thread.start()
+

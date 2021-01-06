@@ -16,6 +16,7 @@ from ui_dx_new import *
 from APP import APP_Fun
 from APP import Menu_Fun
 from APP import NetWork_Fun
+from APP import DX_Control
 
 
 # 创建mainWin类并传入Ui_MainWindow
@@ -31,6 +32,8 @@ class mainWin(QMainWindow, Ui_MainWindow):
     destPort = 0
     udp_connect_flag = False
     udp_send = []
+    DC_FY_CmdRun = False
+    DC_XH_CmdRun = False
 
     def __init__(self, parent=None):
         super(mainWin, self).__init__(parent)
@@ -53,11 +56,42 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 模式显示DC_Run界面
         self.stackedWidget.setCurrentIndex(0)
 
+        # 创建UDP发送数据
+        self.udp_send = []
+        for x in range(50):
+            self.udp_send.append(0x00)
+
         # 初始化本地网卡
         NetWork_Fun.Init_Local_Interface(self)
         self.comboBox_LocalInterface.currentIndexChanged.connect(lambda:NetWork_Fun.On_interface_selection_change(self))
         # UDP连接
         self.pushButton_bing.clicked.connect(lambda:NetWork_Fun.UDP_Connect(self))
+        # UDP单击发送
+        self.pushButton_udpSend.clicked.connect(lambda:NetWork_Fun.UDP_Send_Single(self))
+        # UDP连续发送
+        self.pushButton_udpSend_continue.clicked.connect(lambda:NetWork_Fun.UDP_Send_Continue(self))
+
+        # DC设备FY&XH运行操作
+        self.pushButton_DC_FYRunCtl.clicked.connect(lambda:DX_Control.DC_FYRun(self))
+        self.pushButton_DC_XHRunCtl.clicked.connect(lambda:DX_Control.DC_XHRun(self))
+
+        # DC设备FY&XH方向操作
+        self.pushButton_DC_FYRun_Up.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
+        self.pushButton_DC_FYRun_Down.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
+        self.pushButton_DC_XHRun_Left.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
+        self.pushButton_DC_XHRun_Right.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
+        # DC设备FY&XH方向操作释放
+        self.pushButton_DC_FYRun_Up.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
+        self.pushButton_DC_FYRun_Down.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
+        self.pushButton_DC_XHRun_Left.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
+        self.pushButton_DC_XHRun_Right.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
+
+
+
+    # DC信息回显
+    def DC_Recv_Info_Display(self, str_info, count):
+        # print('--->')
+        self.label_dc_Info.setText(str(count))
 
     
     # 全局监听鼠标点击事件
