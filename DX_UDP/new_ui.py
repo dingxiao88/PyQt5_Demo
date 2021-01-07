@@ -6,6 +6,9 @@ import socket
 import os
 import struct
 import time
+
+import datetime
+
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import Qt, QPropertyAnimation
 from PyQt5.QtGui import QMouseEvent, QCursor
@@ -85,6 +88,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_DC_FYRun_Down.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
         self.pushButton_DC_XHRun_Left.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
         self.pushButton_DC_XHRun_Right.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
+
+        curr_time = datetime.datetime.now()
+        time_str = datetime.datetime.strftime(curr_time,'%Y-%m-%d %H:%M:%S')
+        print(time_str)
 
 
 
