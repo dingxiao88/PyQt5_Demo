@@ -42,12 +42,19 @@ class Thread_Udp_Send(QThread):
 
     # 线程运行主循环
     def run(self):
+        self.Run_Count = self.Run_Count + 1
+        self.udp_send[45] =  self.Run_Count//256
+        self.udp_send[46] =  self.Run_Count%256
+
         if(self.oneShot == True):
             self.oneShot = False
             data1 = bytes(self.udp_send)
             self.socket.sendto(data1,(self.send_ip, self.send_port))
         else:
             while(self.working_flag == True):
+                self.Run_Count = self.Run_Count + 1
+                self.udp_send[45] =  self.Run_Count//256
+                self.udp_send[46] =  self.Run_Count%256
                 data2 = bytes(self.udp_send)
                 self.socket.sendto(data2,(self.send_ip, self.send_port))
                 time.sleep(0.02) 
