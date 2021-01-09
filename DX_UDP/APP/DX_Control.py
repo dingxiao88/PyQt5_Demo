@@ -30,7 +30,7 @@ def DC_XHRun(self):
         self.udp_send[4] = 0  #XH停止
         Element_Style.pushButton_setStyle(self.pushButton_DC_XHRunCtl, 0)
 
-
+# FY XH 启停控制
 def DC_FY_XH_Dir_Control(self):
     sender = self.sender()
     if(sender == self.pushButton_DC_FYRun_Up):
@@ -42,7 +42,7 @@ def DC_FY_XH_Dir_Control(self):
     elif(sender == self.pushButton_DC_XHRun_Right):
         self.udp_send[0] = 53
 
-
+# FY XH 启停控制复位
 def DC_FY_XH_Dir_ControlReset(self):
     sender = self.sender()
     if((sender == self.pushButton_DC_FYRun_Up) or
