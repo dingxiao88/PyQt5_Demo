@@ -13,11 +13,12 @@ class DX_Thread(QThread):
 
     DX_Thread_OutSingal = pyqtSignal(str, int)
 
-    def __init__(self, name, parent = None):
+    def __init__(self, name, interval, parent = None):
         super(DX_Thread, self).__init__(parent)
         self.name = name
         self.working_flag = False
         self.Run_Count = 0
+        self.interval = interval
         print(self.name)
 
 
@@ -48,4 +49,4 @@ class DX_Thread(QThread):
                 self.Run_Count = 0
 
             # time.sleep(0.01)  每秒100次
-            time.sleep(0.02) 
+            time.sleep(self.interval) 

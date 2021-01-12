@@ -180,7 +180,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # self.lineEdit_Local_IP.setPlaceholderText(self.ip)
 
         # 线程启动按钮绑定事件------------
-        self.dx_thread = DX_Thread("dx")
+        self.dx_thread = DX_Thread("dx", 0.02)
         self.dx_thread.DX_Thread_OutSingal.connect(self.Thread_Info)
         self.pushButton_thread_start.setStyleSheet('QPushButton {background-color: #16A951; color: black;}')
         self.pushButton_thread_start.clicked.connect(self.Thread_Run)

@@ -20,6 +20,7 @@ from APP import APP_Fun
 from APP import Menu_Fun
 from APP import NetWork_Fun
 from APP import DX_Control
+from Thread_Main import DX_Thread
 
 
 # 创建mainWin类并传入Ui_MainWindow
@@ -89,14 +90,25 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_DC_XHRun_Left.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
         self.pushButton_DC_XHRun_Right.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
 
+        # MQTT图片显示
         pix = QPixmap('1.jpg')
         self.label_mqttPic.setPixmap(pix)
 
+        # 线程启动按钮绑定事件------------
+        self.dx_thread = DX_Thread("dx_display", 0.05)
+        self.dx_thread.DX_Thread_OutSingal.connect(self.Info_reflash)
+        self.dx_thread.setRun()
+        self.dx_thread.start()
+
+
+    # 主界面信息显示刷新
+    def Info_reflash(self):
+        # 显示当前时间
         curr_time = datetime.datetime.now()
         time_str = datetime.datetime.strftime(curr_time,'%Y-%m-%d %H:%M:%S')
-        print(time_str)
-
-
+        self.label_systemTime.setText(time_str)
+        pix = QPixmap('1.jpg')
+        self.label_mqttPic.setPixmap(pix)
 
     # DC信息回显
     def DC_Recv_Info_Display(self, str_info, count):
