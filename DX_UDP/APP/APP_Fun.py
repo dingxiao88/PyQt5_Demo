@@ -5,7 +5,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 # 关闭应用
 def APP_Close(self):
     # 关闭程序
-    self.close()
+    # self.close()
+    # event.ignore()
+    self.hide()
+    self.dx_SystemTray.showMsg(1, "程序缩小至系统托盘!")
 
 # 应用窗口最大化
 def APP_Max(self):

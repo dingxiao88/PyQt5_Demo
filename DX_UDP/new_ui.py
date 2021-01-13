@@ -11,7 +11,7 @@ import datetime
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import Qt, QPropertyAnimation
-from PyQt5.QtGui import QMouseEvent, QCursor, QPixmap
+from PyQt5.QtGui import QMouseEvent, QCursor, QPixmap, QIcon
 
 from ui_dx_new import *
 
@@ -21,6 +21,7 @@ from APP import Menu_Fun
 from APP import NetWork_Fun
 from APP import DX_Control
 from Thread_Main import DX_Thread
+from dx_SystemTray import dx_SystemTray
 
 
 # 创建mainWin类并传入Ui_MainWindow
@@ -42,6 +43,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(mainWin, self).__init__(parent)
         self.setupUi(self)
+
+        # 显示软件图标  -- 运行python命令的目录必须在文件目录，不然会报错
+        self.setWindowIcon(QIcon("./images/me.png"))
+
+        # 配置系统托盘
+        self.dx_SystemTray = dx_SystemTray()
+        self.dx_SystemTray.dx_SystemTray_Signal.connect(self.SystemTray_Pro)
 
         # 绑定窗口设置函数
         self.btn_close.clicked.connect(lambda:APP_Fun.APP_Close(main_win))
@@ -101,6 +109,22 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.dx_thread.start()
 
 
+    # 系统托盘类信号数据处理
+    def SystemTray_Pro(self,str_info):
+        if(str_info == "show"):
+            self.showApp_dx()
+        elif(str_info == "close"):
+            self.closeApp_dx()
+
+    # 关闭程序
+    def closeApp_dx(self):
+        # 点击关闭按钮或者点击退出事件会出现图标无法消失的bug，需要手动将图标内存清除
+        sys.exit(app.exec_())
+
+    # 显示程序
+    def showApp_dx(self):
+        self.show()
+
     # 主界面信息显示刷新
     def Info_reflash(self):
         # 显示当前时间
@@ -139,6 +163,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 if __name__ == '__main__':
     # 下面是使用PyQt5的固定用法
     app = QApplication(sys.argv)
+    app.setApplicationName("霄哥的神秘工具V1.0")
     main_win = mainWin()
     main_win.setWindowTitle('霄哥的神秘工具V1.0')
     main_win.setWindowFlags(Qt.FramelessWindowHint)     # 无边框

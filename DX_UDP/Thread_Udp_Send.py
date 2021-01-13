@@ -43,6 +43,8 @@ class Thread_Udp_Send(QThread):
     # 线程运行主循环
     def run(self):
         self.Run_Count = self.Run_Count + 1
+        if(self.Run_Count > 65000):
+            self.Run_Count = 0
         self.udp_send[45] =  self.Run_Count//256
         self.udp_send[46] =  self.Run_Count%256
 
@@ -53,6 +55,8 @@ class Thread_Udp_Send(QThread):
         else:
             while(self.working_flag == True):
                 self.Run_Count = self.Run_Count + 1
+                if(self.Run_Count > 65000):
+                    self.Run_Count = 0
                 self.udp_send[45] =  self.Run_Count//256
                 self.udp_send[46] =  self.Run_Count%256
                 data2 = bytes(self.udp_send)
