@@ -656,7 +656,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
             # 创建socket
             self.Set_Local_Socket(True)
 
-        elif(self.udp_connect_flag == True):
+        elif(self.udp_connect_flag == True): 
             # 关闭socket
             self.Set_Local_Socket(False)
 
