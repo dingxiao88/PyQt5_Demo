@@ -40,7 +40,7 @@ class Thread_Udp_Recv(QThread):
             try:
                 # receiveData = udpSocket.recvfrom(1024)
                 recv_msg, recv_addr = self.socket.recvfrom(1024)
-                # print("<<%s:%s"%(str(receiveData[1]),str(receiveData[0])))
+                # print("<<%s:%s"%(str(receiveData[1]),str(receiveData[0]))) 
                 # print("<<"+str(recv_addr[0]))
                 # if(str(recv_addr[0]) == "192.168.0.106"):
                 if((str(recv_addr[0]) == "10.0.0.18") or (str(recv_addr[0]) == "192.168.10.106") or (str(recv_addr[0]) == "10.0.0.25")):

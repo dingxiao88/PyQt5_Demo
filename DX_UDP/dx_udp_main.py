@@ -648,7 +648,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         else:
             self.statusBar().showMessage('the net interface is not wlan.')
 
-    # --------UDP连接--------
+    # --------UDP连接-----------
     def UDP_Connect(self):
         if(self.udp_connect_flag == False):
             # 获取网络参数
@@ -669,7 +669,6 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.pushButton_bing.setStyleSheet('QPushButton {background-color: #F20C00; color: black;}')
 
         elif(self.udp_recv_thread.working_flag == True):
-
             self.udp_recv_thread.setRun()
             self.udp_connect_flag = False
             self.pushButton_bing.setText('绑定')
