@@ -137,7 +137,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
     # DC信息回显
     def DC_Recv_Info_Display(self, str_info, count):
         # print('--->')
-        self.label_dc_Info.setText(str(count))
+        self.label_dc_Info.setText(str(count)) 
 
     
     # 全局监听鼠标点击事件
