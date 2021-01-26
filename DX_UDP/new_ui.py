@@ -141,7 +141,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
     
     # 全局监听鼠标点击事件
-    def mousePressEvent(self, event):
+    def mousePressEvent(self, event): 
         if event.button()==Qt.LeftButton:
             self.m_flag=True
             self.m_Position=event.globalPos()-self.pos() #获取鼠标相对窗口的位置
