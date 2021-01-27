@@ -710,6 +710,23 @@ class Ui_MainWindow(object):
         self.label_mqttPic.setText("")
         self.label_mqttPic.setObjectName("label_mqttPic")
         self.verticalLayout_17.addWidget(self.label_mqttPic)
+        self.pushButton_getColor = QtWidgets.QPushButton(self.frame_3)
+        self.pushButton_getColor.setMinimumSize(QtCore.QSize(0, 40))
+        self.pushButton_getColor.setStyleSheet("QPushButton {\n"
+"    color: rgb(234,237,237);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+"    border: none;\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_getColor.setObjectName("pushButton_getColor")
+        self.verticalLayout_17.addWidget(self.pushButton_getColor)
         self.verticalLayout_10.addWidget(self.frame_3)
         self.stackedWidget.addWidget(self.page_weather)
         self.page_setting = QtWidgets.QWidget()
@@ -1181,6 +1198,7 @@ class Ui_MainWindow(object):
         self.label_11.setText(_translate("MainWindow", "旋回"))
         self.pushButton_DC_FYRunCtl.setText(_translate("MainWindow", "启动"))
         self.label_7.setText(_translate("MainWindow", "测试"))
+        self.pushButton_getColor.setText(_translate("MainWindow", "颜色选择"))
         self.label_4.setText(_translate("MainWindow", "网卡设置"))
         self.label_InterfaceIP.setText(_translate("MainWindow", "IP:255.255.255.255"))
         self.label_13.setText(_translate("MainWindow", "UDP协议设置"))

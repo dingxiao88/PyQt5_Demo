@@ -9,7 +9,7 @@ import time
 
 import datetime
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QColorDialog
 from PyQt5.QtCore import Qt, QPropertyAnimation
 from PyQt5.QtGui import QMouseEvent, QCursor, QPixmap, QIcon
 
@@ -102,11 +102,30 @@ class mainWin(QMainWindow, Ui_MainWindow):
         pix = QPixmap('1.jpg')
         self.label_mqttPic.setPixmap(pix)
 
+        # 颜色选择按键操作绑定
+        self.pushButton_getColor.clicked.connect(self.openColorDialog)
+
         # 线程启动按钮绑定事件------------
         self.dx_thread = DX_Thread("dx_display", 0.05)
         self.dx_thread.DX_Thread_OutSingal.connect(self.Info_reflash)
         self.dx_thread.setRun()
         self.dx_thread.start()
+
+
+    def openColorDialog(self):
+        color = QColorDialog.getColor()
+
+        if color.isValid():
+            # print(color.name())
+            print(color.name())
+            color_R = color.red()
+            color_G = color.green()
+            color_B = color.blue()
+            self.udp_send[40] = color_R
+            self.udp_send[41] = color_G
+            self.udp_send[42] = color_B
+            # print(color_R)
+
 
 
     # 系统托盘类信号数据处理
