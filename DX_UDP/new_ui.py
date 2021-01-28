@@ -23,6 +23,8 @@ from APP import DX_Control
 from Thread_Main import DX_Thread
 from dx_SystemTray import dx_SystemTray
 
+from colorpicker import ColorPicker
+
 
 # 创建mainWin类并传入Ui_MainWindow
 class mainWin(QMainWindow, Ui_MainWindow):
@@ -113,20 +115,33 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
 
     def openColorDialog(self):
-        color = QColorDialog.getColor()
+        # color = QColorDialog.getColor()
 
-        if color.isValid():
-            # print(color.name())
-            print(color.name())
-            color_R = color.red()
-            color_G = color.green()
-            color_B = color.blue()
-            self.udp_send[40] = color_R
-            self.udp_send[41] = color_G
-            self.udp_send[42] = color_B
-            # print(color_R)
+        # if color.isValid():
+        #     # print(color.name())
+        #     print(color.name())
+        #     color_R = color.red()
+        #     color_G = color.green()
+        #     color_B = color.blue()
+        #     self.udp_send[40] = color_R
+        #     self.udp_send[41] = color_G
+        #     self.udp_send[42] = color_B
+        #     # print(color_R)
+
+        my_color_picker = ColorPicker(useAlpha=False)
+        my_color_picker.DX_Color_OutSingal.connect(self.dx_color)
+        picked_color = my_color_picker.hsv2hex(my_color_picker.getColor())
+        # print("------->")
+        # print(picked_color)
 
 
+    def dx_color(self,color_r,color_g,color_b):
+        print(color_r)
+        print(color_g)
+        print(color_b)
+        self.udp_send[40] = color_r
+        self.udp_send[41] = color_g
+        self.udp_send[42] = color_b
 
     # 系统托盘类信号数据处理
     def SystemTray_Pro(self,str_info):
