@@ -78,6 +78,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
         for x in range(50):
             self.udp_send.append(0x00)
 
+        # 测试俯仰和旋回角度
+        self.udp_send[5] = 0x01
+        self.udp_send[6] = 0x2B
+        self.udp_send[7] = 0xE6
+        self.udp_send[8] = 0xB6
+
+
         # 初始化本地网卡
         NetWork_Fun.Init_Local_Interface(self)
         self.comboBox_LocalInterface.currentIndexChanged.connect(lambda:NetWork_Fun.On_interface_selection_change(self))
