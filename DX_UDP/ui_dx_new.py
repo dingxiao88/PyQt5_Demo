@@ -514,16 +514,16 @@ class Ui_MainWindow(object):
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setSpacing(3)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.pushButton_DC_FYRun_Down = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_DC_MainPower_Ctl = QtWidgets.QPushButton(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_DC_FYRun_Down.sizePolicy().hasHeightForWidth())
-        self.pushButton_DC_FYRun_Down.setSizePolicy(sizePolicy)
-        self.pushButton_DC_FYRun_Down.setMinimumSize(QtCore.QSize(0, 50))
-        self.pushButton_DC_FYRun_Down.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.pushButton_DC_FYRun_Down.setStyleSheet("QPushButton {\n"
-"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-bottom.png);\n"
+        sizePolicy.setHeightForWidth(self.pushButton_DC_MainPower_Ctl.sizePolicy().hasHeightForWidth())
+        self.pushButton_DC_MainPower_Ctl.setSizePolicy(sizePolicy)
+        self.pushButton_DC_MainPower_Ctl.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_DC_MainPower_Ctl.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_DC_MainPower_Ctl.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-check-alt.png);\n"
 "    background-position: center;\n"
 "    background-repeat: no-reperat;\n"
 "    border: none;\n"
@@ -535,19 +535,19 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_DC_FYRun_Down.setText("")
-        self.pushButton_DC_FYRun_Down.setObjectName("pushButton_DC_FYRun_Down")
-        self.gridLayout_2.addWidget(self.pushButton_DC_FYRun_Down, 2, 1, 1, 1)
-        self.pushButton_DC_FYRun_Up = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_DC_MainPower_Ctl.setText("")
+        self.pushButton_DC_MainPower_Ctl.setObjectName("pushButton_DC_MainPower_Ctl")
+        self.gridLayout_2.addWidget(self.pushButton_DC_MainPower_Ctl, 2, 1, 1, 1)
+        self.pushButton_DC_SpeakerCtl = QtWidgets.QPushButton(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_DC_FYRun_Up.sizePolicy().hasHeightForWidth())
-        self.pushButton_DC_FYRun_Up.setSizePolicy(sizePolicy)
-        self.pushButton_DC_FYRun_Up.setMinimumSize(QtCore.QSize(0, 50))
-        self.pushButton_DC_FYRun_Up.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.pushButton_DC_FYRun_Up.setStyleSheet("QPushButton {\n"
-"    background-image: url(:/images_icons_20/images/icons/20x20/cil-arrow-top.png);\n"
+        sizePolicy.setHeightForWidth(self.pushButton_DC_SpeakerCtl.sizePolicy().hasHeightForWidth())
+        self.pushButton_DC_SpeakerCtl.setSizePolicy(sizePolicy)
+        self.pushButton_DC_SpeakerCtl.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_DC_SpeakerCtl.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.pushButton_DC_SpeakerCtl.setStyleSheet("QPushButton {\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-volume-off.png);\n"
 "    background-position: center;\n"
 "    background-repeat: no-reperat;\n"
 "    border: none;\n"
@@ -559,9 +559,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_DC_FYRun_Up.setText("")
-        self.pushButton_DC_FYRun_Up.setObjectName("pushButton_DC_FYRun_Up")
-        self.gridLayout_2.addWidget(self.pushButton_DC_FYRun_Up, 2, 0, 1, 1)
+        self.pushButton_DC_SpeakerCtl.setText("")
+        self.pushButton_DC_SpeakerCtl.setObjectName("pushButton_DC_SpeakerCtl")
+        self.gridLayout_2.addWidget(self.pushButton_DC_SpeakerCtl, 2, 0, 1, 1)
         self.label_8 = QtWidgets.QLabel(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -1174,7 +1174,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

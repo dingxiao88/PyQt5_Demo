@@ -84,6 +84,8 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.udp_send[7] = 0xE6
         self.udp_send[8] = 0xB6
 
+        # 测试高压控制 | 测试鸣音器控制
+        self.udp_send[9] = 0x00
 
         # 初始化本地网卡
         NetWork_Fun.Init_Local_Interface(self)
@@ -99,14 +101,18 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_DC_FYRunCtl.clicked.connect(lambda:DX_Control.DC_FYRun(self))
         self.pushButton_DC_XHRunCtl.clicked.connect(lambda:DX_Control.DC_XHRun(self))
 
+        # DC设备鸣音器控制
+        self.pushButton_DC_SpeakerCtl.pressed.connect(lambda:DX_Control.DC_Sperker_Control(self))
+        # DC设备高压控制
+        self.pushButton_DC_MainPower_Ctl.pressed.connect(lambda:DX_Control.DC_MainPower_Control(self))
+
         # DC设备FY&XH方向操作
-        self.pushButton_DC_FYRun_Up.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
-        self.pushButton_DC_FYRun_Down.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
+        # self.pushButton_DC_FYRun_Down.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
         self.pushButton_DC_XHRun_Left.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
         self.pushButton_DC_XHRun_Right.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
         # DC设备FY&XH方向操作释放
-        self.pushButton_DC_FYRun_Up.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
-        self.pushButton_DC_FYRun_Down.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
+        # self.pushButton_DC_FYRun_Up.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
+        # self.pushButton_DC_FYRun_Down.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
         self.pushButton_DC_XHRun_Left.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
         self.pushButton_DC_XHRun_Right.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
 
