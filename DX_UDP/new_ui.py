@@ -107,12 +107,9 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_DC_MainPower_Ctl.pressed.connect(lambda:DX_Control.DC_MainPower_Control(self))
 
         # DC设备FY&XH方向操作
-        # self.pushButton_DC_FYRun_Down.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
         self.pushButton_DC_XHRun_Left.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
         self.pushButton_DC_XHRun_Right.pressed.connect(lambda:DX_Control.DC_FY_XH_Dir_Control(self))
         # DC设备FY&XH方向操作释放
-        # self.pushButton_DC_FYRun_Up.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
-        # self.pushButton_DC_FYRun_Down.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
         self.pushButton_DC_XHRun_Left.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
         self.pushButton_DC_XHRun_Right.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
 
