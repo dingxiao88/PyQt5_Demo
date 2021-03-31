@@ -9,7 +9,7 @@ import time
 
 import datetime
 
-from icecream import ic
+# from icecream import ic
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QColorDialog
 from PyQt5.QtCore import Qt, QPropertyAnimation
@@ -50,7 +50,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         # 显示软件图标  -- 运行python命令的目录必须在文件目录，不然会报错
         self.setWindowIcon(QIcon("./images/me.png"))
-        ic()
+        # ic()
 
         # 配置系统托盘
         self.dx_SystemTray = dx_SystemTray()
