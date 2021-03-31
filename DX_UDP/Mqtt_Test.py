@@ -10,7 +10,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     # print(msg.topic + " " + str(msg.payload))
     print("topic:"+msg.topic)
-    # imgdata = base64.b64decode(str(msg.payload))
+    # imgdata = base64.b64decode(str(msg.payload)) 
     # imgdata = base64.b64decode(f.read())
     file = open('1.jpg','wb')
     file.write(msg.payload)
