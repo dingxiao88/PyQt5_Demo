@@ -9,7 +9,7 @@ import time
 
 import datetime
 
-# from icecream import ic
+# from icecream import ic  #替代print的python库
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QColorDialog
 from PyQt5.QtCore import Qt, QPropertyAnimation
