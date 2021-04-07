@@ -117,6 +117,12 @@ class mainWin(QMainWindow, Ui_MainWindow):
         pix = QPixmap('1.jpg')
         self.label_mqttPic.setPixmap(pix)
 
+        # websocket图片显示
+        pix1 = QPixmap('ESP32_CAM_Real.jpg')
+        self.label_mqttPic_2.setPixmap(pix1)
+        pix2 = QPixmap('ESP32_CAM_Real1.jpg')
+        self.label_mqttPic_3.setPixmap(pix2)
+
         # 颜色选择按键操作绑定
         self.pushButton_getColor.clicked.connect(self.openColorDialog)
 
@@ -180,6 +186,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.label_systemTime.setText(time_str)
         pix = QPixmap('1.jpg')
         self.label_mqttPic.setPixmap(pix)
+        pix1 = QPixmap('ESP32_CAM_Real.jpg')
+        self.label_mqttPic_2.setPixmap(pix1)
+        pix2 = QPixmap('ESP32_CAM_Real1.jpg')
+        self.label_mqttPic_3.setPixmap(pix2)
 
     # DC信息回显
     def DC_Recv_Info_Display(self, str_info, count):
