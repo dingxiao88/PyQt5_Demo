@@ -23,18 +23,18 @@ async def hello2(websocket, path):
         name1 = await websocket.recv()
         # print(f"< {name}")
         # print("p2")
-        file1 = open('ESP32_CAM_Real1.jpg','wb')
+        file1 = open('ESP32_CAM_Real.jpg','wb')
         file1.write(name1)
         file1.close()
 
 
 # start_server = websockets.serve(hello, "localhost", 8888)
-# start_server1 = websockets.serve(hello1, "10.0.0.12", 8888)
-# start_server2 = websockets.serve(hello2, "10.0.0.12", 8886)
+start_server1 = websockets.serve(hello1, "10.0.0.15", 8888)
+start_server2 = websockets.serve(hello2, "10.0.0.15", 8886)
 # start_server1 = websockets.serve(hello1, "192.168.31.188", 8888)
-start_server2 = websockets.serve(hello2, "192.168.31.188", 8886)
+# start_server2 = websockets.serve(hello2, "192.168.31.188", 8886)
 
 print("----------RUN-----------")
-# asyncio.get_event_loop().run_until_complete(start_server1)
+asyncio.get_event_loop().run_until_complete(start_server1)
 asyncio.get_event_loop().run_until_complete(start_server2)
 asyncio.get_event_loop().run_forever()
