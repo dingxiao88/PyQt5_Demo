@@ -22,6 +22,7 @@ from APP import APP_Fun
 from APP import Menu_Fun
 from APP import NetWork_Fun
 from APP import DX_Control
+from APP import Coin_Fun
 from Thread_Main import DX_Thread
 from dx_SystemTray import dx_SystemTray
 
@@ -69,6 +70,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_weather.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,2))
         self.pushButton_config.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,3))
         self.pushButton_about.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,4))
+        self.pushButton_coin.clicked.connect(lambda:Menu_Fun.Choose_Menu(self,5))
 
         # 模式显示DC_Run界面
         self.stackedWidget.setCurrentIndex(0)
@@ -112,6 +114,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # DC设备FY&XH方向操作释放
         self.pushButton_DC_XHRun_Left.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
         self.pushButton_DC_XHRun_Right.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
+
+        # 数字货币实时价格获取功能
+        self.pushButton_getRealPrice.clicked.connect(lambda:Coin_Fun.GetCoinRealPrice(self))
+        self.lineEdit_coinPrice.textChanged.connect(lambda:Coin_Fun.GetMoney(self))
 
         # MQTT图片显示
         pix = QPixmap('1.jpg')

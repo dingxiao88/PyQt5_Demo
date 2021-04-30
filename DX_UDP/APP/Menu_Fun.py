@@ -74,6 +74,23 @@ def Choose_Menu(self, btn_index):
                                             border-left: 28px solid rgb(85, 170, 255);\
                                             }')
 
+    self.pushButton_coin.setStyleSheet('QPushButton {background-image: url(:/images_icons_20/images/icons/20x20/cil-chart-line.png);\
+                                        background-position: left center;\
+                                        background-repeat: no-repeat;\
+                                        border: none;\
+                                        border-left: 28px solid rgb(27, 29, 35);\
+                                        background-color: rgb(27, 29, 35);\
+                                        text-align: left;\
+                                        padding-left: 45px;}\
+                                        QPushButton:hover {\
+                                        background-color: rgb(33, 37, 43);\
+                                        border-left: 28px solid rgb(33, 37, 43);\
+                                        }\
+                                        QPushButton:pressed {	\
+                                        background-color: rgb(85, 170, 255);\
+                                        border-left: 28px solid rgb(85, 170, 255);\
+                                        }')
+
     if(btn_index == 1):
         self.pushButton_dc_run.setStyleSheet('QPushButton {background-image: url(:/images_icons_20/images/icons/20x20/cil-monitor.png);\
                                             background-position: left center;\
@@ -135,7 +152,7 @@ def Choose_Menu(self, btn_index):
         self.stackedWidget.setCurrentIndex(2)
 
     elif(btn_index == 4):
-        self.pushButton_about.setStyleSheet('QPushButton {background-image: url(:/images_icons_20/images/icons/20x20/cil-comment-bubble.png);\
+        self.pushButton_about.setStyleSheet('QPushButton {background-image: url(:/images_icons_20/images/icons/20x20/cil-settings.png);\
                                             background-position: left center;\
                                             background-repeat: no-repeat;\
                                             border: none;\
@@ -153,6 +170,26 @@ def Choose_Menu(self, btn_index):
                                             border-left: 28px solid rgb(85, 170, 255);\
                                             }')
         self.stackedWidget.setCurrentIndex(3)
+
+    elif(btn_index == 5):
+        self.pushButton_coin.setStyleSheet('QPushButton {background-image: url(:/images_icons_20/images/icons/20x20/cil-chart-line.png);\
+                                            background-position: left center;\
+                                            background-repeat: no-repeat;\
+                                            border: none;\
+                                            border-left: 28px solid rgb(27, 29, 35);\
+                                            border-right: 5px solid rgb(44, 49, 60);\
+                                            background-color: rgb(27, 29, 35);\
+                                            text-align: left;\
+                                            padding-left: 45px;}\
+                                            QPushButton:hover {\
+                                            background-color: rgb(33, 37, 43);\
+                                            border-left: 28px solid rgb(33, 37, 43);\
+                                            }\
+                                            QPushButton:pressed {	\
+                                            background-color: rgb(85, 170, 255);\
+                                            border-left: 28px solid rgb(85, 170, 255);\
+                                            }')
+        self.stackedWidget.setCurrentIndex(4)
 
 
 # 显示菜单过度动画

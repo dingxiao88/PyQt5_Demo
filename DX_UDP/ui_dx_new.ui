@@ -22,7 +22,7 @@
     <string notr="true">background: transparent;
 color: rgb(210, 210, 210);</string>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_9">
+   <layout class="QVBoxLayout" name="verticalLayout_18">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -612,7 +612,7 @@ QPushButton:pressed {
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,0,0">
+               <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,0,0,0">
                 <property name="spacing">
                  <number>0</number>
                 </property>
@@ -741,6 +741,39 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
+                 <widget class="QPushButton" name="pushButton_coin">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {	
+	background-image: url(:/images_icons_20/images/icons/20x20/cil-chart-line.png);
+	background-position: left center;
+    background-repeat: no-repeat;
+	border: none;
+	border-left: 28px solid rgb(27, 29, 35);
+	background-color: rgb(27, 29, 35);
+	text-align: left;
+	padding-left: 45px;
+}
+QPushButton:hover {
+	background-color: rgb(33, 37, 43);
+	border-left: 28px solid rgb(33, 37, 43);
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+	border-left: 28px solid rgb(85, 170, 255);
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>PushButton</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="pushButton_about">
                   <property name="minimumSize">
                    <size>
@@ -750,7 +783,7 @@ QPushButton:pressed {
                   </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton {	
-	background-image: url(:/images_icons_20/images/icons/20x20/cil-comment-bubble.png);
+	background-image: url(:/images_icons_20/images/icons/20x20/cil-settings.png);
 	background-position: left center;
     background-repeat: no-repeat;
 	border: none;
@@ -932,7 +965,7 @@ QPushButton:pressed {
                    <string notr="true">background: transparent;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>4</number>
                   </property>
                   <widget class="QWidget" name="page_dc_run">
                    <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -2260,64 +2293,6 @@ border-radius: 10px;</string>
                            </property>
                           </widget>
                          </item>
-                         <item row="4" column="0">
-                          <widget class="QLabel" name="label_24">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>16777215</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>Segoe UI</family>
-                             <pointsize>10</pointsize>
-                             <weight>75</weight>
-                             <bold>true</bold>
-                            </font>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">background: transparent;
-</string>
-                           </property>
-                           <property name="text">
-                            <string>官方网址：</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="2" column="0">
-                          <widget class="QLabel" name="label_22">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="minimumSize">
-                            <size>
-                             <width>0</width>
-                             <height>0</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>Segoe UI</family>
-                            </font>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">color: rgb(98, 103, 111);</string>
-                           </property>
-                           <property name="text">
-                            <string>Design by:Jack Din</string>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="1" column="0">
                           <widget class="QLabel" name="label_21">
                            <property name="maximumSize">
@@ -2369,12 +2344,425 @@ QCommandLinkButton:pressed {
                            </property>
                           </widget>
                          </item>
+                         <item row="2" column="0">
+                          <widget class="QLabel" name="label_22">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>0</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Segoe UI</family>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">color: rgb(98, 103, 111);</string>
+                           </property>
+                           <property name="text">
+                            <string>Design by:Jack Din</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="4" column="0">
+                          <widget class="QLabel" name="label_24">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>Segoe UI</family>
+                             <pointsize>10</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background: transparent;
+</string>
+                           </property>
+                           <property name="text">
+                            <string>官方网址：</string>
+                           </property>
+                          </widget>
+                         </item>
                         </layout>
                        </item>
                       </layout>
                      </widget>
                     </item>
                    </layout>
+                  </widget>
+                  <widget class="QWidget" name="page_coin">
+                   <widget class="QFrame" name="frame_13">
+                    <property name="geometry">
+                     <rect>
+                      <x>0</x>
+                      <y>0</y>
+                      <width>711</width>
+                      <height>551</height>
+                     </rect>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <widget class="QLabel" name="label_12">
+                     <property name="geometry">
+                      <rect>
+                       <x>60</x>
+                       <y>10</y>
+                       <width>621</width>
+                       <height>30</height>
+                      </rect>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+margin:1px;</string>
+                     </property>
+                     <property name="text">
+                      <string>数字货币实时数据</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="lineEdit_coinName">
+                     <property name="geometry">
+                      <rect>
+                       <x>130</x>
+                       <y>60</y>
+                       <width>121</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+padding: 5px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="inputMask">
+                      <string/>
+                     </property>
+                     <property name="placeholderText">
+                      <string>bitcoin</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_14">
+                     <property name="geometry">
+                      <rect>
+                       <x>60</x>
+                       <y>60</y>
+                       <width>61</width>
+                       <height>30</height>
+                      </rect>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+margin:1px;</string>
+                     </property>
+                     <property name="text">
+                      <string>货币名：</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                    <widget class="QPushButton" name="pushButton_getRealPrice">
+                     <property name="geometry">
+                      <rect>
+                       <x>260</x>
+                       <y>60</y>
+                       <width>81</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+padding: 5px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string>获取</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_coinRealPrice">
+                     <property name="geometry">
+                      <rect>
+                       <x>60</x>
+                       <y>100</y>
+                       <width>621</width>
+                       <height>111</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+border-radius: 10px;
+padding: 5px;
+padding-bottom: 7px;
+margin-top: 8px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string>show me the money...</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="lineEdit_coinPrice">
+                     <property name="geometry">
+                      <rect>
+                       <x>130</x>
+                       <y>270</y>
+                       <width>121</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+padding: 5px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_25">
+                     <property name="geometry">
+                      <rect>
+                       <x>60</x>
+                       <y>270</y>
+                       <width>61</width>
+                       <height>30</height>
+                      </rect>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+margin:1px;</string>
+                     </property>
+                     <property name="text">
+                      <string>买入价:</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                    <widget class="Line" name="line">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>240</y>
+                       <width>701</width>
+                       <height>16</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="lineWidth">
+                      <number>3</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_moneyGet">
+                     <property name="geometry">
+                      <rect>
+                       <x>60</x>
+                       <y>380</y>
+                       <width>621</width>
+                       <height>151</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+border-radius: 10px;
+padding: 5px;
+padding-bottom: 7px;
+margin-top: 8px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string>waiting...</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="lineEdit_3">
+                     <property name="geometry">
+                      <rect>
+                       <x>130</x>
+                       <y>330</y>
+                       <width>121</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+padding: 5px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_26">
+                     <property name="geometry">
+                      <rect>
+                       <x>60</x>
+                       <y>330</y>
+                       <width>61</width>
+                       <height>30</height>
+                      </rect>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+margin:1px;</string>
+                     </property>
+                     <property name="text">
+                      <string>止盈比:</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_systemTime_4">
+                     <property name="geometry">
+                      <rect>
+                       <x>260</x>
+                       <y>330</y>
+                       <width>40</width>
+                       <height>34</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+border-radius: 10px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string>%</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                    <widget class="QPushButton" name="pushButton_3">
+                     <property name="geometry">
+                      <rect>
+                       <x>330</x>
+                       <y>330</y>
+                       <width>81</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+padding: 5px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string>正常</string>
+                     </property>
+                    </widget>
+                    <widget class="QPushButton" name="pushButton_4">
+                     <property name="geometry">
+                      <rect>
+                       <x>420</x>
+                       <y>330</y>
+                       <width>81</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+padding: 5px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string>贪心</string>
+                     </property>
+                    </widget>
+                    <widget class="QPushButton" name="pushButton_5">
+                     <property name="geometry">
+                      <rect>
+                       <x>510</x>
+                       <y>330</y>
+                       <width>81</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+padding: 5px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string>极度贪心</string>
+                     </property>
+                    </widget>
+                    <widget class="QPushButton" name="pushButton_clcMoney">
+                     <property name="geometry">
+                      <rect>
+                       <x>260</x>
+                       <y>270</y>
+                       <width>81</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+padding: 5px;
+color: rgb(255, 0, 127);</string>
+                     </property>
+                     <property name="text">
+                      <string>计算</string>
+                     </property>
+                    </widget>
+                   </widget>
                   </widget>
                  </widget>
                 </item>

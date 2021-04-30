@@ -22,10 +22,10 @@ class Ui_MainWindow(object):
         self.centralwidget.setStyleSheet("background: transparent;\n"
 "color: rgb(210, 210, 210);")
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout_9.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_9.setSpacing(0)
-        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout_18.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_18.setSpacing(0)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
         self.frame_main = QtWidgets.QFrame(self.centralwidget)
         self.frame_main.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_main.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -347,10 +347,32 @@ class Ui_MainWindow(object):
 "}")
         self.pushButton_config.setObjectName("pushButton_config")
         self.verticalLayout_8.addWidget(self.pushButton_config)
+        self.pushButton_coin = QtWidgets.QPushButton(self.frame_menus)
+        self.pushButton_coin.setMinimumSize(QtCore.QSize(0, 60))
+        self.pushButton_coin.setStyleSheet("QPushButton {    \n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-chart-line.png);\n"
+"    background-position: left center;\n"
+"    background-repeat: no-repeat;\n"
+"    border: none;\n"
+"    border-left: 28px solid rgb(27, 29, 35);\n"
+"    background-color: rgb(27, 29, 35);\n"
+"    text-align: left;\n"
+"    padding-left: 45px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-left: 28px solid rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"    border-left: 28px solid rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_coin.setObjectName("pushButton_coin")
+        self.verticalLayout_8.addWidget(self.pushButton_coin)
         self.pushButton_about = QtWidgets.QPushButton(self.frame_menus)
         self.pushButton_about.setMinimumSize(QtCore.QSize(0, 60))
         self.pushButton_about.setStyleSheet("QPushButton {    \n"
-"    background-image: url(:/images_icons_20/images/icons/20x20/cil-comment-bubble.png);\n"
+"    background-image: url(:/images_icons_20/images/icons/20x20/cil-settings.png);\n"
 "    background-position: left center;\n"
 "    background-repeat: no-repeat;\n"
 "    border: none;\n"
@@ -1076,36 +1098,6 @@ class Ui_MainWindow(object):
         self.label_23.setStyleSheet("color: rgb(98, 103, 111);")
         self.label_23.setObjectName("label_23")
         self.gridLayout_5.addWidget(self.label_23, 3, 0, 1, 1)
-        self.label_24 = QtWidgets.QLabel(self.frame_10)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_24.sizePolicy().hasHeightForWidth())
-        self.label_24.setSizePolicy(sizePolicy)
-        self.label_24.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_24.setFont(font)
-        self.label_24.setStyleSheet("background: transparent;\n"
-"")
-        self.label_24.setObjectName("label_24")
-        self.gridLayout_5.addWidget(self.label_24, 4, 0, 1, 1)
-        self.label_22 = QtWidgets.QLabel(self.frame_10)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_22.sizePolicy().hasHeightForWidth())
-        self.label_22.setSizePolicy(sizePolicy)
-        self.label_22.setMinimumSize(QtCore.QSize(0, 0))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        self.label_22.setFont(font)
-        self.label_22.setStyleSheet("color: rgb(98, 103, 111);")
-        self.label_22.setObjectName("label_22")
-        self.gridLayout_5.addWidget(self.label_22, 2, 0, 1, 1)
         self.label_21 = QtWidgets.QLabel(self.frame_10)
         self.label_21.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
@@ -1137,9 +1129,160 @@ class Ui_MainWindow(object):
         self.commandLinkButton.setIcon(icon4)
         self.commandLinkButton.setObjectName("commandLinkButton")
         self.gridLayout_5.addWidget(self.commandLinkButton, 5, 0, 1, 1)
+        self.label_22 = QtWidgets.QLabel(self.frame_10)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_22.sizePolicy().hasHeightForWidth())
+        self.label_22.setSizePolicy(sizePolicy)
+        self.label_22.setMinimumSize(QtCore.QSize(0, 0))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        self.label_22.setFont(font)
+        self.label_22.setStyleSheet("color: rgb(98, 103, 111);")
+        self.label_22.setObjectName("label_22")
+        self.gridLayout_5.addWidget(self.label_22, 2, 0, 1, 1)
+        self.label_24 = QtWidgets.QLabel(self.frame_10)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_24.sizePolicy().hasHeightForWidth())
+        self.label_24.setSizePolicy(sizePolicy)
+        self.label_24.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_24.setFont(font)
+        self.label_24.setStyleSheet("background: transparent;\n"
+"")
+        self.label_24.setObjectName("label_24")
+        self.gridLayout_5.addWidget(self.label_24, 4, 0, 1, 1)
         self.verticalLayout_15.addLayout(self.gridLayout_5)
         self.verticalLayout_16.addWidget(self.frame_10)
         self.stackedWidget.addWidget(self.page_about)
+        self.page_coin = QtWidgets.QWidget()
+        self.page_coin.setObjectName("page_coin")
+        self.frame_13 = QtWidgets.QFrame(self.page_coin)
+        self.frame_13.setGeometry(QtCore.QRect(0, 0, 711, 551))
+        self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_13.setObjectName("frame_13")
+        self.label_12 = QtWidgets.QLabel(self.frame_13)
+        self.label_12.setGeometry(QtCore.QRect(60, 10, 621, 30))
+        self.label_12.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.label_12.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"margin:1px;")
+        self.label_12.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_12.setObjectName("label_12")
+        self.lineEdit_coinName = QtWidgets.QLineEdit(self.frame_13)
+        self.lineEdit_coinName.setGeometry(QtCore.QRect(130, 60, 121, 31))
+        self.lineEdit_coinName.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.lineEdit_coinName.setInputMask("")
+        self.lineEdit_coinName.setObjectName("lineEdit_coinName")
+        self.label_14 = QtWidgets.QLabel(self.frame_13)
+        self.label_14.setGeometry(QtCore.QRect(60, 60, 61, 30))
+        self.label_14.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.label_14.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"margin:1px;")
+        self.label_14.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_14.setObjectName("label_14")
+        self.pushButton_getRealPrice = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_getRealPrice.setGeometry(QtCore.QRect(260, 60, 81, 31))
+        self.pushButton_getRealPrice.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.pushButton_getRealPrice.setObjectName("pushButton_getRealPrice")
+        self.label_coinRealPrice = QtWidgets.QLabel(self.frame_13)
+        self.label_coinRealPrice.setGeometry(QtCore.QRect(60, 100, 621, 111))
+        self.label_coinRealPrice.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"border-radius: 10px;\n"
+"padding: 5px;\n"
+"padding-bottom: 7px;\n"
+"margin-top: 8px;\n"
+"color: rgb(255, 0, 127);")
+        self.label_coinRealPrice.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_coinRealPrice.setObjectName("label_coinRealPrice")
+        self.lineEdit_coinPrice = QtWidgets.QLineEdit(self.frame_13)
+        self.lineEdit_coinPrice.setGeometry(QtCore.QRect(130, 270, 121, 31))
+        self.lineEdit_coinPrice.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.lineEdit_coinPrice.setObjectName("lineEdit_coinPrice")
+        self.label_25 = QtWidgets.QLabel(self.frame_13)
+        self.label_25.setGeometry(QtCore.QRect(60, 270, 61, 30))
+        self.label_25.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.label_25.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"margin:1px;")
+        self.label_25.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_25.setObjectName("label_25")
+        self.line = QtWidgets.QFrame(self.frame_13)
+        self.line.setGeometry(QtCore.QRect(0, 240, 701, 16))
+        self.line.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"color: rgb(255, 0, 127);")
+        self.line.setLineWidth(3)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.label_moneyGet = QtWidgets.QLabel(self.frame_13)
+        self.label_moneyGet.setGeometry(QtCore.QRect(60, 380, 621, 151))
+        self.label_moneyGet.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"border-radius: 10px;\n"
+"padding: 5px;\n"
+"padding-bottom: 7px;\n"
+"margin-top: 8px;\n"
+"color: rgb(255, 0, 127);")
+        self.label_moneyGet.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_moneyGet.setObjectName("label_moneyGet")
+        self.lineEdit_3 = QtWidgets.QLineEdit(self.frame_13)
+        self.lineEdit_3.setGeometry(QtCore.QRect(130, 330, 121, 31))
+        self.lineEdit_3.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.lineEdit_3.setText("")
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.label_26 = QtWidgets.QLabel(self.frame_13)
+        self.label_26.setGeometry(QtCore.QRect(60, 330, 61, 30))
+        self.label_26.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.label_26.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"margin:1px;")
+        self.label_26.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_26.setObjectName("label_26")
+        self.label_systemTime_4 = QtWidgets.QLabel(self.frame_13)
+        self.label_systemTime_4.setGeometry(QtCore.QRect(260, 330, 40, 34))
+        self.label_systemTime_4.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"border-radius: 10px;\n"
+"color: rgb(255, 0, 127);")
+        self.label_systemTime_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_systemTime_4.setObjectName("label_systemTime_4")
+        self.pushButton_3 = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_3.setGeometry(QtCore.QRect(330, 330, 81, 31))
+        self.pushButton_3.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_4 = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_4.setGeometry(QtCore.QRect(420, 330, 81, 31))
+        self.pushButton_4.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.pushButton_5 = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_5.setGeometry(QtCore.QRect(510, 330, 81, 31))
+        self.pushButton_5.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.pushButton_clcMoney = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_clcMoney.setGeometry(QtCore.QRect(260, 270, 81, 31))
+        self.pushButton_clcMoney.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.pushButton_clcMoney.setObjectName("pushButton_clcMoney")
+        self.stackedWidget.addWidget(self.page_coin)
         self.verticalLayout_7.addWidget(self.stackedWidget)
         self.label_systemTime = QtWidgets.QLabel(self.frame_content)
         self.label_systemTime.setStyleSheet("background-color: rgb(33, 37, 43);\n"
@@ -1196,11 +1339,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.addWidget(self.frame_grip)
         self.horizontalLayout_2.addWidget(self.frame_content_right)
         self.verticalLayout_2.addWidget(self.frame_center)
-        self.verticalLayout_9.addWidget(self.frame_main)
+        self.verticalLayout_18.addWidget(self.frame_main)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1212,6 +1355,7 @@ class Ui_MainWindow(object):
         self.pushButton_dc_run.setText(_translate("MainWindow", "DC远程控制"))
         self.pushButton_weather.setText(_translate("MainWindow", "天气查询"))
         self.pushButton_config.setText(_translate("MainWindow", "配置参数"))
+        self.pushButton_coin.setText(_translate("MainWindow", "PushButton"))
         self.pushButton_about.setText(_translate("MainWindow", "软件设置"))
         self.label_9.setText(_translate("MainWindow", "0.00"))
         self.label_10.setText(_translate("MainWindow", "0.00"))
@@ -1241,10 +1385,23 @@ class Ui_MainWindow(object):
         self.pushButton_bing.setText(_translate("MainWindow", "绑定"))
         self.pushButton_udp_multicast.setText(_translate("MainWindow", "组播"))
         self.label_23.setText(_translate("MainWindow", "霄哥的神秘工具是一个简单程序应用的框架，其中包含了一些工作中需要使用的模拟器。"))
-        self.label_24.setText(_translate("MainWindow", "官方网址："))
-        self.label_22.setText(_translate("MainWindow", "Design by:Jack Din"))
         self.label_21.setText(_translate("MainWindow", "霄哥的神秘工具"))
         self.commandLinkButton.setText(_translate("MainWindow", "www.dx1023.com"))
+        self.label_22.setText(_translate("MainWindow", "Design by:Jack Din"))
+        self.label_24.setText(_translate("MainWindow", "官方网址："))
+        self.label_12.setText(_translate("MainWindow", "数字货币实时数据"))
+        self.lineEdit_coinName.setPlaceholderText(_translate("MainWindow", "bitcoin"))
+        self.label_14.setText(_translate("MainWindow", "货币名："))
+        self.pushButton_getRealPrice.setText(_translate("MainWindow", "获取"))
+        self.label_coinRealPrice.setText(_translate("MainWindow", "show me the money..."))
+        self.label_25.setText(_translate("MainWindow", "买入价:"))
+        self.label_moneyGet.setText(_translate("MainWindow", "waiting..."))
+        self.label_26.setText(_translate("MainWindow", "止盈比:"))
+        self.label_systemTime_4.setText(_translate("MainWindow", "%"))
+        self.pushButton_3.setText(_translate("MainWindow", "正常"))
+        self.pushButton_4.setText(_translate("MainWindow", "贪心"))
+        self.pushButton_5.setText(_translate("MainWindow", "极度贪心"))
+        self.pushButton_clcMoney.setText(_translate("MainWindow", "计算"))
         self.label_systemTime.setText(_translate("MainWindow", "00<small>d</small> 00<small>h</small> 00<small>m</small> 00<small>s"))
         self.label_credits.setText(_translate("MainWindow", "Design by: Jack Din"))
         self.label_version.setText(_translate("MainWindow", "v1.0.0"))
