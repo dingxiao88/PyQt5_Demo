@@ -56,7 +56,16 @@ def GetMoney(self):
     price_10 = price + (price * 0.10)
     price_20 = price + (price * 0.20)
 
-    self.label_moneyGet.setText(
+    price_1_f = price - (price * 0.01)
+    price_2_f = price - (price * 0.02)
+    price_3_f = price - (price * 0.03)
+    price_4_f = price - (price * 0.04)
+    price_5_f = price - (price * 0.05)
+    price_6_f = price - (price * 0.06)
+    price_7_f = price - (price * 0.07)
+    price_8_f = price - (price * 0.08)
+
+    self.label_moneyGetGood.setText(
     'each good price is \n' +
     '1% = ' + str(price_1) + '\n' +
     '1.23% = ' + str(price_1_23) + '\n' +
@@ -66,7 +75,16 @@ def GetMoney(self):
     '8% = ' + str(price_8) + '\n' +
     '10% = ' + str(price_10) + '\n' +
     '20% = ' + str(price_20) + '\n' 
+    )
 
-    
-    
+    self.label_moneyGetBad.setText(
+    'each bad price is \n' +
+    '1% = ' + str(price_1_f) + '\n' +
+    '2% = ' + str(price_2_f) + '\n' +
+    '3% = ' + str(price_3_f) + '\n' +
+    '4% = ' + str(price_4_f) + '\n' +
+    '5% = ' + str(price_5_f) + '\n' +
+    '6% = ' + str(price_6_f) + '\n' +
+    '7% = ' + str(price_7_f) + '\n' +
+    '8% = ' + str(price_8_f) + '\n' 
     )

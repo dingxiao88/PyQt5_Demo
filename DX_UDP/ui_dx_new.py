@@ -1227,16 +1227,16 @@ class Ui_MainWindow(object):
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.label_moneyGet = QtWidgets.QLabel(self.frame_13)
-        self.label_moneyGet.setGeometry(QtCore.QRect(60, 380, 621, 151))
-        self.label_moneyGet.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+        self.label_moneyGetGood = QtWidgets.QLabel(self.frame_13)
+        self.label_moneyGetGood.setGeometry(QtCore.QRect(40, 380, 291, 151))
+        self.label_moneyGetGood.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "border-radius: 10px;\n"
 "padding: 5px;\n"
 "padding-bottom: 7px;\n"
 "margin-top: 8px;\n"
 "color: rgb(255, 0, 127);")
-        self.label_moneyGet.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
-        self.label_moneyGet.setObjectName("label_moneyGet")
+        self.label_moneyGetGood.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_moneyGetGood.setObjectName("label_moneyGetGood")
         self.lineEdit_3 = QtWidgets.QLineEdit(self.frame_13)
         self.lineEdit_3.setGeometry(QtCore.QRect(130, 330, 121, 31))
         self.lineEdit_3.setStyleSheet("background-color: rgb(33, 37, 43);\n"
@@ -1282,6 +1282,16 @@ class Ui_MainWindow(object):
 "padding: 5px;\n"
 "color: rgb(255, 0, 127);")
         self.pushButton_clcMoney.setObjectName("pushButton_clcMoney")
+        self.label_moneyGetBad = QtWidgets.QLabel(self.frame_13)
+        self.label_moneyGetBad.setGeometry(QtCore.QRect(390, 380, 291, 151))
+        self.label_moneyGetBad.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"border-radius: 10px;\n"
+"padding: 5px;\n"
+"padding-bottom: 7px;\n"
+"margin-top: 8px;\n"
+"color: rgb(0, 229, 0);")
+        self.label_moneyGetBad.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_moneyGetBad.setObjectName("label_moneyGetBad")
         self.stackedWidget.addWidget(self.page_coin)
         self.verticalLayout_7.addWidget(self.stackedWidget)
         self.label_systemTime = QtWidgets.QLabel(self.frame_content)
@@ -1395,13 +1405,14 @@ class Ui_MainWindow(object):
         self.pushButton_getRealPrice.setText(_translate("MainWindow", "获取"))
         self.label_coinRealPrice.setText(_translate("MainWindow", "show me the money..."))
         self.label_25.setText(_translate("MainWindow", "买入价:"))
-        self.label_moneyGet.setText(_translate("MainWindow", "waiting..."))
+        self.label_moneyGetGood.setText(_translate("MainWindow", "Show me the Money!"))
         self.label_26.setText(_translate("MainWindow", "止盈比:"))
         self.label_systemTime_4.setText(_translate("MainWindow", "%"))
         self.pushButton_3.setText(_translate("MainWindow", "正常"))
         self.pushButton_4.setText(_translate("MainWindow", "贪心"))
         self.pushButton_5.setText(_translate("MainWindow", "极度贪心"))
         self.pushButton_clcMoney.setText(_translate("MainWindow", "计算"))
+        self.label_moneyGetBad.setText(_translate("MainWindow", "How Bad it?"))
         self.label_systemTime.setText(_translate("MainWindow", "00<small>d</small> 00<small>h</small> 00<small>m</small> 00<small>s"))
         self.label_credits.setText(_translate("MainWindow", "Design by: Jack Din"))
         self.label_version.setText(_translate("MainWindow", "v1.0.0"))

@@ -2601,12 +2601,12 @@ color: rgb(255, 0, 127);</string>
                       <enum>Qt::Horizontal</enum>
                      </property>
                     </widget>
-                    <widget class="QLabel" name="label_moneyGet">
+                    <widget class="QLabel" name="Good">
                      <property name="geometry">
                       <rect>
-                       <x>60</x>
+                       <x>40</x>
                        <y>380</y>
-                       <width>621</width>
+                       <width>291</width>
                        <height>151</height>
                       </rect>
                      </property>
@@ -2619,7 +2619,7 @@ margin-top: 8px;
 color: rgb(255, 0, 127);</string>
                      </property>
                      <property name="text">
-                      <string>waiting...</string>
+                      <string>Show me the Money!</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -2760,6 +2760,30 @@ color: rgb(255, 0, 127);</string>
                      </property>
                      <property name="text">
                       <string>计算</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_moneyGetBad">
+                     <property name="geometry">
+                      <rect>
+                       <x>390</x>
+                       <y>380</y>
+                       <width>291</width>
+                       <height>151</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(33, 37, 43);
+border-radius: 10px;
+padding: 5px;
+padding-bottom: 7px;
+margin-top: 8px;
+color: rgb(0, 229, 0);</string>
+                     </property>
+                     <property name="text">
+                      <string>How Bad it?</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                      </property>
                     </widget>
                    </widget>
