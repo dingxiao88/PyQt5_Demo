@@ -1,7 +1,5 @@
-import urllib.request
-import json
 
-
+from Thread_GetPrice import DX_Thread_GetPrice
 
 
 # url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum&vs_currencies=eur%2Cgbp%2Cusd&include_24hr_change=true"
@@ -12,7 +10,12 @@ url_base = 'https://api.coingecko.com/api/v3/simple/price?ids='
 url_last = '&vs_currencies=eur%2Cgbp%2Cusd&include_24hr_change=true'
 
 
-def GetCoinRealPrice(self):
+
+# 获得单一数字货币实时价格
+def GetSingleCoinRealPrice(self):
+
+    self.pushButton_getRealPrice.setEnabled(False)
+    self.pushButton_getRealPrice.setText('获取中...')
 
     self.label_coinRealPrice.setText('checking...')
 
@@ -20,29 +23,33 @@ def GetCoinRealPrice(self):
     if not coinName:
         coinName = 'bitcoin'
     
-
-    url = url_base + coinName + url_last
-
-    # print(url)
-
-    response = urllib.request.urlopen(url)
-    the_page = response.read()
-    data = json.loads(the_page)
-
-    try:
-        temp_value = data[coinName]['usd']
-        # temp_value = data[coinName]['eur']
-        # temp_value = data[coinName]['gbp']
-    except:
-        temp_value = 'This Coin is not available'
-
-    temp_price = str(temp_value)
-
-    # print(temp_value)
-    self.label_coinRealPrice.setText(coinName + ' RealPrice: $' + temp_price)
+    GetPriceThread(self,coinName, 0, 0)
 
 
+# 获得多个数字货币实时价格
+def GetMultiCoinRealPrice(self, list_index, first_clean):
+    
+    self.pushButton_getRealPrice_2.setEnabled(False)
+    self.pushButton_getRealPrice_2.setText('获取中...')
 
+    if(first_clean == 1):
+        self.label_showPrice1.setText(' ')
+        self.label_showPrice2.setText(' ')
+        self.label_showPrice3.setText(' ')
+        self.label_showPrice4.setText(' ')
+
+    GetPriceThread(self, self.coinList[list_index], 1, list_index)
+
+# 获得实时价格线程
+def GetPriceThread(self, coinName, ThreadMode, list_index):
+    # 线程启动按钮绑定事件------------
+    self.dx_getPrice = DX_Thread_GetPrice("dx_getPrice", coinName, ThreadMode, list_index)
+    self.dx_getPrice.DX_Thread_OutSingal.connect(self.ShowMoney)
+    self.dx_getPrice.setRun(True)
+    self.dx_getPrice.start()
+
+
+# 计算盈亏比
 def GetMoney(self):
 
     price = float(self.lineEdit_coinPrice.text())

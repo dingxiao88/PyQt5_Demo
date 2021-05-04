@@ -44,6 +44,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
     udp_send = []
     DC_FY_CmdRun = False
     DC_XH_CmdRun = False
+    coinList = ["bitcoin", "dogecoin", "decentraland", "ethereum"]
 
     def __init__(self, parent=None):
         super(mainWin, self).__init__(parent)
@@ -116,8 +117,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_DC_XHRun_Right.released.connect(lambda:DX_Control.DC_FY_XH_Dir_ControlReset(self))
 
         # 数字货币实时价格获取功能
-        self.pushButton_getRealPrice.clicked.connect(lambda:Coin_Fun.GetCoinRealPrice(self))
+        self.pushButton_getRealPrice.clicked.connect(lambda:Coin_Fun.GetSingleCoinRealPrice(self))
         self.lineEdit_coinPrice.textChanged.connect(lambda:Coin_Fun.GetMoney(self))
+        # 自动获取数字货币价格
+        self.pushButton_getRealPrice_2.clicked.connect(lambda:Coin_Fun.GetMultiCoinRealPrice(self, 0, 1))
 
         # MQTT图片显示
         pix = QPixmap('1.jpg')
@@ -137,6 +140,35 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.dx_thread.DX_Thread_OutSingal.connect(self.Info_reflash)
         self.dx_thread.setRun()
         self.dx_thread.start()
+
+
+    # 显示实时价格
+    def ShowMoney(self, str_price, mode, index):
+        if(mode == 0):
+            self.label_coinRealPrice.setText(str_price)
+            self.pushButton_getRealPrice.setEnabled(True)
+            self.pushButton_getRealPrice.setText('获取'+ str(mode))
+
+
+        if(mode == 1):
+            if index == 0:
+                self.label_showPrice1.setText(str_price)
+            elif index == 1:
+                self.label_showPrice2.setText(str_price)
+            elif index == 2:
+                self.label_showPrice3.setText(str_price)
+            elif index == 3:
+                self.label_showPrice4.setText(str_price)
+
+            index = index + 1
+            if(index < len(self.coinList)):
+                Coin_Fun.GetMultiCoinRealPrice(self, index, 0)
+
+            if index == len(self.coinList):
+                self.pushButton_getRealPrice_2.setEnabled(True)
+                self.pushButton_getRealPrice_2.setText('自动'+ str(mode))
+                self.dx_SystemTray.showMsg(2, str_price)
+
 
 
     def openColorDialog(self):
