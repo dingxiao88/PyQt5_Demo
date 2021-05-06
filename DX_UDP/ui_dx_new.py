@@ -1177,27 +1177,27 @@ class Ui_MainWindow(object):
         self.label_12.setAlignment(QtCore.Qt.AlignCenter)
         self.label_12.setObjectName("label_12")
         self.lineEdit_coinName = QtWidgets.QLineEdit(self.frame_13)
-        self.lineEdit_coinName.setGeometry(QtCore.QRect(110, 50, 121, 31))
+        self.lineEdit_coinName.setGeometry(QtCore.QRect(130, 50, 121, 31))
         self.lineEdit_coinName.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "padding: 5px;\n"
 "color: rgb(255, 0, 127);")
         self.lineEdit_coinName.setInputMask("")
         self.lineEdit_coinName.setObjectName("lineEdit_coinName")
         self.label_14 = QtWidgets.QLabel(self.frame_13)
-        self.label_14.setGeometry(QtCore.QRect(40, 50, 61, 30))
+        self.label_14.setGeometry(QtCore.QRect(60, 50, 61, 30))
         self.label_14.setMaximumSize(QtCore.QSize(16777215, 30))
         self.label_14.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "margin:1px;")
         self.label_14.setAlignment(QtCore.Qt.AlignCenter)
         self.label_14.setObjectName("label_14")
         self.pushButton_getRealPrice = QtWidgets.QPushButton(self.frame_13)
-        self.pushButton_getRealPrice.setGeometry(QtCore.QRect(240, 50, 81, 31))
+        self.pushButton_getRealPrice.setGeometry(QtCore.QRect(270, 50, 81, 31))
         self.pushButton_getRealPrice.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "padding: 5px;\n"
 "color: rgb(255, 0, 127);")
         self.pushButton_getRealPrice.setObjectName("pushButton_getRealPrice")
         self.label_coinRealPrice = QtWidgets.QLabel(self.frame_13)
-        self.label_coinRealPrice.setGeometry(QtCore.QRect(40, 90, 281, 41))
+        self.label_coinRealPrice.setGeometry(QtCore.QRect(370, 40, 281, 41))
         self.label_coinRealPrice.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "border-radius: 10px;\n"
 "padding: 5px;\n"
@@ -1237,13 +1237,13 @@ class Ui_MainWindow(object):
 "color: rgb(255, 0, 127);")
         self.label_moneyGetGood.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_moneyGetGood.setObjectName("label_moneyGetGood")
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.frame_13)
-        self.lineEdit_3.setGeometry(QtCore.QRect(130, 350, 121, 31))
-        self.lineEdit_3.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+        self.lineEdit_profit_loss = QtWidgets.QLineEdit(self.frame_13)
+        self.lineEdit_profit_loss.setGeometry(QtCore.QRect(130, 350, 121, 31))
+        self.lineEdit_profit_loss.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "padding: 5px;\n"
 "color: rgb(255, 0, 127);")
-        self.lineEdit_3.setText("")
-        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.lineEdit_profit_loss.setText("")
+        self.lineEdit_profit_loss.setObjectName("lineEdit_profit_loss")
         self.label_26 = QtWidgets.QLabel(self.frame_13)
         self.label_26.setGeometry(QtCore.QRect(60, 350, 61, 30))
         self.label_26.setMaximumSize(QtCore.QSize(16777215, 30))
@@ -1258,24 +1258,6 @@ class Ui_MainWindow(object):
 "color: rgb(255, 0, 127);")
         self.label_systemTime_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_systemTime_4.setObjectName("label_systemTime_4")
-        self.pushButton_3 = QtWidgets.QPushButton(self.frame_13)
-        self.pushButton_3.setGeometry(QtCore.QRect(330, 350, 81, 31))
-        self.pushButton_3.setStyleSheet("background-color: rgb(33, 37, 43);\n"
-"padding: 5px;\n"
-"color: rgb(255, 0, 127);")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_4 = QtWidgets.QPushButton(self.frame_13)
-        self.pushButton_4.setGeometry(QtCore.QRect(420, 350, 81, 31))
-        self.pushButton_4.setStyleSheet("background-color: rgb(33, 37, 43);\n"
-"padding: 5px;\n"
-"color: rgb(255, 0, 127);")
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.pushButton_5 = QtWidgets.QPushButton(self.frame_13)
-        self.pushButton_5.setGeometry(QtCore.QRect(510, 350, 81, 31))
-        self.pushButton_5.setStyleSheet("background-color: rgb(33, 37, 43);\n"
-"padding: 5px;\n"
-"color: rgb(255, 0, 127);")
-        self.pushButton_5.setObjectName("pushButton_5")
         self.pushButton_clcMoney = QtWidgets.QPushButton(self.frame_13)
         self.pushButton_clcMoney.setGeometry(QtCore.QRect(260, 300, 81, 31))
         self.pushButton_clcMoney.setStyleSheet("background-color: rgb(33, 37, 43);\n"
@@ -1293,10 +1275,10 @@ class Ui_MainWindow(object):
         self.label_moneyGetBad.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_moneyGetBad.setObjectName("label_moneyGetBad")
         self.label_showPrice1 = QtWidgets.QLabel(self.frame_13)
-        self.label_showPrice1.setGeometry(QtCore.QRect(80, 150, 131, 101))
+        self.label_showPrice1.setGeometry(QtCore.QRect(80, 150, 131, 61))
         font = QtGui.QFont()
         font.setFamily("Arial Unicode MS")
-        font.setPointSize(16)
+        font.setPointSize(10)
         self.label_showPrice1.setFont(font)
         self.label_showPrice1.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "border-radius: 10px;\n"
@@ -1307,10 +1289,10 @@ class Ui_MainWindow(object):
         self.label_showPrice1.setAlignment(QtCore.Qt.AlignCenter)
         self.label_showPrice1.setObjectName("label_showPrice1")
         self.label_showPrice2 = QtWidgets.QLabel(self.frame_13)
-        self.label_showPrice2.setGeometry(QtCore.QRect(220, 150, 131, 101))
+        self.label_showPrice2.setGeometry(QtCore.QRect(220, 150, 131, 61))
         font = QtGui.QFont()
         font.setFamily("Arial Unicode MS")
-        font.setPointSize(16)
+        font.setPointSize(10)
         self.label_showPrice2.setFont(font)
         self.label_showPrice2.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "border-radius: 10px;\n"
@@ -1321,10 +1303,10 @@ class Ui_MainWindow(object):
         self.label_showPrice2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_showPrice2.setObjectName("label_showPrice2")
         self.label_showPrice4 = QtWidgets.QLabel(self.frame_13)
-        self.label_showPrice4.setGeometry(QtCore.QRect(500, 150, 131, 101))
+        self.label_showPrice4.setGeometry(QtCore.QRect(500, 150, 131, 61))
         font = QtGui.QFont()
         font.setFamily("Arial Unicode MS")
-        font.setPointSize(16)
+        font.setPointSize(10)
         self.label_showPrice4.setFont(font)
         self.label_showPrice4.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "border-radius: 10px;\n"
@@ -1335,10 +1317,10 @@ class Ui_MainWindow(object):
         self.label_showPrice4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_showPrice4.setObjectName("label_showPrice4")
         self.label_showPrice3 = QtWidgets.QLabel(self.frame_13)
-        self.label_showPrice3.setGeometry(QtCore.QRect(360, 150, 131, 101))
+        self.label_showPrice3.setGeometry(QtCore.QRect(360, 150, 131, 61))
         font = QtGui.QFont()
         font.setFamily("Arial Unicode MS")
-        font.setPointSize(16)
+        font.setPointSize(10)
         self.label_showPrice3.setFont(font)
         self.label_showPrice3.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "border-radius: 10px;\n"
@@ -1348,12 +1330,170 @@ class Ui_MainWindow(object):
 "color: rgb(255, 0, 127);")
         self.label_showPrice3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_showPrice3.setObjectName("label_showPrice3")
-        self.pushButton_getRealPrice_2 = QtWidgets.QPushButton(self.frame_13)
-        self.pushButton_getRealPrice_2.setGeometry(QtCore.QRect(370, 50, 81, 31))
-        self.pushButton_getRealPrice_2.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+        self.pushButton_startAutoGet = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_startAutoGet.setGeometry(QtCore.QRect(550, 100, 81, 41))
+        self.pushButton_startAutoGet.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "padding: 5px;\n"
 "color: rgb(255, 0, 127);")
-        self.pushButton_getRealPrice_2.setObjectName("pushButton_getRealPrice_2")
+        self.pushButton_startAutoGet.setObjectName("pushButton_startAutoGet")
+        self.pushButton_AutoGet_1M = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_AutoGet_1M.setGeometry(QtCore.QRect(80, 110, 71, 31))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_AutoGet_1M.sizePolicy().hasHeightForWidth())
+        self.pushButton_AutoGet_1M.setSizePolicy(sizePolicy)
+        self.pushButton_AutoGet_1M.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_AutoGet_1M.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("6809chargen")
+        font.setPointSize(10)
+        self.pushButton_AutoGet_1M.setFont(font)
+        self.pushButton_AutoGet_1M.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_AutoGet_1M.setObjectName("pushButton_AutoGet_1M")
+        self.pushButton_AutoGet_5M = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_AutoGet_5M.setGeometry(QtCore.QRect(170, 110, 71, 31))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_AutoGet_5M.sizePolicy().hasHeightForWidth())
+        self.pushButton_AutoGet_5M.setSizePolicy(sizePolicy)
+        self.pushButton_AutoGet_5M.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_AutoGet_5M.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("6809chargen")
+        font.setPointSize(10)
+        self.pushButton_AutoGet_5M.setFont(font)
+        self.pushButton_AutoGet_5M.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_AutoGet_5M.setObjectName("pushButton_AutoGet_5M")
+        self.pushButton_AutoGet_15M = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_AutoGet_15M.setGeometry(QtCore.QRect(260, 110, 71, 31))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_AutoGet_15M.sizePolicy().hasHeightForWidth())
+        self.pushButton_AutoGet_15M.setSizePolicy(sizePolicy)
+        self.pushButton_AutoGet_15M.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_AutoGet_15M.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("6809chargen")
+        font.setPointSize(10)
+        self.pushButton_AutoGet_15M.setFont(font)
+        self.pushButton_AutoGet_15M.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_AutoGet_15M.setObjectName("pushButton_AutoGet_15M")
+        self.pushButton_AutoGet_30M = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_AutoGet_30M.setGeometry(QtCore.QRect(350, 110, 71, 31))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_AutoGet_30M.sizePolicy().hasHeightForWidth())
+        self.pushButton_AutoGet_30M.setSizePolicy(sizePolicy)
+        self.pushButton_AutoGet_30M.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_AutoGet_30M.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("6809chargen")
+        font.setPointSize(10)
+        self.pushButton_AutoGet_30M.setFont(font)
+        self.pushButton_AutoGet_30M.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_AutoGet_30M.setObjectName("pushButton_AutoGet_30M")
+        self.pushButton_AutoGet_Flag = QtWidgets.QPushButton(self.frame_13)
+        self.pushButton_AutoGet_Flag.setGeometry(QtCore.QRect(440, 110, 91, 31))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_AutoGet_Flag.sizePolicy().hasHeightForWidth())
+        self.pushButton_AutoGet_Flag.setSizePolicy(sizePolicy)
+        self.pushButton_AutoGet_Flag.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_AutoGet_Flag.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("6809chargen")
+        font.setPointSize(10)
+        self.pushButton_AutoGet_Flag.setFont(font)
+        self.pushButton_AutoGet_Flag.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_AutoGet_Flag.setObjectName("pushButton_AutoGet_Flag")
+        self.label_profit_loss = QtWidgets.QLabel(self.frame_13)
+        self.label_profit_loss.setGeometry(QtCore.QRect(310, 340, 371, 41))
+        self.label_profit_loss.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"border-radius: 10px;\n"
+"padding: 5px;\n"
+"padding-bottom: 7px;\n"
+"margin-top: 8px;\n"
+"color: rgb(233, 182, 17);")
+        self.label_profit_loss.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_profit_loss.setObjectName("label_profit_loss")
+        self.lineEdit_coinPrice_compare3 = QtWidgets.QLineEdit(self.frame_13)
+        self.lineEdit_coinPrice_compare3.setGeometry(QtCore.QRect(360, 220, 131, 31))
+        self.lineEdit_coinPrice_compare3.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.lineEdit_coinPrice_compare3.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_coinPrice_compare3.setObjectName("lineEdit_coinPrice_compare3")
+        self.lineEdit_coinPrice_compare1 = QtWidgets.QLineEdit(self.frame_13)
+        self.lineEdit_coinPrice_compare1.setGeometry(QtCore.QRect(80, 220, 131, 31))
+        self.lineEdit_coinPrice_compare1.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.lineEdit_coinPrice_compare1.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_coinPrice_compare1.setObjectName("lineEdit_coinPrice_compare1")
+        self.lineEdit_coinPrice_compare2 = QtWidgets.QLineEdit(self.frame_13)
+        self.lineEdit_coinPrice_compare2.setGeometry(QtCore.QRect(220, 220, 131, 31))
+        self.lineEdit_coinPrice_compare2.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.lineEdit_coinPrice_compare2.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_coinPrice_compare2.setObjectName("lineEdit_coinPrice_compare2")
+        self.lineEdit_coinPrice_compare4 = QtWidgets.QLineEdit(self.frame_13)
+        self.lineEdit_coinPrice_compare4.setGeometry(QtCore.QRect(500, 220, 131, 31))
+        self.lineEdit_coinPrice_compare4.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 5px;\n"
+"color: rgb(255, 0, 127);")
+        self.lineEdit_coinPrice_compare4.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_coinPrice_compare4.setObjectName("lineEdit_coinPrice_compare4")
         self.stackedWidget.addWidget(self.page_coin)
         self.verticalLayout_7.addWidget(self.stackedWidget)
         self.label_systemTime = QtWidgets.QLabel(self.frame_content)
@@ -1470,16 +1610,23 @@ class Ui_MainWindow(object):
         self.label_moneyGetGood.setText(_translate("MainWindow", "Show me the Money!"))
         self.label_26.setText(_translate("MainWindow", "止盈比:"))
         self.label_systemTime_4.setText(_translate("MainWindow", "%"))
-        self.pushButton_3.setText(_translate("MainWindow", "正常"))
-        self.pushButton_4.setText(_translate("MainWindow", "贪心"))
-        self.pushButton_5.setText(_translate("MainWindow", "极度贪心"))
         self.pushButton_clcMoney.setText(_translate("MainWindow", "计算"))
         self.label_moneyGetBad.setText(_translate("MainWindow", "How Bad it?"))
         self.label_showPrice1.setText(_translate("MainWindow", "---"))
         self.label_showPrice2.setText(_translate("MainWindow", "---"))
         self.label_showPrice4.setText(_translate("MainWindow", "---"))
         self.label_showPrice3.setText(_translate("MainWindow", "---"))
-        self.pushButton_getRealPrice_2.setText(_translate("MainWindow", "自动"))
+        self.pushButton_startAutoGet.setText(_translate("MainWindow", "启动"))
+        self.pushButton_AutoGet_1M.setText(_translate("MainWindow", "1 Min"))
+        self.pushButton_AutoGet_5M.setText(_translate("MainWindow", "5 Min"))
+        self.pushButton_AutoGet_15M.setText(_translate("MainWindow", "15 Min"))
+        self.pushButton_AutoGet_30M.setText(_translate("MainWindow", "30 Min"))
+        self.pushButton_AutoGet_Flag.setText(_translate("MainWindow", "自动推送"))
+        self.label_profit_loss.setText(_translate("MainWindow", "tell me?"))
+        self.lineEdit_coinPrice_compare3.setText(_translate("MainWindow", "0"))
+        self.lineEdit_coinPrice_compare1.setText(_translate("MainWindow", "0"))
+        self.lineEdit_coinPrice_compare2.setText(_translate("MainWindow", "0"))
+        self.lineEdit_coinPrice_compare4.setText(_translate("MainWindow", "0"))
         self.label_systemTime.setText(_translate("MainWindow", "00<small>d</small> 00<small>h</small> 00<small>m</small> 00<small>s"))
         self.label_credits.setText(_translate("MainWindow", "Design by: Jack Din"))
         self.label_version.setText(_translate("MainWindow", "v1.0.0"))

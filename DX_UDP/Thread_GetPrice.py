@@ -22,7 +22,7 @@ url_last = '&vs_currencies=eur%2Cgbp%2Cusd&include_24hr_change=true'
 
 class DX_Thread_GetPrice(QThread):
 
-    DX_Thread_OutSingal = pyqtSignal(str, int, int)
+    DX_Thread_OutSingal = pyqtSignal(str, int, int, float)
 
     def __init__(self, name, coin_name, mode, index, parent = None):
         super(DX_Thread_GetPrice, self).__init__(parent)
@@ -64,16 +64,16 @@ class DX_Thread_GetPrice(QThread):
                 # temp_value = data[coinName]['eur']
                 # temp_value = data[coinName]['gbp']
             except:
-                temp_value = 'This Coin is not available'
+                temp_value = 0
 
             temp_price = str(temp_value)
 
             # print(temp_value)
 
             if(self.working_mode == 0):
-                self.DX_Thread_OutSingal.emit(self.coinName + ' RealPrice: $ ' + temp_price, self.working_mode, self.index)
+                self.DX_Thread_OutSingal.emit(self.coinName + ' RealPrice: $ ' + temp_price, self.working_mode, self.index, temp_value)
             elif(self.working_mode == 1):
-                self.DX_Thread_OutSingal.emit(self.coinName + '\n$ ' + temp_price, self.working_mode, self.index)
+                self.DX_Thread_OutSingal.emit(self.coinName + '\n$ ' + temp_price, self.working_mode, self.index, temp_value)
             # self.label_coinRealPrice.setText(coinName + ' RealPrice: $' + temp_price)
             # self.DX_Thread_OutSingal.emit(temp_price)
         

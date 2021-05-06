@@ -44,7 +44,26 @@ class mainWin(QMainWindow, Ui_MainWindow):
     udp_send = []
     DC_FY_CmdRun = False
     DC_XH_CmdRun = False
+    # coin自动更新数字货币列表
     coinList = ["bitcoin", "dogecoin", "decentraland", "ethereum"]
+    # coin自动更新时间
+    autoGetTimeValue = 1
+    # coin自动更新标志
+    autoGetFlag = False
+    # coin自动更新启动标志
+    autoGetStart = False
+    # coin自动更新tick计数
+    autoGetTime_Tick = 0
+    # coin自动更新秒计数
+    autoGetTime_Second = 0
+    # coin自动更新分钟计数
+    autoGetTime_Min = 0
+    # 程序是否是最小化标志
+    appMin_Flag = False
+    # 软件底部提示信息str
+    current_price2_str = ''
+    current_price2 = 0
+    current_price2_last = 0
 
     def __init__(self, parent=None):
         super(mainWin, self).__init__(parent)
@@ -119,8 +138,18 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 数字货币实时价格获取功能
         self.pushButton_getRealPrice.clicked.connect(lambda:Coin_Fun.GetSingleCoinRealPrice(self))
         self.lineEdit_coinPrice.textChanged.connect(lambda:Coin_Fun.GetMoney(self))
-        # 自动获取数字货币价格
-        self.pushButton_getRealPrice_2.clicked.connect(lambda:Coin_Fun.GetMultiCoinRealPrice(self, 0, 1))
+        # 自动获取时间选择
+        self.pushButton_AutoGet_1M.clicked.connect(lambda:Coin_Fun.SetAutoGetTime(self, 1))
+        self.pushButton_AutoGet_5M.clicked.connect(lambda:Coin_Fun.SetAutoGetTime(self, 2))
+        self.pushButton_AutoGet_15M.clicked.connect(lambda:Coin_Fun.SetAutoGetTime(self, 3))
+        self.pushButton_AutoGet_30M.clicked.connect(lambda:Coin_Fun.SetAutoGetTime(self, 4))
+        # 消息自动推送标志
+        self.pushButton_AutoGet_Flag.clicked.connect(lambda:Coin_Fun.SetAutoGetTime(self, 5))
+        # 自动更新启动
+        self.pushButton_startAutoGet.clicked.connect(lambda:Coin_Fun.SetAutoGetTime(self, 6))
+        # 自动盈亏
+        self.lineEdit_profit_loss.textChanged.connect(lambda:Coin_Fun.GetProfitLoss(self))
+
 
         # MQTT图片显示
         pix = QPixmap('1.jpg')
@@ -143,18 +172,22 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
 
     # 显示实时价格
-    def ShowMoney(self, str_price, mode, index):
+    def ShowMoney(self, str_price, mode, index, price):
+
+        # 单价格查询模式
         if(mode == 0):
             self.label_coinRealPrice.setText(str_price)
             self.pushButton_getRealPrice.setEnabled(True)
             self.pushButton_getRealPrice.setText('获取'+ str(mode))
 
-
+        # 多个价格查询模式
         if(mode == 1):
             if index == 0:
                 self.label_showPrice1.setText(str_price)
             elif index == 1:
                 self.label_showPrice2.setText(str_price)
+                self.current_price2 = price
+                self.current_price2_str = str_price
             elif index == 2:
                 self.label_showPrice3.setText(str_price)
             elif index == 3:
@@ -165,10 +198,15 @@ class mainWin(QMainWindow, Ui_MainWindow):
                 Coin_Fun.GetMultiCoinRealPrice(self, index, 0)
 
             if index == len(self.coinList):
-                self.pushButton_getRealPrice_2.setEnabled(True)
-                self.pushButton_getRealPrice_2.setText('自动'+ str(mode))
-                self.dx_SystemTray.showMsg(2, str_price)
-
+                # self.pushButton_startAutoGet.setEnabled(True)
+                self.pushButton_startAutoGet.setText('自动'+ str(mode))
+                # 查询程序是否是最小化
+                if((self.appMin_Flag == True) or (self.autoGetFlag == True)):
+                    if(self.current_price2 > self.current_price2_last):
+                        self.dx_SystemTray.showMsg(1, self.current_price2_str)
+                    elif(self.current_price2 <= self.current_price2_last):
+                        self.dx_SystemTray.showMsg(2, self.current_price2_str)
+                    self.current_price2_last = self.current_price2
 
 
     def openColorDialog(self):
@@ -222,12 +260,37 @@ class mainWin(QMainWindow, Ui_MainWindow):
         curr_time = datetime.datetime.now()
         time_str = datetime.datetime.strftime(curr_time,'%Y-%m-%d %H:%M:%S')
         self.label_systemTime.setText(time_str)
+
+        # MQTT显示图片
         pix = QPixmap('1.jpg')
         self.label_mqttPic.setPixmap(pix)
         pix1 = QPixmap('ESP32_CAM_Real.jpg')
         self.label_mqttPic_2.setPixmap(pix1)
         pix2 = QPixmap('ESP32_CAM_Real1.jpg')
         self.label_mqttPic_3.setPixmap(pix2)
+
+        # 数字货币自动更新计数
+        self.autoGetTime_Tick = self.autoGetTime_Tick + 1
+        if(self.autoGetTime_Tick >= 19):
+            self.autoGetTime_Tick = 0
+            self.autoGetTime_Second = self.autoGetTime_Second + 1
+            if(self.autoGetTime_Second >= 59):
+                self.autoGetTime_Second = 0
+                self.autoGetTime_Min = self.autoGetTime_Min + 1
+                # 自动更细的最大设置时间为30Min
+                if(self.autoGetTime_Min >= 30):
+                    self.autoGetTime_Min = 0
+
+        # 查询coin自动更新启动标志
+        if(self.autoGetStart == True):
+            # 自动更新时间到
+            if(self.autoGetTime_Min >= self.autoGetTimeValue):
+                print('--------------->time up  '+ str(self.autoGetFlag))
+                # print()
+                self.autoGetTime_Min = 0
+                Coin_Fun.GetMultiCoinRealPrice(self, 0, 1)
+
+
 
     # DC信息回显
     def DC_Recv_Info_Display(self, str_info, count):
