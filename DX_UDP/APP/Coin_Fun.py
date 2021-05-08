@@ -148,8 +148,8 @@ def GetProfitLoss(self):
     # 获得盈亏百分比
     price_profit_loss = float(self.lineEdit_profit_loss.text())
     # 计算目标价格
-    price_target_p = price + (price_profit_loss * 0.01)
-    price_target_n = price - (price_profit_loss * 0.01)
+    price_target_p = price + (price * price_profit_loss * 0.01)
+    price_target_n = price - (price * price_profit_loss * 0.01)
     # 显示价格
     # self.label_profit_loss.setText('price: '+ str(price_target))
 
