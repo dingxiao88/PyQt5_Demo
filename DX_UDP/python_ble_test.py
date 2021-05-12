@@ -98,7 +98,8 @@
 import asyncio
 from bleak import BleakClient
 
-address = "9C:9C:1F:C7:66:12"
+# address = "9C:9C:1F:C7:66:12"
+address = "A4:CF:12:73:44:02"
 UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
 def convert_rgb(rgb):
