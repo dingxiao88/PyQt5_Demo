@@ -102,6 +102,8 @@ from bleak import BleakClient
 address = "A4:CF:12:73:44:02"
 UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
+
+
 def convert_rgb(rgb):
     scale = 0xFF
     adjusted = [max(1, chan) for chan in rgb]
@@ -114,13 +116,18 @@ def convert_rgb(rgb):
 
 async def run(address, loop):
     async with BleakClient(address, loop=loop) as client:
+        send_data = 0
         x = await client.is_connected()
         # print("Connected: {0}".format(x))
         while(1):
             y = await client.read_gatt_char(UUID)
             print(y[0])
             color = convert_rgb([255, 0, 0])
-            await client.write_gatt_char(UUID, b"\x01")
+            send_data = send_data + 1
+            if(send_data >= 255):
+                send_data = 0
+            # await client.write_gatt_char(UUID, b"\x01")
+            await client.write_gatt_char(UUID, send_data.to_bytes(1,byteorder="big"))
             await asyncio.sleep(1.0)
 
 loop = asyncio.get_event_loop()
