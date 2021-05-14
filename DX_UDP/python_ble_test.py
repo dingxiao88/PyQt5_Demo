@@ -97,6 +97,10 @@
 
 import asyncio
 from bleak import BleakClient
+# import pyautogui
+import keyboard
+from time import sleep
+import ctypes
 
 # address = "9C:9C:1F:C7:66:12"
 address = "A4:CF:12:73:44:02"
@@ -121,7 +125,20 @@ async def run(address, loop):
         # print("Connected: {0}".format(x))
         while(1):
             y = await client.read_gatt_char(UUID)
-            print(y[0])
+            print(y[1])
+
+            if(y[1] == 1):
+                ctypes.windll.user32.LockWorkStation()
+            elif(y[1] == 2):
+                # pyautogui.press('enter')
+                keyboard.press('enter')
+                keyboard.press('1')
+                # pyautogui.press('enter')
+                # pyautogui.hotkey('win', 'r')
+                # pyautogui.typewrite("cmd\n")
+                # sleep(0.500)
+                # pyautogui.typewrite("rundll32.exe user32.dll LockWorkStation\n")
+
             color = convert_rgb([255, 0, 0])
             send_data = send_data + 1
             if(send_data >= 255):
