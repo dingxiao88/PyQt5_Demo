@@ -77,4 +77,39 @@ def str_insert(str_origin, pos, str_add):
     return  str_out
 
 
+
+def get_zazhipdf_Data():
+
+    #发送请求
+    url="https://www.zazhipdf.com/"
+    #伪装请求头
+    headers ={'User-Agent':'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'}
+    response = requests.get(url,timeout=30,headers=headers)
+    response.encoding = 'gb2312'
+    home_page = response.content.decode()
+
+    soup = BeautifulSoup(home_page, 'html.parser')
+    # print(soup.prettify())   #打印html字符串
+    # print(type(soup))
+    # print(soup)
+
+    script = soup.find_all('div', class_  = 'placeholder')  
+    # print(type(script.text))
+    # print(len(script))
+    # print(script.string)
+    pdf1 = script[0]
+
+    # print(pdf1.a.img)
+    # print(pdf1.a.img['alt'])   #img标签alt属性
+    # print(pdf1.a.img['data-src'])
+
+    return pdf1
+
+
+
 # get_Covid19_Data()
+
+pdf = get_zazhipdf_Data()
+# # print(pdf.a.img)
+print(pdf.a.img['alt'])   #img标签alt属性
+print(pdf.a.img['data-src'])
