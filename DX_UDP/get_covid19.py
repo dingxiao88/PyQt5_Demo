@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 # from ast import literal_eval
+from PIL import Image
 
 def get_Covid19_Data():
     # 建立一个会话（session）
@@ -105,11 +106,25 @@ def get_zazhipdf_Data():
 
     return pdf1
 
+def img_png_to_jpg():
+
+    image_url = "https://www.zazhipdf.com/wp-content/themes/rizhuti/timthumb.php?src=https://www.zazhipdf.com/wp-content/uploads/2021/07/da9ded8acca6cc1.png&h=270&w=270&zc=1&a=c&q=100&s=1"
+    
+    img_data = requests.get(image_url).content
+    with open('/home/dx/sites/dx1023.com/django_blog/media/images/image_name1.png', 'wb') as handler:
+        handler.write(img_data)
+
+    im = Image.open('/home/dx/sites/dx1023.com/django_blog/media/images/image_name1.png')
+    rgb_im = im.convert('RGB')
+    rgb_im.save('/home/dx/sites/dx1023.com/django_blog/media/images/img_png_to_jpg.jpg')
+
 
 
 # get_Covid19_Data()
 
-pdf = get_zazhipdf_Data()
-# # print(pdf.a.img)
-print(pdf.a.img['alt'])   #img标签alt属性
-print(pdf.a.img['data-src'])
+# pdf = get_zazhipdf_Data()
+# # # print(pdf.a.img)
+# print(pdf.a.img['alt'])   #img标签alt属性
+# print(pdf.a.img['data-src'])
+
+# img_png_to_jpg()
