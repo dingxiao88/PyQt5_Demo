@@ -45,8 +45,9 @@ class Thread_Udp_Send(QThread):
         self.Run_Count = self.Run_Count + 1
         if(self.Run_Count > 65000):
             self.Run_Count = 0
-        self.udp_send[45] =  self.Run_Count//256
-        self.udp_send[46] =  self.Run_Count%256
+        # 模拟人机
+        # self.udp_send[45] =  self.Run_Count//256
+        # self.udp_send[46] =  self.Run_Count%256
 
         if(self.oneShot == True):
             self.oneShot = False
@@ -57,8 +58,10 @@ class Thread_Udp_Send(QThread):
                 self.Run_Count = self.Run_Count + 1
                 if(self.Run_Count > 65000):
                     self.Run_Count = 0
-                self.udp_send[45] =  self.Run_Count//256
-                self.udp_send[46] =  self.Run_Count%256
+                # 模拟人机
+                # self.udp_send[45] =  self.Run_Count//256
+                # self.udp_send[46] =  self.Run_Count%256
                 data2 = bytes(self.udp_send)
                 self.socket.sendto(data2,(self.send_ip, self.send_port))
-                time.sleep(0.02) 
+                # 每秒50帧
+                time.sleep(0.01) 

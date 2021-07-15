@@ -77,10 +77,10 @@ def Get_IP_Port(self, port):
     # 获得远端IP------
     self.destIp = self.lineEdit_Remote_IP.text()
     if(self.destIp == ''):
-        self.destIp = "224.100.23.200"
+        self.destIp = "224.100.100.133"
     # 获得远端Port------
     if(self.lineEdit_Remote_Port.text() == ''):
-        self.destPort = 6000
+        self.destPort = 21785
     else:
         self.destPort = int(self.lineEdit_Remote_Port.text())  
 
@@ -104,14 +104,23 @@ def Set_Local_Socket(self, set_flag):
         # 声明该socket为多播类型
         self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 255) 
         # 加入组播地址
-        mreq = struct.pack('4sl', socket.inet_aton('224.100.23.200'), socket.INADDR_ANY)
+        mreq = struct.pack('4sl', socket.inet_aton('224.100.100.133'), socket.INADDR_ANY)
         self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
         # self.udpSocket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton('224.100.23.200') + socket.inet_aton('0.0.0.0'))
 
         # 创建thread
         self.udp_recv_thread = Thread_Udp_Recv(self.udpSocket)
         self.udp_recv_thread.DX_Thread_OutSingal.connect(self.DC_Recv_Info_Display)
-        self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send, self.destIp, self.destPort)
+        # 模拟人机
+        # self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send, self.destIp, self.destPort)
+        # KW状态
+        # self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send_KW_Status, self.destIp, self.destPort)
+        # KW随动配置
+        # self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send_KW_ServoConfig, self.destIp, self.destPort)
+        # KW制止器控制
+        # self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send_KW_Stoper, self.destIp, self.destPort)
+        # KW命令角度
+        self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send_KW_Angel, self.destIp, self.destPort)
     
     else:
         self.udpSocket.close()

@@ -42,6 +42,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
     destPort = 0
     udp_connect_flag = False
     udp_send = []
+    udp_send_KW_Status = []           #测试KW双网接口
+    udp_send_KW_Stoper = []           #测试KW双网接口
+    udp_send_KW_ServoConfig = []      #测试KW双网接口
+    udp_send_KW_Angel = []            #测试KW双网接口
     DC_FY_CmdRun = False
     DC_XH_CmdRun = False
     # coin自动更新数字货币列表
@@ -99,6 +103,92 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.udp_send = []
         for x in range(50):
             self.udp_send.append(0x00)
+
+        #KW双网发送数据初始化
+        self.udp_send_KW_Status = []           #测试KW双网接口
+        self.udp_send_KW_Stoper = []           #测试KW双网接口
+        self.udp_send_KW_ServoConfig = []      #测试KW双网接口
+        self.udp_send_KW_Angel = []            #测试KW双网接口
+        for x in range(16):
+            self.udp_send_KW_Status.append(0x00)
+            self.udp_send_KW_Stoper.append(0x00)
+            self.udp_send_KW_ServoConfig.append(0x00)
+        for x in range(18):
+            self.udp_send_KW_Angel.append(0x00)
+
+        #KW状态报文
+        self.udp_send_KW_Status[0] = 0x00
+        self.udp_send_KW_Status[1] = 0xff
+        self.udp_send_KW_Status[2] = 0x00
+        self.udp_send_KW_Status[3] = 0x10
+        self.udp_send_KW_Status[4] = 0x00
+        self.udp_send_KW_Status[5] = 0x00
+        self.udp_send_KW_Status[6] = 0x00
+        self.udp_send_KW_Status[7] = 0x01
+        self.udp_send_KW_Status[8] = 0xff
+        self.udp_send_KW_Status[9] = 0xff
+        self.udp_send_KW_Status[10] = 0xc8
+        self.udp_send_KW_Status[11] = 0xeb
+        self.udp_send_KW_Status[12] = 0xff
+        self.udp_send_KW_Status[13] = 0x33
+        self.udp_send_KW_Status[14] = 0x00
+        self.udp_send_KW_Status[15] = 0x00
+
+        #KW制止器控制报文
+        self.udp_send_KW_Stoper[0] = 0x00
+        self.udp_send_KW_Stoper[1] = 0xff
+        self.udp_send_KW_Stoper[2] = 0x00
+        self.udp_send_KW_Stoper[3] = 0x10
+        self.udp_send_KW_Stoper[4] = 0x00
+        self.udp_send_KW_Stoper[5] = 0x00
+        self.udp_send_KW_Stoper[6] = 0x00
+        self.udp_send_KW_Stoper[7] = 0x01
+        self.udp_send_KW_Stoper[8] = 0xff
+        self.udp_send_KW_Stoper[9] = 0xff
+        self.udp_send_KW_Stoper[10] = 0xc8
+        self.udp_send_KW_Stoper[11] = 0xec
+        self.udp_send_KW_Stoper[12] = 0xff
+        self.udp_send_KW_Stoper[13] = 0x33
+        self.udp_send_KW_Stoper[14] = 0x00
+        self.udp_send_KW_Stoper[15] = 0x00
+
+        #KW随动配置报文
+        self.udp_send_KW_ServoConfig[0] = 0x00
+        self.udp_send_KW_ServoConfig[1] = 0xff
+        self.udp_send_KW_ServoConfig[2] = 0x00
+        self.udp_send_KW_ServoConfig[3] = 0x10
+        self.udp_send_KW_ServoConfig[4] = 0x00
+        self.udp_send_KW_ServoConfig[5] = 0x00
+        self.udp_send_KW_ServoConfig[6] = 0x00
+        self.udp_send_KW_ServoConfig[7] = 0x01
+        self.udp_send_KW_ServoConfig[8] = 0xff
+        self.udp_send_KW_ServoConfig[9] = 0xff
+        self.udp_send_KW_ServoConfig[10] = 0xc8
+        self.udp_send_KW_ServoConfig[11] = 0xe9
+        self.udp_send_KW_ServoConfig[12] = 0xff
+        self.udp_send_KW_ServoConfig[13] = 0x33
+        self.udp_send_KW_ServoConfig[14] = 0x00
+        self.udp_send_KW_ServoConfig[15] = 0x00
+
+        #KW角度命令报文
+        self.udp_send_KW_Angel[0] = 0x00
+        self.udp_send_KW_Angel[1] = 0xff
+        self.udp_send_KW_Angel[2] = 0x00
+        self.udp_send_KW_Angel[3] = 0x12
+        self.udp_send_KW_Angel[4] = 0x00
+        self.udp_send_KW_Angel[5] = 0x00
+        self.udp_send_KW_Angel[6] = 0x00
+        self.udp_send_KW_Angel[7] = 0x01
+        self.udp_send_KW_Angel[8] = 0xff
+        self.udp_send_KW_Angel[9] = 0xff
+        self.udp_send_KW_Angel[10] = 0xc8
+        self.udp_send_KW_Angel[11] = 0xea
+        self.udp_send_KW_Angel[12] = 0xff
+        self.udp_send_KW_Angel[13] = 0x33
+        self.udp_send_KW_Angel[14] = 0x00
+        self.udp_send_KW_Angel[15] = 0x00
+        self.udp_send_KW_Angel[16] = 0x00
+        self.udp_send_KW_Angel[17] = 0x00
 
         # 测试俯仰和旋回角度
         self.udp_send[5] = 0x01
@@ -293,9 +383,11 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
 
     # DC信息回显
-    def DC_Recv_Info_Display(self, str_info, count):
+    def DC_Recv_Info_Display(self, str_info, count, fy_angle, xh_angle):
         # print('--->')
         self.label_dc_Info.setText(str(count)) 
+        self.label_fy_angle.setText(str(fy_angle))
+        self.label_xh_angle.setText(str(xh_angle))
 
     
     # 全局监听鼠标点击事件

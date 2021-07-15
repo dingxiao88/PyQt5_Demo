@@ -965,7 +965,7 @@ QPushButton:pressed {
                    <string notr="true">background: transparent;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>4</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="page_dc_run">
                    <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -990,7 +990,7 @@ QPushButton:pressed {
                           <number>1</number>
                          </property>
                          <item row="3" column="0">
-                          <widget class="QLabel" name="label_9">
+                          <widget class="QLabel" name="label_fy_angle">
                            <property name="font">
                             <font>
                              <family>Pixel LCD7</family>
@@ -1014,7 +1014,7 @@ background-color: rgb(33, 37, 43);</string>
                           </widget>
                          </item>
                          <item row="3" column="1">
-                          <widget class="QLabel" name="label_10">
+                          <widget class="QLabel" name="label_xh_angle">
                            <property name="font">
                             <font>
                              <family>Pixel LCD7</family>
@@ -1958,7 +1958,7 @@ margin:1px;</string>
                                <set>Qt::AlignCenter</set>
                               </property>
                               <property name="placeholderText">
-                               <string>224.100.23.200</string>
+                               <string>224.100.100.133</string>
                               </property>
                              </widget>
                             </item>
@@ -1989,7 +1989,7 @@ margin:1px;</string>
                                <set>Qt::AlignCenter</set>
                               </property>
                               <property name="placeholderText">
-                               <string>6000</string>
+                               <string>21785</string>
                               </property>
                              </widget>
                             </item>
@@ -2020,7 +2020,7 @@ margin:1px;</string>
                                <set>Qt::AlignCenter</set>
                               </property>
                               <property name="placeholderText">
-                               <string>192.168.41.4</string>
+                               <string>168.6.4.17</string>
                               </property>
                              </widget>
                             </item>
@@ -2051,7 +2051,7 @@ margin:1px;</string>
                                <set>Qt::AlignCenter</set>
                               </property>
                               <property name="placeholderText">
-                               <string>6000</string>
+                               <string>21785</string>
                               </property>
                              </widget>
                             </item>
