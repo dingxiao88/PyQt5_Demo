@@ -58,9 +58,9 @@ class Thread_Udp_Recv(QThread):
 
                     data_len = len(recv_msg)
 
-                    # 数据报文18B-随动角度报文
-                    if(data_len == 18):
-                        data_18 = struct.unpack('!18B',recv_msg)
+                    # 数据报文20B-随动角度报文
+                    if(data_len == 20):
+                        data_18 = struct.unpack('!20B',recv_msg)
                         # //@-MK3设备-FY输入角度
                         # temp1 = (int)(Computer_NetRecv_Data[13]&0xff);
                         # temp2 = (int)(Computer_NetRecv_Data[12]&0xff);

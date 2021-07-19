@@ -185,10 +185,14 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.udp_send_KW_Angel[11] = 0xea
         self.udp_send_KW_Angel[12] = 0xff
         self.udp_send_KW_Angel[13] = 0x33
-        self.udp_send_KW_Angel[14] = 0x00
+        self.udp_send_KW_Angel[14] = 0x00  
         self.udp_send_KW_Angel[15] = 0x00
         self.udp_send_KW_Angel[16] = 0x00
         self.udp_send_KW_Angel[17] = 0x00
+        # self.udp_send_KW_Angel[14] = 0xFF  #FY-FFF7-->-0.1   XH-E001-->-89.99
+        # self.udp_send_KW_Angel[15] = 0xF7
+        # self.udp_send_KW_Angel[16] = 0xE0
+        # self.udp_send_KW_Angel[17] = 0x01
 
         # 测试俯仰和旋回角度
         self.udp_send[5] = 0x01
