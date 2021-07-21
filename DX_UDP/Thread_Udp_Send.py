@@ -13,13 +13,16 @@ class Thread_Udp_Send(QThread):
 
     DX_Thread_OutSingal = pyqtSignal(str, int)
 
-    def __init__(self, socket, udp_send, send_ip, send_port,parent = None):
+    # udp_send1-用于连续发送
+    # udp_send2-用于点击发送
+    def __init__(self, socket, udp_send1, udp_send2, send_ip, send_port,parent = None):
         super(Thread_Udp_Send, self).__init__(parent)
         self.working_flag = False
         self.oneShot = False
         self.Run_Count = 0
         self.socket = socket
-        self.udp_send = udp_send
+        self.udp_send1 = udp_send1
+        self.udp_send2 = udp_send2
         self.send_ip = send_ip
         self.send_port = send_port
         # print('thread init')
@@ -51,7 +54,7 @@ class Thread_Udp_Send(QThread):
 
         if(self.oneShot == True):
             self.oneShot = False
-            data1 = bytes(self.udp_send)
+            data1 = bytes(self.udp_send2)
             self.socket.sendto(data1,(self.send_ip, self.send_port))
         else:
             while(self.working_flag == True):
@@ -61,7 +64,8 @@ class Thread_Udp_Send(QThread):
                 # 模拟人机
                 # self.udp_send[45] =  self.Run_Count//256
                 # self.udp_send[46] =  self.Run_Count%256
-                data2 = bytes(self.udp_send)
+                data2 = bytes(self.udp_send1)
                 self.socket.sendto(data2,(self.send_ip, self.send_port))
                 # 每秒50帧
-                time.sleep(0.01) 
+                time.sleep(1) 
+                # time.sleep(0.01) 

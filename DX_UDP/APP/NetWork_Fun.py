@@ -114,7 +114,7 @@ def Set_Local_Socket(self, set_flag):
         # 模拟人机
         # self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send, self.destIp, self.destPort)
         # KW状态
-        self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send_KW_Status, self.destIp, self.destPort)
+        self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send_KW_Status, self.udp_send_KW_ServoConfig, self.destIp, self.destPort)
         # KW随动配置
         # self.udp_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send_KW_ServoConfig, self.destIp, self.destPort)
         # KW制止器控制
