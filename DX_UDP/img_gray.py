@@ -134,7 +134,6 @@ def get_img_2Bytes(input_data, img_w):
             eval(byte6_s), eval(byte7_s), eval(byte8_s), eval(byte9_s), eval(byte10_s), \
             eval(byte11_s), eval(byte12_s), eval(byte13_s), eval(byte14_s), eval(byte15_s))
 
-
     # return eval(byte1_s), eval(byte2_s), eval(byte3_s), eval(byte4_s), eval(byte5_s)
     # return hex(eval(byte1_s)), hex(eval(byte2_s)), hex(eval(byte3_s)), hex(eval(byte4_s)), hex(eval(byte5_s))
     # return eval(byte1_s), eval(byte2_s)
@@ -176,6 +175,7 @@ def img_to_bin():
 
     # image_b[0], image_b[1] = get_img_2Bytes(data[0])
 
+    # 将数据写入文件
     file = open('data.txt','w')
     file.write(str(image_b))
     file.close()
