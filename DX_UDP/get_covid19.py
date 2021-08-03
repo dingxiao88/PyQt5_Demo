@@ -65,6 +65,7 @@ def get_Covid19_Data():
 
 
     text = json.loads(str_out)
+    print(text)
     # print(text['confirmedCount'])
 
 
@@ -120,7 +121,7 @@ def img_png_to_jpg():
 
 
 
-# get_Covid19_Data()
+get_Covid19_Data()
 
 # pdf = get_zazhipdf_Data()
 # # # print(pdf.a.img)
