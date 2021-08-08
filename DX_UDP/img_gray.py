@@ -98,47 +98,47 @@ def get_img_2Bytes(input_data, img_w):
         for i in range(bit_start,bit_end,-1): 
             byte7_s = byte7_s + b_s[i]
 
-    # bit_start = bit_start + 8
-    # bit_end = bit_end + 8
-    # if((bit_start < img_w) and (bit_end < img_w)):
-    #     for i in range(bit_start,bit_end,-1): 
-    #         byte8_s = byte8_s + b_s[i]
+    bit_start = bit_start + 8
+    bit_end = bit_end + 8
+    if((bit_start < img_w) and (bit_end < img_w)):
+        for i in range(bit_start,bit_end,-1): 
+            byte8_s = byte8_s + b_s[i]
 
-    # bit_start = bit_start + 8
-    # bit_end = bit_end + 8
-    # if((bit_start < img_w) and (bit_end < img_w)):
-    #     for i in range(bit_start,bit_end,-1): 
-    #         byte9_s = byte9_s + b_s[i]
+    bit_start = bit_start + 8
+    bit_end = bit_end + 8
+    if((bit_start < img_w) and (bit_end < img_w)):
+        for i in range(bit_start,bit_end,-1): 
+            byte9_s = byte9_s + b_s[i]
 
-    # bit_start = bit_start + 8
-    # bit_end = bit_end + 8
-    # if((bit_start < img_w) and (bit_end < img_w)):
-    #     for i in range(bit_start,bit_end,-1): 
-    #         byte10_s = byte10_s + b_s[i]
+    bit_start = bit_start + 8
+    bit_end = bit_end + 8
+    if((bit_start < img_w) and (bit_end < img_w)):
+        for i in range(bit_start,bit_end,-1): 
+            byte10_s = byte10_s + b_s[i]
 
-    # bit_start = bit_start + 8
-    # bit_end = bit_end + 8
-    # if((bit_start < img_w) and (bit_end < img_w)):
-    #     for i in range(bit_start,bit_end,-1): 
-    #         byte11_s = byte11_s + b_s[i]
+    bit_start = bit_start + 8
+    bit_end = bit_end + 8
+    if((bit_start < img_w) and (bit_end < img_w)):
+        for i in range(bit_start,bit_end,-1): 
+            byte11_s = byte11_s + b_s[i]
 
-    # bit_start = bit_start + 8
-    # bit_end = bit_end + 8
-    # if((bit_start < img_w) and (bit_end < img_w)):
-    #     for i in range(bit_start,bit_end,-1): 
-    #         byte12_s = byte12_s + b_s[i]
+    bit_start = bit_start + 8
+    bit_end = bit_end + 8
+    if((bit_start < img_w) and (bit_end < img_w)):
+        for i in range(bit_start,bit_end,-1): 
+            byte12_s = byte12_s + b_s[i]
 
-    # bit_start = bit_start + 8
-    # bit_end = bit_end + 8
-    # if((bit_start < img_w) and (bit_end < img_w)):
-    #     for i in range(bit_start,bit_end,-1): 
-    #         byte13_s = byte13_s + b_s[i]
+    bit_start = bit_start + 8
+    bit_end = bit_end + 8
+    if((bit_start < img_w) and (bit_end < img_w)):
+        for i in range(bit_start,bit_end,-1): 
+            byte13_s = byte13_s + b_s[i]
 
-    # bit_start = bit_start + 8
-    # bit_end = bit_end + 8
-    # if((bit_start < img_w) and (bit_end < img_w)):
-    #     for i in range(bit_start,bit_end,-1): 
-    #         byte14_s = byte14_s + b_s[i]
+    bit_start = bit_start + 8
+    bit_end = bit_end + 8
+    if((bit_start < img_w) and (bit_end < img_w)):
+        for i in range(bit_start,bit_end,-1): 
+            byte14_s = byte14_s + b_s[i]
 
     # bit_start = bit_start + 8
     # bit_end = bit_end + 8
@@ -236,13 +236,20 @@ def get_img_2Bytes(input_data, img_w):
     #     for i in range(bit_start,bit_end,-1): 
     #         byte30_s = byte30_s + b_s[i]
 
-
-    # 返回图片宽度为112像素
+    # 返回图片宽度为208像素
     # return (eval(byte1_s), eval(byte2_s), eval(byte3_s), eval(byte4_s), eval(byte5_s), \
     #         eval(byte6_s), eval(byte7_s), eval(byte8_s), eval(byte9_s), eval(byte10_s), \
-    #         eval(byte11_s), eval(byte12_s), eval(byte13_s), eval(byte14_s))
+    #         eval(byte11_s), eval(byte12_s), eval(byte13_s), eval(byte14_s), eval(byte15_s), \
+    #         eval(byte16_s), eval(byte17_s), eval(byte18_s), eval(byte19_s), eval(byte20_s), \
+    #         eval(byte21_s), eval(byte22_s), eval(byte23_s), eval(byte24_s), eval(byte25_s), \
+    #         eval(byte26_s))
+
+    # 返回图片宽度为112像素
+    return (eval(byte1_s), eval(byte2_s), eval(byte3_s), eval(byte4_s), eval(byte5_s), \
+            eval(byte6_s), eval(byte7_s), eval(byte8_s), eval(byte9_s), eval(byte10_s), \
+            eval(byte11_s), eval(byte12_s), eval(byte13_s), eval(byte14_s))
             
-    # 返回图片宽度为240像素
+    # # 返回图片宽度为240像素
     # return (eval(byte1_s), eval(byte2_s), eval(byte3_s), eval(byte4_s), eval(byte5_s), \
     #         eval(byte6_s), eval(byte7_s), eval(byte8_s), eval(byte9_s), eval(byte10_s), \
     #         eval(byte11_s), eval(byte12_s), eval(byte13_s), eval(byte14_s), eval(byte15_s), \
@@ -251,8 +258,8 @@ def get_img_2Bytes(input_data, img_w):
     #         eval(byte26_s), eval(byte27_s), eval(byte28_s), eval(byte29_s), eval(byte30_s))
 
     # # 返回图片宽度为56像素
-    return (eval(byte1_s), eval(byte2_s), eval(byte3_s), eval(byte4_s), eval(byte5_s), \
-            eval(byte6_s), eval(byte7_s))
+    # return (eval(byte1_s), eval(byte2_s), eval(byte3_s), eval(byte4_s), eval(byte5_s), \
+    #         eval(byte6_s), eval(byte7_s))
 
     # 返回图片宽度为120像素
     # return (eval(byte1_s), eval(byte2_s), eval(byte3_s), eval(byte4_s), eval(byte5_s), \
@@ -269,10 +276,10 @@ def img_to_bin():
     # img = Image.open('Location Pin.jpg')
     # img = Image.open('wifi.jpg')   #16*16
     # img = Image.open('test111.jpg')  #120*232
-    img = Image.open('/home/dx/sites/dx1023.com/django_blog/media/images/chinese.jpg')  #56*59
+    # img = Image.open('/home/dx/sites/dx1023.com/django_blog/media/images/chinese.jpg')  #56*59
     # img = Image.open('chinese.jpg')  #56*59
-    # img = Image.open('/home/dx/sites/dx1023.com/django_blog/media/images/json_pic.jpg')  #240*135  112*59
-    # img = Image.open('json_pic.jpg')  #240*135  112*59
+    img = Image.open('/home/dx/sites/dx1023.com/django_blog/media/images/json_pic.jpg')  #240*135  112*59-ok  208*50
+    # img = Image.open('json_pic.jpg')  #240*135  112*59-ok  208*50
     
     img_w = img.width   # 图片的宽
     img_h = img.height  # 图片的高
@@ -306,13 +313,23 @@ def img_to_bin():
     #         index_i = index_i + 1
 
 
-    # 获得整张图片二进制值  图片像素 112
+    # 获得整张图片二进制值  图片像素 208
     # for i in range(0,image_sizeGroup):
-    #     image_b[i*14], image_b[(i*14)+1], image_b[(i*14)+2], image_b[(i*14)+3], image_b[(i*14)+4], \
-    #     image_b[(i*14)+5], image_b[(i*14)+6], image_b[(i*14)+7], image_b[(i*14)+8], image_b[(i*14)+9], \
-    #     image_b[(i*14)+10], image_b[(i*14)+11], image_b[(i*14)+12], image_b[(i*14)+13] = get_img_2Bytes(data[i], img_w)
+    #     image_b[i*26], image_b[(i*26)+1], image_b[(i*26)+2], image_b[(i*26)+3], image_b[(i*26)+4], \
+    #     image_b[(i*26)+5], image_b[(i*26)+6], image_b[(i*26)+7], image_b[(i*26)+8], image_b[(i*26)+9], \
+    #     image_b[(i*26)+10], image_b[(i*26)+11], image_b[(i*26)+12], image_b[(i*26)+13], image_b[(i*26)+14], \
+    #     image_b[(i*26)+15], image_b[(i*26)+16], image_b[(i*26)+17], image_b[(i*26)+18], image_b[(i*26)+19], \
+    #     image_b[(i*26)+20], image_b[(i*26)+21], image_b[(i*26)+22], image_b[(i*26)+23], image_b[(i*26)+24], \
+    #     image_b[(i*26)+25]  = get_img_2Bytes(data[i], img_w)
 
-    # 获得整张图片二进制值  图片像素 240
+
+    # 获得整张图片二进制值  图片像素 112
+    for i in range(0,image_sizeGroup):
+        image_b[i*14], image_b[(i*14)+1], image_b[(i*14)+2], image_b[(i*14)+3], image_b[(i*14)+4], \
+        image_b[(i*14)+5], image_b[(i*14)+6], image_b[(i*14)+7], image_b[(i*14)+8], image_b[(i*14)+9], \
+        image_b[(i*14)+10], image_b[(i*14)+11], image_b[(i*14)+12], image_b[(i*14)+13] = get_img_2Bytes(data[i], img_w)
+
+    # # 获得整张图片二进制值  图片像素 240
     # for i in range(0,image_sizeGroup):
     #     image_b[i*30], image_b[(i*30)+1], image_b[(i*30)+2], image_b[(i*30)+3], image_b[(i*30)+4], \
     #     image_b[(i*30)+5], image_b[(i*30)+6], image_b[(i*30)+7], image_b[(i*30)+8], image_b[(i*30)+9], \
@@ -322,9 +339,9 @@ def img_to_bin():
     #     image_b[(i*30)+25], image_b[(i*30)+26], image_b[(i*30)+27], image_b[(i*30)+28], image_b[(i*30)+29]  = get_img_2Bytes(data[i], img_w)
 
     # 获得整张图片二进制值  图片像素 56--img.convert('1')
-    for i in range(0,image_sizeGroup):
-        image_b[i*7], image_b[(i*7)+1], image_b[(i*7)+2], image_b[(i*7)+3], image_b[(i*7)+4], \
-        image_b[(i*7)+5], image_b[(i*7)+6] = get_img_2Bytes(data[i], img_w)
+    # for i in range(0,image_sizeGroup):
+    #     image_b[i*7], image_b[(i*7)+1], image_b[(i*7)+2], image_b[(i*7)+3], image_b[(i*7)+4], \
+    #     image_b[(i*7)+5], image_b[(i*7)+6] = get_img_2Bytes(data[i], img_w)
 
     # 获得整张图片二进制值  图片像素 120
     # for i in range(0,image_sizeGroup):
