@@ -98,7 +98,7 @@ class Ui_MainWindow(object):
         self.label_gague.setText("")
         self.label_gague.setObjectName("label_gague")
         self.label_pointer = QtWidgets.QLabel(self.frame_main)
-        self.label_pointer.setGeometry(QtCore.QRect(610, 170, 31, 101))
+        self.label_pointer.setGeometry(QtCore.QRect(530, 220, 60, 111))
         font = QtGui.QFont()
         font.setFamily("仿宋")
         font.setPointSize(18)
@@ -129,5 +129,5 @@ class Ui_MainWindow(object):
         self.pushButton_3.setText(_translate("MainWindow", "数值颜色"))
         self.pushButton_4.setText(_translate("MainWindow", "指针颜色"))
         self.label_value.setText(_translate("MainWindow", "0"))
-        self.label_pointer.setText(_translate("MainWindow", "1111"))
+        self.label_pointer.setText(_translate("MainWindow", "1"))
 import Meter_images_rc

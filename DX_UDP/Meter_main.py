@@ -55,6 +55,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.label_gague.setPixmap(defaultPix1)
 
         defaultPix2 = QtGui.QPixmap("./meter_images/pointer_2.svg")
+        # 旋转pix
+        self.rotation = -45
+        self.transform = QtGui.QTransform().rotate(self.rotation)
+        defaultPix2 = defaultPix2.transformed(self.transform, QtCore.Qt.SmoothTransformation)
         self.label_pointer.setPixmap(defaultPix2)
 
         
