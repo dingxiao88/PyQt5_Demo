@@ -40,6 +40,7 @@ from Meter import *
 
 defJson = {
     'value_color': '#ffffff',
+    'pointer_color': '#ffffff',
     'value_min': 0,
     'value_max': 40, 
     }
@@ -66,11 +67,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
                 str = read_congfig_file.read()
                 json_data = json.loads(str)
                 self.value_color = json_data['value_color']
+                self.pointer_color = json_data['pointer_color']
         elif(file_flag ==  True):
             with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
                 str = read_congfig_file.read()
                 json_data = json.loads(str)
                 self.value_color = json_data['value_color']
+                self.pointer_color = json_data['pointer_color']
                 # print(self.value_color)
 
         # 绑定按键响应函数
@@ -106,8 +109,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.show()
 
 
-
-    # 1 表盘指针颜色修改
+    # 1 表盘选择
     def Gague_Choose(self):
         # 表盘文件选择对话框
         # directory = QtWidgets.QFileDialog.getOpenFileName(self,
@@ -144,8 +146,31 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         pointer_color = '#' + picker_color
 
+        # 生成新的svg图形
         with  open('./meter_images/dx.svg','w',encoding = 'utf-8') as f:
             f.write('<svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5.67 127.56"><defs><style>.cls-1,.cls-2{fill:'+ pointer_color + ';}.cls-2{stroke:#000;stroke-miterlimit:10;stroke-width:0.25px;}</style></defs><title>指针45</title><polygon class="cls-1" points="5.67 127.56 0 127.56 2.83 0 4.25 63.78 5.67 127.56"/><polygon class="cls-1" points="1.42 63.78 2.83 63.78 4.25 63.78 5.67 127.56 0 127.56 1.42 63.78"/><polygon class="cls-2" points="1.42 63.78 4.25 63.78 2.83 0 1.42 63.78"/></svg>')
+            f.close()
+
+        # 将表盘指针颜色写入Config json文件
+        with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
+            str = read_congfig_file.read()
+            json_data = json.loads(str)
+            self.value_color = json_data['value_color']
+            json_data['pointer_color'] = pointer_color
+            write_json =  json_data
+        with  open('./gaguge_config.json','w+',encoding = 'utf-8') as congfig_file:
+            json.dump(write_json, congfig_file, indent=4, sort_keys=True)
+
+
+        # 生成新的home_page.xml文件
+        with  open('./meter_images/home_page.xml','w',encoding = 'utf-8') as f:
+            f.write('''<?xml ruler_y="220" ruler_x="297,42,-439,-112"?>
+<window name="home_page" style:normal:bg_color="#FFFFFF">
+<guage name="guage" x="0" y="0" w="320" h="240" draw_type="scale_auto" image="voltmeter">
+    <guage_pointer name="guage_pointer" x="294" y="10" w="7" h="420" value="0" angle="-90" anchor_x="0.5" anchor_y="0.5" animation="value(easing=bounce_out,from=0,to=-90)" min="-90" max="0" style:normal:fg_color="#00000000" style:normal:bg_color="''' + pointer_color + '''" image="pointer_2" style:normal:border="all" style:normal:border_color="#00000000"/>
+</guage>
+<label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="'''+ self.value_color +'''" style:normal:text_align_h="right" visible="true" min="0" max="40" enable="true" style:normal:font_name="default" text="0"/>
+</window>''')
             f.close()
 
         # 刷新表盘指针svg
@@ -174,10 +199,22 @@ class mainWin(QMainWindow, Ui_MainWindow):
         with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
             str = read_congfig_file.read()
             json_data = json.loads(str)
+            self.pointer_color = json_data['pointer_color']
             json_data['value_color'] = value_color
             write_json =  json_data
         with  open('./gaguge_config.json','w+',encoding = 'utf-8') as congfig_file:
             json.dump(write_json, congfig_file, indent=4, sort_keys=True)
+
+        # 生成新的home_page.xml文件
+        with  open('./meter_images/home_page.xml','w',encoding = 'utf-8') as f:
+            f.write('''<?xml ruler_y="220" ruler_x="297,42,-439,-112"?>
+<window name="home_page" style:normal:bg_color="#FFFFFF">
+<guage name="guage" x="0" y="0" w="320" h="240" draw_type="scale_auto" image="voltmeter">
+    <guage_pointer name="guage_pointer" x="294" y="10" w="7" h="420" value="0" angle="-90" anchor_x="0.5" anchor_y="0.5" animation="value(easing=bounce_out,from=0,to=-90)" min="-90" max="0" style:normal:fg_color="#00000000" style:normal:bg_color="''' + self.pointer_color + '''" image="pointer_2" style:normal:border="all" style:normal:border_color="#00000000"/>
+</guage>
+<label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="'''+ value_color +'''" style:normal:text_align_h="right" visible="true" min="0" max="40" enable="true" style:normal:font_name="default" text="0"/>
+</window>''')
+            f.close()
 
 
     # 4 表盘数值(最小值)修改
@@ -232,10 +269,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\xml_to_ui.exe C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\home_page.xml C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\home_page.bin bin")
         subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\xml_to_ui.exe C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\new.xml C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\new.bin bin")
         # 生成最终固件
-        subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\genromfs.exe -d res -f assets.HJR")
-        
+        subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\.\genromfs.exe -d C:\Users\DX\Downloads\gauge_320_240_90\res -f C:\Users\DX\Downloads\gauge_320_240_90\assets.HJR")
+        # subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\.\DX.bat")
         QMessageBox.about(self, "固件生成信息", "表盘固件生成成功!")
-        
+
 
     # 主程序全局关闭事件监听
     # Override closeEvent, to intercept the window closing event

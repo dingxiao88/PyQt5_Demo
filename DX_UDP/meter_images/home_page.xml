@@ -1,0 +1,7 @@
+<?xml ruler_y="220" ruler_x="297,42,-439,-112"?>
+<window name="home_page" style:normal:bg_color="#FFFFFF">
+<guage name="guage" x="0" y="0" w="320" h="240" draw_type="scale_auto" image="voltmeter">
+    <guage_pointer name="guage_pointer" x="294" y="10" w="7" h="420" value="0" angle="-90" anchor_x="0.5" anchor_y="0.5" animation="value(easing=bounce_out,from=0,to=-90)" min="-90" max="0" style:normal:fg_color="#00000000" style:normal:bg_color="#0a0a0a" image="pointer_2" style:normal:border="all" style:normal:border_color="#00000000"/>
+</guage>
+<label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="#0a0909" style:normal:text_align_h="right" visible="true" min="0" max="40" enable="true" style:normal:font_name="default" text="0"/>
+</window>
