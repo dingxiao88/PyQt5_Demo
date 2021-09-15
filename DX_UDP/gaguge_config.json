@@ -1,6 +1,6 @@
 {
-    "pointer_color": "#0a0a0a",
-    "value_color": "#0a0909",
+    "pointer_color": "#f9f4f4",
+    "value_color": "#f9f3f3",
     "value_max": 40,
     "value_min": 0
 }

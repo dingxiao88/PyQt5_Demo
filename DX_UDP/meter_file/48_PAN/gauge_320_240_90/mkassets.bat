@@ -1,0 +1,1 @@
+.\genromfs.exe -d res -f assets.HJR

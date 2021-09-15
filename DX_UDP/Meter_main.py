@@ -17,6 +17,8 @@ from pyqt_led import Led          # https://github.com/Neur1n/pyqt_led
 # 运行外部命令
 import subprocess
 
+import shutil
+
 # 颜色识取器
 from colorpicker import ColorPicker
 
@@ -261,17 +263,52 @@ class mainWin(QMainWindow, Ui_MainWindow):
     # 6 生成固件
     def Gague_Build(self):
 
+        # 删除文件
+        self.Del_FireWareFile("./meter_file/48_PAN/gauge_320_240_90/design/default/images/svg/pointer.bsvg")
+        self.Del_FireWareFile("./meter_file/48_PAN/gauge_320_240_90/design/default/images/svg/pointer_1.bsvg")
+        self.Del_FireWareFile("./meter_file/48_PAN/gauge_320_240_90/design/default/images/svg/pointer_2.bsvg")
+        self.Del_FireWareFile("./meter_file/48_PAN/gauge_320_240_90/design/default/ui/home_page.bin")
+        self.Del_FireWareFile("./meter_file/48_PAN/gauge_320_240_90/design/default/ui/new.bin")
+        self.Del_FireWareFile("./meter_file/48_PAN/gauge_320_240_90/design/default/images/xx/voltmeter.png")
+        self.Del_FireWareFile("./meter_file/48_PAN/gauge_320_240_90/assets.HJR")
+
+        # 复制文件 xml
+        self.Copy_FireWareFile(r".\meter_images\home_page.xml", r"meter_file\48_PAN\gauge_320_240_90\design\default\ui\home_page.xml")
+
         # 生成svg图片bin
-        subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\bsvggen.exe C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\pointer.svg C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\pointer.bsvg bin")
-        subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\bsvggen.exe C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\pointer_1.svg C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\pointer_1.bsvg bin")
-        subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\bsvggen.exe C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\pointer_2.svg C:\Users\DX\Downloads\gauge_320_240_90\design\default\images\svg\pointer_2.bsvg bin")
+        subprocess.run(r".\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\bsvggen.exe .\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer.svg .\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer.bsvg bin")
+        subprocess.run(r".\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\bsvggen.exe .\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer_1.svg .\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer_1.bsvg bin")
+        subprocess.run(r".\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\bsvggen.exe .\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer_2.svg .\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer_2.bsvg bin")
         # 生成ui xml文件bin
-        subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\xml_to_ui.exe C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\home_page.xml C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\home_page.bin bin")
-        subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\xml_to_ui.exe C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\new.xml C:\Users\DX\Downloads\gauge_320_240_90\design\default\ui\new.bin bin")
-        # 生成最终固件
-        subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\.\genromfs.exe -d C:\Users\DX\Downloads\gauge_320_240_90\res -f C:\Users\DX\Downloads\gauge_320_240_90\assets.HJR")
-        # subprocess.run(r"C:\Users\DX\Downloads\gauge_320_240_90\.\DX.bat")
+        subprocess.run(r".\meter_file\48_PAN\gauge_320_240_90\design\default\ui\xml_to_ui.exe .\meter_file\48_PAN\gauge_320_240_90\design\default\ui\home_page.xml .\meter_file\48_PAN\gauge_320_240_90\design\default\ui\home_page.bin bin")
+        subprocess.run(r".\meter_file\48_PAN\gauge_320_240_90\design\default\ui\xml_to_ui.exe .\meter_file\48_PAN\gauge_320_240_90\design\default\ui\new.xml .\meter_file\48_PAN\gauge_320_240_90\design\default\ui\new.bin bin")        
+        
+        # 复制文件 
+        self.Copy_FireWareFile(r".\meter_images\gague_temp.png", r".\meter_file\48_PAN\gauge_320_240_90\design\default\images\xx\voltmeter.png")
+        self.Copy_FireWareFile(r".\meter_images\gague_temp.png", r".\meter_file\48_PAN\gauge_320_240_90\res\assets\default\raw\images\xx\voltmeter.png")
+
+        self.Copy_FireWareFile(r".\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer.bsvg", r".\meter_file\48_PAN\gauge_320_240_90\res\assets\default\raw\images\svg\pointer.bsvg")
+        self.Copy_FireWareFile(r".\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer_1.bsvg", r".\meter_file\48_PAN\gauge_320_240_90\res\assets\default\raw\images\svg\pointer_1.bsvg")
+        self.Copy_FireWareFile(r".\meter_file\48_PAN\gauge_320_240_90\design\default\images\svg\pointer_2.bsvg", r".\meter_file\48_PAN\gauge_320_240_90\res\assets\default\raw\images\svg\pointer_2.bsvg")
+
+        self.Copy_FireWareFile(r".\meter_file\48_PAN\gauge_320_240_90\design\default\ui\new.bin", r".\meter_file\48_PAN\gauge_320_240_90\res\assets\default\raw\ui\new.bin")
+        self.Copy_FireWareFile(r".\meter_file\48_PAN\gauge_320_240_90\design\default\ui\home_page.bin", r".\meter_file\48_PAN\gauge_320_240_90\res\assets\default\raw\ui\home_page.bin")
+
+        # # 生成最终固件
+        subprocess.run(r".\meter_file\48_PAN\gauge_320_240_90\.\genromfs.exe -d .\meter_file\48_PAN\gauge_320_240_90\res -f .\meter_fireware\assets.HJR")
         QMessageBox.about(self, "固件生成信息", "表盘固件生成成功!")
+
+
+    # 删除文件
+    def Del_FireWareFile(self, filename):
+        file_flag = os.path.exists(filename)
+        if(file_flag == True):
+            # print("---->del")
+            os.remove(filename)
+
+    # 复制文件
+    def Copy_FireWareFile(self, src_filename, des_filename):
+        shutil.copyfile(src_filename, des_filename)
 
 
     # 主程序全局关闭事件监听
