@@ -1,0 +1,1 @@
+mkassets.bat

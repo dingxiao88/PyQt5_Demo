@@ -1,0 +1,16 @@
+<window name="new">
+  <slider name="slider" x="0" y="0" w="90" h="240" style:normal:fg_color="#00000000" animation="value(duration=200,yoyo_times=0,easing=quadratic_out,from=0,to=98)" style:normal:icon="cross" style:normal:x_offset="0" style:normal:y_offset="0">
+    <property name="style:normal:border_color">
+      <![CDATA[#00000000]]>
+    </property>
+    <property name="style:normal:bg_image">
+      <![CDATA[]]>
+    </property>
+    <property name="vertical">
+      <![CDATA[true]]>
+    </property>
+    <property name="value">
+      <![CDATA[0]]>
+    </property>
+  </slider>
+</window>
