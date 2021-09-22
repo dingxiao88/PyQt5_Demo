@@ -66,16 +66,20 @@ class mainWin(QMainWindow, Ui_MainWindow):
             with  open('./gaguge_config.json','w',encoding = 'utf-8') as congfig_file:
                 json.dump(defJson, congfig_file, indent=4, sort_keys=True)
             with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
-                str = read_congfig_file.read()
-                json_data = json.loads(str)
+                str_temp = read_congfig_file.read()
+                json_data = json.loads(str_temp)
                 self.value_color = json_data['value_color']
                 self.pointer_color = json_data['pointer_color']
+                self.value_min = json_data['value_min']
+                self.value_max = json_data['value_max']
         elif(file_flag ==  True):
             with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
-                str = read_congfig_file.read()
-                json_data = json.loads(str)
+                str_temp = read_congfig_file.read()
+                json_data = json.loads(str_temp)
                 self.value_color = json_data['value_color']
                 self.pointer_color = json_data['pointer_color']
+                self.value_min = json_data['value_min']
+                self.value_max = json_data['value_max']
                 # print(self.value_color)
 
         # 绑定按键响应函数
@@ -122,14 +126,16 @@ class mainWin(QMainWindow, Ui_MainWindow):
         "选择表盘文件", os.getcwd(),
         "PNG Files (*.png)") 
 
-        # 刷新表盘背景图
-        defaultPix1 = QtGui.QPixmap(FileName)
-        
-        # 暂存表盘背景图片
-        # QtGui.QPixmap.drawPixmap(0,0,320,240,QtGui.QPixmap(FileName))
-        defaultPix1.save("./meter_images/gague_temp.png")
+        if(len(FileName) != 0):
 
-        self.label_gague.setPixmap(defaultPix1)
+            # 刷新表盘背景图
+            defaultPix1 = QtGui.QPixmap(FileName)
+            
+            # 暂存表盘背景图片
+            # QtGui.QPixmap.drawPixmap(0,0,320,240,QtGui.QPixmap(FileName))
+            defaultPix1.save("./meter_images/gague_temp.png")
+
+            self.label_gague.setPixmap(defaultPix1)
 
         # print("------->")
         # print(FileName)
@@ -156,9 +162,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         # 将表盘指针颜色写入Config json文件
         with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
-            str = read_congfig_file.read()
-            json_data = json.loads(str)
+            str_temp = read_congfig_file.read()
+            json_data = json.loads(str_temp)
             self.value_color = json_data['value_color']
+            self.value_min = json_data['value_min']
+            self.value_max = json_data['value_max']
+            value_min_str = str(self.value_min)
+            value_max_str = str(self.value_max)
             json_data['pointer_color'] = pointer_color
             write_json =  json_data
         with  open('./gaguge_config.json','w+',encoding = 'utf-8') as congfig_file:
@@ -172,7 +182,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 <guage name="guage" x="0" y="0" w="320" h="240" draw_type="scale_auto" image="voltmeter">
     <guage_pointer name="guage_pointer" x="294" y="10" w="7" h="420" value="0" angle="-90" anchor_x="0.5" anchor_y="0.5" animation="value(easing=bounce_out,from=0,to=-90)" min="-90" max="0" style:normal:fg_color="#00000000" style:normal:bg_color="''' + pointer_color + '''" image="pointer_2" style:normal:border="all" style:normal:border_color="#00000000"/>
 </guage>
-<label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="'''+ self.value_color +'''" style:normal:text_align_h="right" visible="true" min="0" max="40" enable="true" style:normal:font_name="default" text="0"/>
+<label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="'''+ self.value_color +'''" style:normal:text_align_h="right" visible="true" min="'''+ value_min_str + '''" max="'''+ value_max_str + '''" enable="true" style:normal:font_name="default" text="0"/>
 </window>''')
             f.close()
 
@@ -200,9 +210,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
         # 将数值颜色写入Config json文件
         with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
-            str = read_congfig_file.read()
-            json_data = json.loads(str)
+            str_temp = read_congfig_file.read()
+            json_data = json.loads(str_temp)
             self.pointer_color = json_data['pointer_color']
+            self.value_min = json_data['value_min']
+            self.value_max = json_data['value_max']
+            value_min_str = str(self.value_min)
+            value_max_str = str(self.value_max)
             json_data['value_color'] = value_color
             write_json =  json_data
         with  open('./gaguge_config.json','w+',encoding = 'utf-8') as congfig_file:
@@ -215,7 +229,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
 <guage name="guage" x="0" y="0" w="320" h="240" draw_type="scale_auto" image="voltmeter">
     <guage_pointer name="guage_pointer" x="294" y="10" w="7" h="420" value="0" angle="-90" anchor_x="0.5" anchor_y="0.5" animation="value(easing=bounce_out,from=0,to=-90)" min="-90" max="0" style:normal:fg_color="#00000000" style:normal:bg_color="''' + self.pointer_color + '''" image="pointer_2" style:normal:border="all" style:normal:border_color="#00000000"/>
 </guage>
-<label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="'''+ value_color +'''" style:normal:text_align_h="right" visible="true" min="0" max="40" enable="true" style:normal:font_name="default" text="0"/>
+<label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="'''+ self.value_color +'''" style:normal:text_align_h="right" visible="true" min="'''+ value_min_str + '''" max="'''+ value_max_str + '''" enable="true" style:normal:font_name="default" text="0"/>
 </window>''')
             f.close()
 
@@ -236,14 +250,32 @@ class mainWin(QMainWindow, Ui_MainWindow):
             print(num_min)
             # 将最小值写入Config json文件
             with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
-                str = read_congfig_file.read()
-                json_data = json.loads(str)
+                str_temp = read_congfig_file.read()
+                json_data = json.loads(str_temp)
+                self.pointer_color = json_data['pointer_color']
+                self.value_color = json_data['value_color']
+                self.value_max = json_data['value_max']
                 json_data['value_min'] = num_min
                 write_json =  json_data
             with  open('./gaguge_config.json','w+',encoding = 'utf-8') as congfig_file:
                 json.dump(write_json, congfig_file, indent=4, sort_keys=True)
 
             self.value_num_min = num_min
+
+            value_min_str = str(self.value_num_min)
+            value_max_str = str(self.value_max)
+
+            # 生成新的home_page.xml文件
+            with  open('./meter_images/home_page.xml','w',encoding = 'utf-8') as f:
+                f.write('''<?xml ruler_y="220" ruler_x="297,42,-439,-112"?>
+    <window name="home_page" style:normal:bg_color="#FFFFFF">
+    <guage name="guage" x="0" y="0" w="320" h="240" draw_type="scale_auto" image="voltmeter">
+        <guage_pointer name="guage_pointer" x="294" y="10" w="7" h="420" value="0" angle="-90" anchor_x="0.5" anchor_y="0.5" animation="value(easing=bounce_out,from=0,to=-90)" min="-90" max="0" style:normal:fg_color="#00000000" style:normal:bg_color="''' + self.pointer_color + '''" image="pointer_2" style:normal:border="all" style:normal:border_color="#00000000"/>
+    </guage>
+    <label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="'''+ self.value_color +'''" style:normal:text_align_h="right" visible="true" min="'''+ value_min_str + '''" max="'''+ value_max_str + '''" enable="true" style:normal:font_name="default" text="0"/>
+    </window>''')
+                f.close()
+
         
     # 5 表盘数值(最大值)修改
     def Gague_Value_MAX(self):
@@ -252,14 +284,31 @@ class mainWin(QMainWindow, Ui_MainWindow):
             print(num_max)
             # 将最大值写入Config json文件
             with open('./gaguge_config.json', 'r', encoding='utf8') as read_congfig_file:
-                str = read_congfig_file.read()
-                json_data = json.loads(str)
+                str_temp = read_congfig_file.read()
+                json_data = json.loads(str_temp)
+                self.pointer_color = json_data['pointer_color']
+                self.value_color = json_data['value_color']
+                self.value_min = json_data['value_min']
                 json_data['value_max'] = num_max
                 write_json =  json_data
             with  open('./gaguge_config.json','w+',encoding = 'utf-8') as congfig_file:
                 json.dump(write_json, congfig_file, indent=4, sort_keys=True)
 
             self.value_num_max = num_max
+
+            value_min_str = str(self.value_min)
+            value_max_str = str(self.value_num_max)
+
+            # 生成新的home_page.xml文件
+            with  open('./meter_images/home_page.xml','w',encoding = 'utf-8') as f:
+                f.write('''<?xml ruler_y="220" ruler_x="297,42,-439,-112"?>
+    <window name="home_page" style:normal:bg_color="#FFFFFF">
+    <guage name="guage" x="0" y="0" w="320" h="240" draw_type="scale_auto" image="voltmeter">
+        <guage_pointer name="guage_pointer" x="294" y="10" w="7" h="420" value="0" angle="-90" anchor_x="0.5" anchor_y="0.5" animation="value(easing=bounce_out,from=0,to=-90)" min="-90" max="0" style:normal:fg_color="#00000000" style:normal:bg_color="''' + self.pointer_color + '''" image="pointer_2" style:normal:border="all" style:normal:border_color="#00000000"/>
+    </guage>
+    <label name="val" x="221" y="155" w="89" h="75" style:normal:font_size="30" style:normal:text_color="'''+ self.value_color +'''" style:normal:text_align_h="right" visible="true" min="'''+ value_min_str + '''" max="'''+ value_max_str + '''" enable="true" style:normal:font_name="default" text="0"/>
+    </window>''')
+                f.close()
 
     # 6 生成固件
     def Gague_Build(self):

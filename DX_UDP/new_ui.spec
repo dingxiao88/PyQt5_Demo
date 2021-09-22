@@ -1,5 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+
 block_cipher = None
 
 
@@ -9,6 +10,7 @@ a = Analysis(['new_ui.py'],
              datas=[],
              hiddenimports=[],
              hookspath=[],
+             hooksconfig={},
              runtime_hooks=[],
              excludes=[],
              win_no_prefer_redirects=False,
@@ -17,8 +19,9 @@ a = Analysis(['new_ui.py'],
              noarchive=False)
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
+
 exe = EXE(pyz,
-          a.scripts,
+          a.scripts, 
           [],
           exclude_binaries=True,
           name='new_ui',
@@ -27,11 +30,14 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=False,
-          icon='me.ico' )
+          disable_windowed_traceback=False,
+          target_arch=None,
+          codesign_identity=None,
+          entitlements_file=None )
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
-               a.datas,
+               a.datas, 
                strip=False,
                upx=True,
                upx_exclude=[],
