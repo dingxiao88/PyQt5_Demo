@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow_48(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1014, 720)
@@ -33,13 +33,13 @@ class Ui_MainWindow(object):
         self.frame_top.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_top.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_top.setObjectName("frame_top")
-        self.label = QtWidgets.QLabel(self.frame_top)
-        self.label.setGeometry(QtCore.QRect(380, 4, 211, 41))
+        self.label_titel = QtWidgets.QLabel(self.frame_top)
+        self.label_titel.setGeometry(QtCore.QRect(380, 4, 211, 41))
         font = QtGui.QFont()
         font.setFamily("宋体")
         font.setPointSize(22)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
+        self.label_titel.setFont(font)
+        self.label_titel.setObjectName("label_titel")
         self.verticalLayout_2.addWidget(self.frame_top)
         self.frame_main = QtWidgets.QFrame(self.frame_all)
         self.frame_main.setStyleSheet("background-color: rgb(40, 44, 52);")
@@ -121,6 +121,14 @@ class Ui_MainWindow(object):
         self.pushButton_build.setFont(font)
         self.pushButton_build.setStyleSheet("color:#ff0000")
         self.pushButton_build.setObjectName("pushButton_build")
+        self.pushButton_return = QtWidgets.QPushButton(self.frame_main)
+        self.pushButton_return.setGeometry(QtCore.QRect(280, 500, 151, 41))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(18)
+        self.pushButton_return.setFont(font)
+        self.pushButton_return.setStyleSheet("color:#00bc12")
+        self.pushButton_return.setObjectName("pushButton_return")
         self.pushButton_gague_choose.raise_()
         self.pushButton_value_min.raise_()
         self.pushButton_value_color.raise_()
@@ -130,6 +138,7 @@ class Ui_MainWindow(object):
         self.label_pointer.raise_()
         self.pushButton_value_max.raise_()
         self.pushButton_build.raise_()
+        self.pushButton_return.raise_()
         self.verticalLayout_2.addWidget(self.frame_main)
         self.verticalLayout.addWidget(self.frame_all)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -140,7 +149,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "智能表盘生成器"))
+        self.label_titel.setText(_translate("MainWindow", "智能表盘生成器"))
         self.pushButton_gague_choose.setText(_translate("MainWindow", "表盘选择"))
         self.pushButton_value_min.setText(_translate("MainWindow", "数值最小值"))
         self.pushButton_value_color.setText(_translate("MainWindow", "数值颜色"))
@@ -149,4 +158,5 @@ class Ui_MainWindow(object):
         self.label_pointer.setText(_translate("MainWindow", "1"))
         self.pushButton_value_max.setText(_translate("MainWindow", "数值最大值"))
         self.pushButton_build.setText(_translate("MainWindow", "生成固件"))
+        self.pushButton_return.setText(_translate("MainWindow", "返回"))
 import Meter_images_rc

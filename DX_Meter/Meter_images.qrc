@@ -1,7 +1,10 @@
 <RCC>
   <qresource prefix="images">
+    <file>meter_images/90/voltmeter_96.bmp</file>
     <file>meter_images/svg/pointer.svg</file>
     <file>meter_images/90/voltmeter.png</file>
+    <file>meter_images/90/meter_sel1.png</file>
+    <file>meter_images/90/meter_sel2.png</file>
     <file>meter_images/svg/pointer_2.svg</file>
     <file>meter_images/svg/pointer_1.svg</file>
   </qresource>

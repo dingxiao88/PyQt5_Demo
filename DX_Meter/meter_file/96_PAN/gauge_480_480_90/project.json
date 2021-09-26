@@ -1,0 +1,38 @@
+{
+  "name": "gauge_320_240_90",
+  "entry": "home_page",
+  "assets": {
+    "activedTheme": "default",
+    "outputDir": "res",
+    "loadFrom": "fs",
+    "const": "resource_data",
+    "screenDPR": "x1",
+    "defaultLanguage": "zh",
+    "defaultCountry": "CN",
+    "themes": {
+      "default": {
+        "activedSystemBar": "",
+        "activedBottomSystemBar": "",
+        "packaged": true,
+        "fonts": {
+          "default": {
+            "18": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+            "text": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+          }
+        },
+        "lcd": {
+          "width": "320",
+          "height": "240",
+          "colorDepth": "16bit",
+          "colorFormat": "BGR(A)"
+        }
+      }
+    }
+  },
+  "modifyTime": "2021/09/09",
+  "creator": {
+    "name": "AWTK Designer",
+    "version": "1.1.4"
+  },
+  "awtkRoot": "${DesignerPath}/SDK/awtk"
+}

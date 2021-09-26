@@ -45,12 +45,12 @@ color: rgb(210, 210, 210);</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="label_titel">
           <property name="geometry">
            <rect>
-            <x>380</x>
-            <y>4</y>
-            <width>211</width>
+            <x>370</x>
+            <y>3</y>
+            <width>241</width>
             <height>41</height>
            </rect>
           </property>
@@ -61,7 +61,7 @@ color: rgb(210, 210, 210);</string>
            </font>
           </property>
           <property name="text">
-           <string>智能表盘生成器</string>
+           <string>智能48表盘生成器</string>
           </property>
          </widget>
         </widget>
@@ -275,6 +275,28 @@ background-repeat: no-repeat;</string>
            <string>生成固件</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="pushButton_return">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>500</y>
+            <width>151</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>宋体</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:#00bc12</string>
+          </property>
+          <property name="text">
+           <string>返回</string>
+          </property>
+         </widget>
          <zorder>pushButton_gague_choose</zorder>
          <zorder>pushButton_value_min</zorder>
          <zorder>pushButton_value_color</zorder>
@@ -284,6 +306,7 @@ background-repeat: no-repeat;</string>
          <zorder>label_pointer</zorder>
          <zorder>pushButton_value_max</zorder>
          <zorder>pushButton_build</zorder>
+         <zorder>pushButton_return</zorder>
         </widget>
        </item>
       </layout>
