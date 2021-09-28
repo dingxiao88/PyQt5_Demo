@@ -80,7 +80,7 @@ color: rgb(210, 210, 210);</string>
          <widget class="QPushButton" name="pushButton_gague_choose">
           <property name="geometry">
            <rect>
-            <x>270</x>
+            <x>280</x>
             <y>550</y>
             <width>121</width>
             <height>41</height>
@@ -99,7 +99,7 @@ color: rgb(210, 210, 210);</string>
          <widget class="QPushButton" name="pushButton_value_min">
           <property name="geometry">
            <rect>
-            <x>270</x>
+            <x>280</x>
             <y>610</y>
             <width>151</width>
             <height>41</height>
@@ -118,7 +118,7 @@ color: rgb(210, 210, 210);</string>
          <widget class="QPushButton" name="pushButton_value_color">
           <property name="geometry">
            <rect>
-            <x>560</x>
+            <x>570</x>
             <y>550</y>
             <width>121</width>
             <height>41</height>
@@ -137,7 +137,7 @@ color: rgb(210, 210, 210);</string>
          <widget class="QPushButton" name="pushButton_pointer_color">
           <property name="geometry">
            <rect>
-            <x>420</x>
+            <x>430</x>
             <y>550</y>
             <width>121</width>
             <height>41</height>
@@ -237,7 +237,7 @@ background-repeat: no-repeat;</string>
          <widget class="QPushButton" name="pushButton_value_max">
           <property name="geometry">
            <rect>
-            <x>530</x>
+            <x>540</x>
             <y>610</y>
             <width>151</width>
             <height>41</height>
@@ -256,7 +256,7 @@ background-repeat: no-repeat;</string>
          <widget class="QPushButton" name="pushButton_build">
           <property name="geometry">
            <rect>
-            <x>530</x>
+            <x>540</x>
             <y>670</y>
             <width>151</width>
             <height>41</height>
@@ -278,7 +278,7 @@ background-repeat: no-repeat;</string>
          <widget class="QPushButton" name="pushButton_return">
           <property name="geometry">
            <rect>
-            <x>270</x>
+            <x>280</x>
             <y>670</y>
             <width>151</width>
             <height>41</height>
