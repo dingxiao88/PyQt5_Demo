@@ -103,7 +103,11 @@ from time import sleep
 import ctypes
 
 # address = "9C:9C:1F:C7:66:12"
-address = "A4:CF:12:73:44:02"   #DX_JS 4按键版本
+# address = "A4:CF:12:73:44:02"   #DX_JS 4按键版本
+address = "4C:75:25:C1:76:02"   #小黑板
+
+
+
 
 UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
