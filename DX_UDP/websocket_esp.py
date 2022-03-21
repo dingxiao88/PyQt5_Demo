@@ -28,7 +28,6 @@ def on_error(ws, error):
 def on_close(ws, close_status_code, close_msg):
     print("### closed ###")
 
-
 def on_open(ws):
     def run(*args):
         for i in range(3):
@@ -52,7 +51,7 @@ websocket.enableTrace(True)
 #     host = "ws://echo.websocket.events/"
 # else:
 #     host = sys.argv[1]
-host = "ws://10.0.0.10:80/ws"
+host = "ws://192.168.43.120:80/ws"
 # host = "ws://192.168.31.95:80/ws"
 ws = websocket.WebSocketApp(host,
                             on_message=on_message,
