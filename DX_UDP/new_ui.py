@@ -109,12 +109,39 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.udp_send_KW_Stoper = []           #测试KW双网接口
         self.udp_send_KW_ServoConfig = []      #测试KW双网接口
         self.udp_send_KW_Angel = []            #测试KW双网接口
+
+        #AXT双网发送数据初始化
+        self.udp_send_AXT_FK_askStatus = []    #测试AXT FK设备工作状态询问报文
+
+
         for x in range(16):
             self.udp_send_KW_Status.append(0x00)
             self.udp_send_KW_Stoper.append(0x00)
             self.udp_send_KW_ServoConfig.append(0x00)
         for x in range(18):
             self.udp_send_KW_Angel.append(0x00)
+
+        #AXT双网发送数据初始化
+        for x in range(13):
+            self.udp_send_AXT_FK_askStatus.append(0x00)
+
+        
+        #AXT FK设备状态询问报文
+        self.udp_send_AXT_FK_askStatus[0] = 0x88  #扩展帧-数据帧
+        self.udp_send_AXT_FK_askStatus[1] = 0x08  #优先级高
+        self.udp_send_AXT_FK_askStatus[2] = 0x00
+        self.udp_send_AXT_FK_askStatus[3] = 0x24
+        self.udp_send_AXT_FK_askStatus[4] = 0x01  #报文序号
+
+        self.udp_send_AXT_FK_askStatus[5] = 0x01
+        self.udp_send_AXT_FK_askStatus[6] = 0x02
+        self.udp_send_AXT_FK_askStatus[7] = 0x03
+        self.udp_send_AXT_FK_askStatus[8] = 0x04
+        self.udp_send_AXT_FK_askStatus[9] = 0x05
+        self.udp_send_AXT_FK_askStatus[10] = 0x06
+        self.udp_send_AXT_FK_askStatus[11] = 0x07
+        self.udp_send_AXT_FK_askStatus[12] = 0x08
+
 
         #KW状态报文
         self.udp_send_KW_Status[0] = 0x00

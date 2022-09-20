@@ -34,7 +34,10 @@ def on_open(ws):
             # send the message, then wait
             # so thread doesn't exit and socket
             # isn't closed
-            ws.send("Hello %d" % i)
+            # ws.send("Hello %d" % i)
+            # ws.send('{"result":{"test1":123}}')
+            ws.send('{"result":{"static": {"os_type": "Windows", "os_release": "10", "os_architecture": "64bit", "manufactory": "HP", "model": "HP ENVY x360 Convertible 15-bp1xx", "cpu_count": 1, "cpu_model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz", "cpu_core_count": 4}, "dynamic": {"Net_name": "DESKTOP-OPD1V18", "Net_sent": 0.26, "Net_recv": 0.0, "CPU_percentage": 1, "memory_free": "1.53", "memory_total": "7.88", "memory_use_percent": "80.5", "GPU_Temperature": 47, "GPU_total": 4.0, "GPU_free": 3.93, "GPU_use_percent": 1.67},"info_check": 1}}')
+
             time.sleep(1)
 
         time.sleep(1)
@@ -51,7 +54,7 @@ websocket.enableTrace(True)
 #     host = "ws://echo.websocket.events/"
 # else:
 #     host = sys.argv[1]
-host = "ws://192.168.43.120:80/ws"
+host = "ws://192.168.31.247:80/ws"
 # host = "ws://192.168.31.95:80/ws"
 ws = websocket.WebSocketApp(host,
                             on_message=on_message,

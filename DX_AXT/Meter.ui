@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1014</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background: transparent;
+color: rgb(210, 210, 210);</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QFrame" name="frame_all">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QFrame" name="frame_top">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(40, 44, 52);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="label">
+          <property name="geometry">
+           <rect>
+            <x>380</x>
+            <y>4</y>
+            <width>211</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>宋体</family>
+            <pointsize>22</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>智能表盘生成器</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_main">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(40, 44, 52);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QPushButton" name="pushButton_gague_choose">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>380</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>宋体</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>表盘选择</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_value_min">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>440</y>
+            <width>151</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>宋体</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>数值最小值</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_value_color">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>380</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>宋体</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>数值颜色</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_pointer_color">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>380</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>宋体</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>指针颜色</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_value">
+          <property name="geometry">
+           <rect>
+            <x>610</x>
+            <y>300</y>
+            <width>31</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Pixel LCD7</family>
+            <pointsize>26</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: #ff0000;
+background: transparent;</string>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_gague">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>110</y>
+            <width>320</width>
+            <height>240</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Pixel LCD7</family>
+            <pointsize>26</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-image: url(:/images/meter_images/90/voltmeter.png);
+background-repeat: no-repeat;</string>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_pointer">
+          <property name="geometry">
+           <rect>
+            <x>500</x>
+            <y>200</y>
+            <width>60</width>
+            <height>111</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>仿宋</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: transparent;
+background-repeat: no-repeat;</string>
+          </property>
+          <property name="text">
+           <string>1</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_value_max">
+          <property name="geometry">
+           <rect>
+            <x>540</x>
+            <y>440</y>
+            <width>151</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>宋体</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>数值最大值</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_build">
+          <property name="geometry">
+           <rect>
+            <x>540</x>
+            <y>500</y>
+            <width>151</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>宋体</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:#ff0000</string>
+          </property>
+          <property name="text">
+           <string>生成固件</string>
+          </property>
+         </widget>
+         <zorder>pushButton_gague_choose</zorder>
+         <zorder>pushButton_value_min</zorder>
+         <zorder>pushButton_value_color</zorder>
+         <zorder>pushButton_pointer_color</zorder>
+         <zorder>label_gague</zorder>
+         <zorder>label_value</zorder>
+         <zorder>label_pointer</zorder>
+         <zorder>pushButton_value_max</zorder>
+         <zorder>pushButton_build</zorder>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Meter_images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

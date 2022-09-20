@@ -1,0 +1,59 @@
+{
+      "data": {
+            "yesterday": {
+                  "date": "3日星期四",
+                  "high": "高温 4℃",
+                  "fx": "西北风",
+                  "low": "低温 -4℃",
+                  "fl": "<![CDATA[3级]]>",
+                  "type": "晴"
+            },
+            "city": "北京",
+            "forecast": [
+                  {
+                        "date": "4日星期五",
+                        "high": "高温 4℃",
+                        "fengli": "<![CDATA[3级]]>",
+                        "low": "低温 -6℃",
+                        "fengxiang": "西北风",
+                        "type": "晴"
+                  },
+                  {
+                        "date": "5日星期六",
+                        "high": "高温 4℃",
+                        "fengli": "<![CDATA[1级]]>",
+                        "low": "低温 -5℃",
+                        "fengxiang": "北风",
+                        "type": "多云"
+                  },
+                  {
+                        "date": "6日星期天",
+                        "high": "高温 7℃",
+                        "fengli": "<![CDATA[2级]]>",
+                        "low": "低温 -4℃",
+                        "fengxiang": "西北风",
+                        "type": "晴"
+                  },
+                  {
+                        "date": "7日星期一",
+                        "high": "高温 2℃",
+                        "fengli": "<![CDATA[3级]]>",
+                        "low": "低温 -7℃",
+                        "fengxiang": "北风",
+                        "type": "晴"
+                  },
+                  {
+                        "date": "8日星期二",
+                        "high": "高温 2℃",
+                        "fengli": "<![CDATA[1级]]>",
+                        "low": "低温 -6℃",
+                        "fengxiang": "北风",
+                        "type": "多云"
+                  }
+            ],
+            "ganmao": "感冒高发期，尽量避免外出，外出戴口罩防护。",
+            "wendu": "4"
+      },
+      "status": 1000,
+      "desc": "OK"
+}
