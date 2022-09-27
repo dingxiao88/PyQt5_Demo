@@ -80,6 +80,7 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 配置系统托盘
         self.dx_SystemTray = dx_SystemTray()
         self.dx_SystemTray.dx_SystemTray_Signal.connect(self.SystemTray_Pro)
+        self.dx_SystemTray.showMsg(1, "程序缩小至系统托盘!")
 
         # 绑定窗口设置函数
         self.btn_close.clicked.connect(lambda:APP_Fun.APP_Close(main_win))

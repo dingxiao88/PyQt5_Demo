@@ -91,9 +91,10 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QIcon("./images/me.png"))
         # ic()
 
-        # 配置系统托盘
+        # 配置系统托盘-20220921-系统托盘功能不正常是因为托盘图片不对(me.png)
         self.dx_SystemTray = dx_SystemTray()
         self.dx_SystemTray.dx_SystemTray_Signal.connect(self.SystemTray_Pro)
+        # self.dx_SystemTray.showMsg(1, "程序缩小至系统托盘!")
 
         # 绑定窗口设置函数
         self.btn_close.clicked.connect(lambda:APP_Fun.APP_Close(main_win))
@@ -168,6 +169,74 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.cmd_fs4 = 0
         self.cmd_fs5 = 0
         self.cmd_fs6 = 0
+
+        # 创建AXT数据字典
+        self.axt_data_dict = {
+
+            #-各管Bomb在位信息 0：无  1：有
+            "AXT_Tube1_BombStatus" : 0,
+            "AXT_Tube2_BombStatus" : 0,
+            "AXT_Tube3_BombStatus" : 0,
+            "AXT_Tube4_BombStatus" : 0,
+            "AXT_Tube5_BombStatus" : 0,
+            "AXT_Tube6_BombStatus" : 0,
+
+            # - 充气及驱动机柜状态    0：正常  1：故障
+            "AXT_DevPart1_Status" : 1,
+            # - 发射管及驱动机构状态  0：正常  1：故障
+            "AXT_DevPart2_Status" : 1,
+            # - 各管电缆回插状态      0：未接通  1：接通
+            "AXT_Tube1_CableStatus" : 0,
+            "AXT_Tube2_CableStatus" : 0,
+            "AXT_Tube3_CableStatus" : 0,
+            "AXT_Tube4_CableStatus" : 0,
+            "AXT_Tube5_CableStatus" : 0,
+            "AXT_Tube6_CableStatus" : 0,
+
+            # - 各管前盖状态  0：正常  1：故障  2：开盖中  3：开盖到位  4：关盖中  5：关盖到位
+            "AXT_Tube1_FrontCaseStatus" : 1,
+            "AXT_Tube2_FrontCaseStatus" : 1,
+            "AXT_Tube3_FrontCaseStatus" : 1,
+            "AXT_Tube4_FrontCaseStatus" : 1,
+            "AXT_Tube5_FrontCaseStatus" : 1,
+            "AXT_Tube6_FrontCaseStatus" : 1,
+            # - 各管前盖反馈状态有效标志
+            # - FY角度
+            # - XH角度
+
+            # -发射命令反馈
+
+             # -关机报文  0：未关机  1：关机
+            "AXT_Dev_Close" : 1,
+
+            # -总气压值
+            "AXT_Dev_AirPressure" : 0.0,
+            # -各管气压值
+            "AXT_Tube1_AirPressure" : 0.0,
+            "AXT_Tube2_AirPressure" : 0.0,
+            "AXT_Tube3_AirPressure" : 0.0,
+            "AXT_Tube4_AirPressure" : 0.0,
+            "AXT_Tube5_AirPressure" : 0.0,
+            "AXT_Tube6_AirPressure" : 0.0,
+
+            # -各管加热状态  0：不加热  1：加热
+            "AXT_Tube1_Warm_Status" : 0,
+            "AXT_Tube2_Warm_Status" : 0,
+            "AXT_Tube3_Warm_Status" : 0,
+            "AXT_Tube4_Warm_Status" : 0,
+            "AXT_Tube5_Warm_Status" : 0,
+            "AXT_Tube6_Warm_Status" : 0,
+
+            # -各管温度
+            "AXT_Tube1_Temperature" : 0.0,
+            "AXT_Tube2_Temperature" : 0.0,
+            "AXT_Tube3_Temperature" : 0.0,
+            "AXT_Tube4_Temperature" : 0.0,
+            "AXT_Tube5_Temperature" : 0.0,
+            "AXT_Tube6_Temperature" : 0.0
+
+        }
+        # print(self.axt_data_dict)
 
         # AXT发送报文ID
         self.AXT_Send_MesgID = 0
@@ -581,12 +650,36 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
 
     # AXT信息回显
-    def AXT_Recv_Info_Display(self, str_info, count, fy_angle, xh_angle, str_axt_str):
+    def AXT_Recv_Info_Display(self, str_info, count, fy_angle, xh_angle, str_axt_str, axt_dict):
         # print('--->')
         self.label_dc_Info.setText(str(count)) 
         # AXT调试信息输出
         self.label_AXT_DebguInfo.setText(str_axt_str)
 
+        #AXT数据显示
+        # print(axt_dict)
+        if(axt_dict):
+
+            # -1号管温度
+            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube1_Temperature"], 1))
+            self.label_43.setText(temp_str)
+            # -2号管温度
+            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube2_Temperature"], 1))
+            self.label_45.setText(temp_str)
+            # -3号管温度
+            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube3_Temperature"], 1))
+            self.label_46.setText(temp_str)
+            # -4号管温度
+            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube4_Temperature"], 1))
+            self.label_47.setText(temp_str)
+            # -5号管温度
+            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube5_Temperature"], 1))
+            self.label_44.setText(temp_str)
+            # -6号管温度
+            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube6_Temperature"], 1))
+            self.label_42.setText(temp_str)
+
+            
         # self.label_fy_angle.setText(str(fy_angle))
         # self.label_xh_angle.setText(str(xh_angle))
 

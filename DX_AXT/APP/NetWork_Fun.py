@@ -167,8 +167,10 @@ def UDP_Connect(self):
         self.udp_recv_thread.setRun()
         self.udp_recv_thread.start()
         self.udp_connect_flag = True
+        UDP_AXT_Send(self, 1)   # AXT专用
         self.pushButton_bing.setText('断开')
         Element_Style.pushButton_setStyle(self.pushButton_bing, 1)
+
 
     elif(self.udp_recv_thread.working_flag == True):
         self.udp_recv_thread.setRun()

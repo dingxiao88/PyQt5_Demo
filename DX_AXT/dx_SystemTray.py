@@ -4,7 +4,16 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu, QWidget)
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QSystemTrayIcon, QAction, QMenu, QStyle, QWidget)
+# from PyQt5.QtWidgets import (
+
+#     QApplication, QMainWindow,
+
+#     QLabel, QGridLayout, QWidget,
+
+#     QCheckBox, QSystemTrayIcon,
+
+#     QSpacerItem, QSizePolicy, QMenu, QAction, QStyle, qApp)
 from PyQt5.QtGui import QRegExpValidator, QIcon, QPixmap, QColor
 from PyQt5.QtCore import pyqtSignal, Qt, QRegExp
 
@@ -56,14 +65,16 @@ class dx_SystemTray(QWidget):
 
         self.tray = QSystemTrayIcon()
 
-        # 创建QIcon对象，用于设置图标（图片过大会出错） -- 运行python命令的目录必须在文件目录，不然会报错
-        # self.trayIconPix = QPixmap(16,16)
-        # self.trayIconPix.fill(QColor(100,100,100))
-        self.trayIconPix = QPixmap("./images/me.png")
-        self.Icon = QIcon(self.trayIconPix)
+        # # 创建QIcon对象，用于设置图标（图片过大会出错） -- 运行python命令的目录必须在文件目录，不然会报错
+        # # self.trayIconPix = QPixmap(16,16)
+        # # self.trayIconPix.fill(QColor(100,100,100))
+        # self.trayIconPix = QPixmap("./images/me.png")
+        # self.Icon = QIcon(self.trayIconPix)
 
-        # 设置托盘图标（QIcon图标过大或者出错会导致托盘显示不出来）
-        self.tray.setIcon(self.Icon)
+        # # 设置托盘图标（QIcon图标过大或者出错会导致托盘显示不出来）
+        # self.tray.setIcon(self.Icon)
+
+        self.tray.setIcon(self.style().standardIcon(QStyle.SP_ComputerIcon))
 
         # 创建QAction
         showAction = QAction("&显示", self, triggered = self.showApp)

@@ -11,6 +11,7 @@ def APP_Close(self):
     self.appMin_Flag = True
 
     self.hide()
+    
     self.dx_SystemTray.showMsg(1, "程序缩小至系统托盘!")
 
 # 应用窗口最大化
