@@ -4804,6 +4804,9 @@ color: rgb(243, 249, 241);</string>
 margin:1px;
 color: rgb(243, 249, 241);</string>
                       </property>
+                      <property name="lineWidth">
+                       <number>10</number>
+                      </property>
                       <property name="text">
                        <string>设备状态:未知</string>
                       </property>
@@ -5144,11 +5147,14 @@ color: rgb(0, 255, 127);</string>
                       <property name="inputMask">
                        <string/>
                       </property>
+                      <property name="text">
+                       <string>-90</string>
+                      </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
                       <property name="placeholderText">
-                       <string>0.00</string>
+                       <string>-90</string>
                       </property>
                      </widget>
                      <widget class="QLineEdit" name="lineEdit_cmd_fy_angle">
@@ -5173,6 +5179,9 @@ color: rgb(0, 255, 127);</string>
                       </property>
                       <property name="inputMask">
                        <string/>
+                      </property>
+                      <property name="text">
+                       <string>0</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -5639,7 +5648,7 @@ QPushButton:pressed {
                        <enum>Qt::Vertical</enum>
                       </property>
                      </widget>
-                     <widget class="QPushButton" name="pushButton_AutoGet_1M_24">
+                     <widget class="QPushButton" name="pushButton_cmd_mainpower">
                       <property name="geometry">
                        <rect>
                         <x>10</x>
@@ -5690,7 +5699,7 @@ QPushButton:pressed {
                        <string>高压闭合</string>
                       </property>
                      </widget>
-                     <widget class="QPushButton" name="pushButton_AutoGet_1M_25">
+                     <widget class="QPushButton" name="pushButton_cmd_fy">
                       <property name="geometry">
                        <rect>
                         <x>85</x>
@@ -5741,7 +5750,7 @@ QPushButton:pressed {
                        <string>俯仰启动</string>
                       </property>
                      </widget>
-                     <widget class="QPushButton" name="pushButton_AutoGet_1M_26">
+                     <widget class="QPushButton" name="pushButton_cmd_xh">
                       <property name="geometry">
                        <rect>
                         <x>160</x>
@@ -6325,9 +6334,9 @@ color: rgb(0, 255, 127);</string>
                     <widget class="QGroupBox" name="groupBox_4">
                      <property name="geometry">
                       <rect>
-                       <x>290</x>
+                       <x>215</x>
                        <y>380</y>
-                       <width>406</width>
+                       <width>481</width>
                        <height>81</height>
                       </rect>
                      </property>
@@ -6454,7 +6463,7 @@ color: rgb(0, 255, 127);</string>
                        <string/>
                       </property>
                       <property name="text">
-                       <string>10.0</string>
+                       <string>0</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -6532,7 +6541,7 @@ color: rgb(0, 255, 127);</string>
                        <string/>
                       </property>
                       <property name="text">
-                       <string>10.0</string>
+                       <string>0</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -6559,7 +6568,7 @@ color: rgb(0, 255, 127);</string>
                        <string/>
                       </property>
                       <property name="text">
-                       <string>10.0</string>
+                       <string>0</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -6586,7 +6595,7 @@ color: rgb(0, 255, 127);</string>
                        <string/>
                       </property>
                       <property name="text">
-                       <string>10.0</string>
+                       <string>0</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -6715,7 +6724,7 @@ color: rgb(0, 255, 127);</string>
                        <string/>
                       </property>
                       <property name="text">
-                       <string>10.0</string>
+                       <string>0</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -6742,7 +6751,7 @@ color: rgb(0, 255, 127);</string>
                        <string/>
                       </property>
                       <property name="text">
-                       <string>10.0</string>
+                       <string>0</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -6802,13 +6811,91 @@ QPushButton:pressed {
                        <string>4#气压</string>
                       </property>
                      </widget>
+                     <widget class="QPushButton" name="pushButton_cmd_persureSet">
+                      <property name="geometry">
+                       <rect>
+                        <x>410</x>
+                        <y>45</y>
+                        <width>61</width>
+                        <height>31</height>
+                       </rect>
+                      </property>
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Arial Black</family>
+                        <pointsize>9</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QPushButton {
+	background-color: rgb(27, 29, 35);
+}
+
+QPushButton:hover {
+	background-color: rgb(33, 37, 43);
+}
+QPushButton:pressed {	
+	background-color: rgb(85, 170, 255);
+}</string>
+                      </property>
+                      <property name="text">
+                       <string>气源气压</string>
+                      </property>
+                     </widget>
+                     <widget class="QLineEdit" name="lineEdit_cmd_persureSet">
+                      <property name="geometry">
+                       <rect>
+                        <x>410</x>
+                        <y>20</y>
+                        <width>61</width>
+                        <height>21</height>
+                       </rect>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(33, 37, 43);
+padding: 2px;
+color: rgb(0, 255, 127);</string>
+                      </property>
+                      <property name="inputMask">
+                       <string/>
+                      </property>
+                      <property name="text">
+                       <string>0</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="placeholderText">
+                       <string>0.00</string>
+                      </property>
+                     </widget>
                     </widget>
                     <widget class="QGroupBox" name="groupBox_5">
                      <property name="geometry">
                       <rect>
                        <x>15</x>
                        <y>380</y>
-                       <width>266</width>
+                       <width>191</width>
                        <height>81</height>
                       </rect>
                      </property>
@@ -6818,8 +6905,8 @@ QPushButton:pressed {
                      <widget class="QComboBox" name="comboBox_cmd_seaState">
                       <property name="geometry">
                        <rect>
-                        <x>130</x>
-                        <y>30</y>
+                        <x>95</x>
+                        <y>15</y>
                         <width>71</width>
                         <height>31</height>
                        </rect>
@@ -6883,8 +6970,8 @@ color: rgb(0, 255, 127);</string>
                      <widget class="QLineEdit" name="lineEdit_cmd_environmentTemp">
                       <property name="geometry">
                        <rect>
-                        <x>5</x>
-                        <y>30</y>
+                        <x>30</x>
+                        <y>15</y>
                         <width>51</width>
                         <height>31</height>
                        </rect>
@@ -6913,10 +7000,10 @@ color: rgb(0, 255, 127);</string>
                      <widget class="QPushButton" name="pushButton_cmd_environment">
                       <property name="geometry">
                        <rect>
-                        <x>205</x>
-                        <y>30</y>
+                        <x>105</x>
+                        <y>50</y>
                         <width>51</width>
-                        <height>31</height>
+                        <height>26</height>
                        </rect>
                       </property>
                       <property name="sizePolicy">
@@ -6966,39 +7053,20 @@ QPushButton:pressed {
                        <string>确定</string>
                       </property>
                      </widget>
-                     <widget class="Line" name="line_4">
-                      <property name="geometry">
-                       <rect>
-                        <x>120</x>
-                        <y>30</y>
-                        <width>16</width>
-                        <height>26</height>
-                       </rect>
-                      </property>
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="layoutDirection">
-                       <enum>Qt::LeftToRight</enum>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">border-left:2px solid white; backgroud-color:black;</string>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                     </widget>
                      <widget class="QLabel" name="label_environmentTemp_Info">
                       <property name="geometry">
                        <rect>
-                        <x>60</x>
-                        <y>25</y>
+                        <x>30</x>
+                        <y>45</y>
                         <width>56</width>
-                        <height>34</height>
+                        <height>26</height>
                        </rect>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>01 Digit</family>
+                        <pointsize>8</pointsize>
+                       </font>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">background-color: rgb(33, 37, 43);

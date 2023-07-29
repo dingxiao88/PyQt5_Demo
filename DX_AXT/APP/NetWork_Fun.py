@@ -167,7 +167,7 @@ def UDP_Connect(self):
         self.udp_recv_thread.setRun()
         self.udp_recv_thread.start()
         self.udp_connect_flag = True
-        UDP_AXT_Send(self, 1)   # AXT专用
+        UDP_AXT_Send(self, 1)   # AXT专用--网络连接成功后自动发送1帧状态询问报文-年月日
         self.pushButton_bing.setText('断开')
         Element_Style.pushButton_setStyle(self.pushButton_bing, 1)
 
@@ -247,16 +247,67 @@ def UDP_AXT_Send(self, send_id):
             # 前盖有效
             self.udp_send_AXT_FK_ctlAXT[6] = 0x3f
 
-            # 旋回角度
-            # self.udp_send_AXT_FK_ctlAXT[7]
-            # self.udp_send_AXT_FK_ctlAXT[8]
-            # 俯仰角度
-            # self.udp_send_AXT_FK_ctlAXT[9]
-            # self.udp_send_AXT_FK_ctlAXT[10]
+            # for自定义数据结构
+            # 旋回角度(-120~120)
+            # if((self.cmd_xh_angle >= -120) and (self.cmd_xh_angle <= 120)):
+            #     x = (abs(self.cmd_xh_angle) / 0.1)
+            #     xx = int(x)
+            #     # temp_bytes = struct.pack('f',x)
+            #     temp_bytes = struct.pack('i',xx)
+            #     B1 = temp_bytes[1]
+            #     B0 = temp_bytes[0]
+            #     if(self.cmd_xh_angle < 0):
+            #         B1 = B1 | 0x80
+            #     self.udp_send_AXT_FK_ctlAXT[7] = B1
+            #     self.udp_send_AXT_FK_ctlAXT[8] = B0
+            # # 俯仰角度(-20~0)
+            # if((self.cmd_fy_angle >= -20) and (self.cmd_fy_angle <= 0)):
+            #     y = (abs(self.cmd_fy_angle) / 0.1)
+            #     yy = int(y)
+            #     # temp_bytes = struct.pack('f',y)
+            #     temp_bytes = struct.pack('i',yy)
+            #     B1 = temp_bytes[1]
+            #     B0 = temp_bytes[0]
+            #     if(self.cmd_fy_angle < 0):
+            #         B1 = B1 | 0x80
+            #     self.udp_send_AXT_FK_ctlAXT[9] = B1
+            #     self.udp_send_AXT_FK_ctlAXT[10] = B0
 
+            # 20230219-根据北京协议修改
+            # 旋回角度(-120~120)
+            if((self.cmd_xh_angle >= -120) and (self.cmd_xh_angle <= 120)):
+                xx2 = hex((int(self.cmd_xh_angle * 10)) & 0xffff)
+                xx3 = int(xx2, 16)
+                xx6 = (xx3 & 0x0fff)
+                xx6 = (xx6 << 4)
+                B1 = ((xx6 & 0xff00) >> 8)
+                B0 = (xx6 & 0x00ff)
+                B0 = B0 | 0x01
+                self.udp_send_AXT_FK_ctlAXT[7] = B0
+                self.udp_send_AXT_FK_ctlAXT[8] = B1
+            print('xh_B0-0x%x'%self.udp_send_AXT_FK_ctlAXT[7])
+            print('xh_B1-0x%x'%self.udp_send_AXT_FK_ctlAXT[8])
+
+            # 20230219-根据北京协议修改
+            # 俯仰角度(-20~0)
+            if((self.cmd_fy_angle >= -20) and (self.cmd_fy_angle <= 0)):
+                xx2 = hex((int(self.cmd_fy_angle * 10)) & 0xffff)
+                xx3 = int(xx2, 16)
+                xx6 = (xx3 & 0x0fff)
+                xx6 = (xx6 << 4)
+                B1 = ((xx6 & 0xff00) >> 8)
+                B0 = (xx6 & 0x00ff)
+                B0 = B0 | 0x01
+                self.udp_send_AXT_FK_ctlAXT[9] = B0
+                self.udp_send_AXT_FK_ctlAXT[10] = B1
+            print('fy_B0-0x%x'%self.udp_send_AXT_FK_ctlAXT[9])
+            print('fy_B1-0x%x'%self.udp_send_AXT_FK_ctlAXT[10])
+
+            # 母线-fy-xh 控制
+            self.udp_send_AXT_FK_ctlAXT[11] = (self.cmd_mainpower_ctl|(self.cmd_fy_ctl<<1)|(self.cmd_xh_ctl<<2)|(0<<3)|(0<<4)|(0<<5)|(0<<6)|(0<<7))
             # 备用
-            self.udp_send_AXT_FK_ctlAXT[11] = 0x00
-            self.udp_send_AXT_FK_ctlAXT[12] = 0x01
+            # self.udp_send_AXT_FK_ctlAXT[11] = 0x00
+            self.udp_send_AXT_FK_ctlAXT[12] = 0x00
 
             self.udp_axt_send_thread = Thread_Udp_Send(self.udpSocket, self.udp_send_AXT_FK_ctlAXT, self.udp_send_AXT_FK_ctlAXT, self.destIp, self.destPort)
             if(self.udp_axt_send_thread.working_flag == False):
@@ -292,8 +343,6 @@ def UDP_AXT_Send(self, send_id):
             if(self.udp_axt_send_thread.working_flag == False):
                     self.udp_axt_send_thread.setOneShot()
                     self.udp_axt_send_thread.start()
-
-
 
 
 # axt FS命令设定
@@ -350,6 +399,15 @@ def AXT_EnvironmentInfo_Set(self):
 def AXT_Persure_Set(self):
 
     # -获得1#气瓶设定压力数值
+    if(self.lineEdit_cmd_persureSet.text() == ''):
+        self.cmd_persure = 10.0
+    else:
+        temp_data = float(self.lineEdit_cmd_persureSet.text())
+        if(temp_data > 25):
+            temp_data = 10.0
+        self.cmd_persure = temp_data
+
+    # -获得1#气瓶设定压力数值
     if(self.lineEdit_cmd_persureSet1.text() == ''):
         self.cmd_persure1 = 10.0
     else:
@@ -403,22 +461,61 @@ def AXT_Persure_Set(self):
             temp_data = 10.0
         self.cmd_persure6 = temp_data
 
-    self.udp_send_AXT_FK_persureSet[5] = int(self.cmd_persure1 * 10)
-    self.udp_send_AXT_FK_persureSet[6] = int(self.cmd_persure2 * 10)
-    self.udp_send_AXT_FK_persureSet[7] = int(self.cmd_persure3 * 10)
-    self.udp_send_AXT_FK_persureSet[8] = int(self.cmd_persure4 * 10)
-    self.udp_send_AXT_FK_persureSet[9] = int(self.cmd_persure5 * 10)
-    self.udp_send_AXT_FK_persureSet[10] = int(self.cmd_persure6 * 10)
+    self.udp_send_AXT_FK_persureSet[5] = int(self.cmd_persure * 10)
+    self.udp_send_AXT_FK_persureSet[6] = int(self.cmd_persure1 * 10)
+    self.udp_send_AXT_FK_persureSet[7] = int(self.cmd_persure2 * 10)
+    self.udp_send_AXT_FK_persureSet[8] = int(self.cmd_persure3 * 10)
+    self.udp_send_AXT_FK_persureSet[9] = int(self.cmd_persure4 * 10)
+    self.udp_send_AXT_FK_persureSet[10] = int(self.cmd_persure5 * 10)
+    self.udp_send_AXT_FK_persureSet[11] = int(self.cmd_persure6 * 10)
 
     UDP_AXT_Send(self, 4)
 
+# axt 母线开关控制
+def AXT_MainPower_Control(self):
+    if(self.cmd_mainpower_ctl == 0):
+            self.cmd_mainpower_ctl = 1
+            self.pushButton_cmd_mainpower.setText('高压关闭')
+            Element_Style.pushButton_setStyle(self.pushButton_cmd_mainpower, 1)
+    elif(self.cmd_mainpower_ctl == 1):
+            self.cmd_mainpower_ctl = 0
+            self.pushButton_cmd_mainpower.setText('高压闭合')
+            Element_Style.pushButton_setStyle(self.pushButton_cmd_mainpower, 0)
+
+    UDP_AXT_Send(self, 2)
+
+# axt FY开关控制
+def AXT_FY_Control(self):
+    if(self.cmd_fy_ctl == 0):
+            self.cmd_fy_ctl = 1
+            self.pushButton_cmd_fy.setText('俯仰关闭')
+            Element_Style.pushButton_setStyle(self.pushButton_cmd_fy, 1)
+    elif(self.cmd_fy_ctl == 1):
+            self.cmd_fy_ctl = 0
+            self.pushButton_cmd_fy.setText('俯仰启动')
+            Element_Style.pushButton_setStyle(self.pushButton_cmd_fy, 0)
+
+    UDP_AXT_Send(self, 2)
+
+# axt XH开关控制
+def AXT_XH_Control(self):
+    if(self.cmd_xh_ctl == 0):
+            self.cmd_xh_ctl = 1
+            self.pushButton_cmd_xh.setText('旋回关闭')
+            Element_Style.pushButton_setStyle(self.pushButton_cmd_xh, 1)
+    elif(self.cmd_xh_ctl == 1):
+            self.cmd_xh_ctl = 0
+            self.pushButton_cmd_xh.setText('旋回启动')
+            Element_Style.pushButton_setStyle(self.pushButton_cmd_xh, 0)
+
+    UDP_AXT_Send(self, 2)
 
 # axt 俯仰/旋回角度控制
 def AXT_FYXH_Angle_Control(self):
 
     # -获得命令旋回角度
     if(self.lineEdit_cmd_xh_angle.text() == ''):
-        self.cmd_xh_angle = 0.0
+        self.cmd_xh_angle = -90.0
     else:
         self.cmd_xh_angle = float(self.lineEdit_cmd_xh_angle.text())
     # -获得命令俯仰角度
@@ -429,20 +526,35 @@ def AXT_FYXH_Angle_Control(self):
 
     # 旋回角度(-120~120)
     if((self.cmd_xh_angle >= -120) and (self.cmd_xh_angle <= 120)):
-        x = (abs(self.cmd_xh_angle) / 0.1)
-        xx = int(x)
+        # x = (abs(self.cmd_xh_angle) / 0.1)
+        # xx = int(x)
+        # print((int(self.cmd_xh_angle * 10)))
         # temp_bytes = struct.pack('f',x)
-        temp_bytes = struct.pack('i',xx)
-        B1 = temp_bytes[1]
-        B0 = temp_bytes[0]
-        if(self.cmd_xh_angle < 0):
-            B1 = B1 | 0x80
-        self.udp_send_AXT_FK_ctlAXT[7] = B1
-        self.udp_send_AXT_FK_ctlAXT[8] = B0
-        # print('0x%x'%self.udp_send_AXT_FK_ctlAXT[7])
-        # print('0x%x'%self.udp_send_AXT_FK_ctlAXT[8])
+        # temp_bytes = struct.pack('i',xx)
+        # B1 = temp_bytes[1]
+        # B0 = temp_bytes[0]
+        # print('1-->0x%x'%B1)
+        # print('1-->0x%x'%B0)
+        # if(self.cmd_xh_angle < 0):
+        #     B1 = B1 | 0x80
+        xx2 = hex((int(self.cmd_xh_angle * 10)) & 0xffff)
+        xx3 = int(xx2, 16)
+        # print((xx3))
+        # print(type(xx3))
+        xx6 = (xx3 & 0x0fff)
+        xx6 = (xx6 << 4)
+        print(hex(xx6))
+        B1 = ((xx6 & 0xff00) >> 8)
+        B0 = (xx6 & 0x00ff)
+        # 20230219-北京协议角度有效位
+        B0 = B0 | 0x01
 
-        # 数据验算
+        self.udp_send_AXT_FK_ctlAXT[7] = B0
+        self.udp_send_AXT_FK_ctlAXT[8] = B1
+        print('xh_B0-0x%x'%self.udp_send_AXT_FK_ctlAXT[7])
+        print('xh_B1-0x%x'%self.udp_send_AXT_FK_ctlAXT[8])
+
+        # 数据验算 for 自定义数据
         # data_181 = self.udp_send_AXT_FK_ctlAXT[7]
         # data_182 = self.udp_send_AXT_FK_ctlAXT[8]
         # data_flag = 0
@@ -456,22 +568,38 @@ def AXT_FYXH_Angle_Control(self):
         # xh_angle = round(xh_angle, 2)
         # print(xh_angle)
 
-    # # 俯仰角度(-20~0)
+    # 俯仰角度(-20~0)
     if((self.cmd_fy_angle >= -20) and (self.cmd_fy_angle <= 0)):
-        y = (abs(self.cmd_fy_angle) / 0.1)
-        yy = int(y)
-        # temp_bytes = struct.pack('f',y)
-        temp_bytes = struct.pack('i',yy)
-        B1 = temp_bytes[1]
-        B0 = temp_bytes[0]
-        if(self.cmd_fy_angle < 0):
-            B1 = B1 | 0x80
-        self.udp_send_AXT_FK_ctlAXT[9] = B1
-        self.udp_send_AXT_FK_ctlAXT[10] = B0
-        # print('0x%x'%self.udp_send_AXT_FK_ctlAXT[9])
-        # print('0x%x'%self.udp_send_AXT_FK_ctlAXT[10])
+        # y = (abs(self.cmd_fy_angle) / 0.1)
+        # yy = int(y)
+        # # temp_bytes = struct.pack('f',y)
+        # temp_bytes = struct.pack('i',yy)
+        # B1 = temp_bytes[1]
+        # B0 = temp_bytes[0]
+        # if(self.cmd_fy_angle < 0):
+        #     B1 = B1 | 0x80
+        # self.udp_send_AXT_FK_ctlAXT[9] = B1
+        # self.udp_send_AXT_FK_ctlAXT[10] = B0
 
-        # 数据验算
+        # 20230219-根据北京协议修改
+        xx2 = hex((int(self.cmd_fy_angle * 10)) & 0xffff)
+        xx3 = int(xx2, 16)
+        # print((xx3))
+        # print(type(xx3))
+        xx6 = (xx3 & 0x0fff)
+        xx6 = (xx6 << 4)
+        print(hex(xx6))
+        B1 = ((xx6 & 0xff00) >> 8)
+        B0 = (xx6 & 0x00ff)
+        # 20230219-北京协议角度有效位
+        B0 = B0 | 0x01
+
+        self.udp_send_AXT_FK_ctlAXT[9] = B0
+        self.udp_send_AXT_FK_ctlAXT[10] = B1
+        print('fy_B0-0x%x'%self.udp_send_AXT_FK_ctlAXT[9])
+        print('fy_B1-0x%x'%self.udp_send_AXT_FK_ctlAXT[10])
+
+        # 数据验算 for 自定义数据
         # data_181 = self.udp_send_AXT_FK_ctlAXT[9]
         # data_182 = self.udp_send_AXT_FK_ctlAXT[10]
         # data_flag = 0

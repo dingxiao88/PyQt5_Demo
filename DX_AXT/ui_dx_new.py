@@ -2123,6 +2123,7 @@ class Ui_MainWindow(object):
         self.label_72.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "margin:1px;\n"
 "color: rgb(243, 249, 241);")
+        self.label_72.setLineWidth(10)
         self.label_72.setAlignment(QtCore.Qt.AlignCenter)
         self.label_72.setObjectName("label_72")
         self.label_74 = QtWidgets.QLabel(self.groupBox)
@@ -2503,22 +2504,22 @@ class Ui_MainWindow(object):
         self.line_6.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_6.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_6.setObjectName("line_6")
-        self.pushButton_AutoGet_1M_24 = QtWidgets.QPushButton(self.groupBox_2)
-        self.pushButton_AutoGet_1M_24.setGeometry(QtCore.QRect(10, 30, 61, 51))
+        self.pushButton_cmd_mainpower = QtWidgets.QPushButton(self.groupBox_2)
+        self.pushButton_cmd_mainpower.setGeometry(QtCore.QRect(10, 30, 61, 51))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_AutoGet_1M_24.sizePolicy().hasHeightForWidth())
-        self.pushButton_AutoGet_1M_24.setSizePolicy(sizePolicy)
-        self.pushButton_AutoGet_1M_24.setMinimumSize(QtCore.QSize(0, 0))
-        self.pushButton_AutoGet_1M_24.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        sizePolicy.setHeightForWidth(self.pushButton_cmd_mainpower.sizePolicy().hasHeightForWidth())
+        self.pushButton_cmd_mainpower.setSizePolicy(sizePolicy)
+        self.pushButton_cmd_mainpower.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_cmd_mainpower.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(9)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_AutoGet_1M_24.setFont(font)
-        self.pushButton_AutoGet_1M_24.setStyleSheet("QPushButton {\n"
+        self.pushButton_cmd_mainpower.setFont(font)
+        self.pushButton_cmd_mainpower.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(27, 29, 35);\n"
 "}\n"
 "\n"
@@ -2528,23 +2529,23 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_AutoGet_1M_24.setObjectName("pushButton_AutoGet_1M_24")
-        self.pushButton_AutoGet_1M_25 = QtWidgets.QPushButton(self.groupBox_2)
-        self.pushButton_AutoGet_1M_25.setGeometry(QtCore.QRect(85, 30, 61, 51))
+        self.pushButton_cmd_mainpower.setObjectName("pushButton_cmd_mainpower")
+        self.pushButton_cmd_fy = QtWidgets.QPushButton(self.groupBox_2)
+        self.pushButton_cmd_fy.setGeometry(QtCore.QRect(85, 30, 61, 51))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_AutoGet_1M_25.sizePolicy().hasHeightForWidth())
-        self.pushButton_AutoGet_1M_25.setSizePolicy(sizePolicy)
-        self.pushButton_AutoGet_1M_25.setMinimumSize(QtCore.QSize(0, 0))
-        self.pushButton_AutoGet_1M_25.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        sizePolicy.setHeightForWidth(self.pushButton_cmd_fy.sizePolicy().hasHeightForWidth())
+        self.pushButton_cmd_fy.setSizePolicy(sizePolicy)
+        self.pushButton_cmd_fy.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_cmd_fy.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(9)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_AutoGet_1M_25.setFont(font)
-        self.pushButton_AutoGet_1M_25.setStyleSheet("QPushButton {\n"
+        self.pushButton_cmd_fy.setFont(font)
+        self.pushButton_cmd_fy.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(27, 29, 35);\n"
 "}\n"
 "\n"
@@ -2554,23 +2555,23 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_AutoGet_1M_25.setObjectName("pushButton_AutoGet_1M_25")
-        self.pushButton_AutoGet_1M_26 = QtWidgets.QPushButton(self.groupBox_2)
-        self.pushButton_AutoGet_1M_26.setGeometry(QtCore.QRect(160, 30, 61, 51))
+        self.pushButton_cmd_fy.setObjectName("pushButton_cmd_fy")
+        self.pushButton_cmd_xh = QtWidgets.QPushButton(self.groupBox_2)
+        self.pushButton_cmd_xh.setGeometry(QtCore.QRect(160, 30, 61, 51))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_AutoGet_1M_26.sizePolicy().hasHeightForWidth())
-        self.pushButton_AutoGet_1M_26.setSizePolicy(sizePolicy)
-        self.pushButton_AutoGet_1M_26.setMinimumSize(QtCore.QSize(0, 0))
-        self.pushButton_AutoGet_1M_26.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        sizePolicy.setHeightForWidth(self.pushButton_cmd_xh.sizePolicy().hasHeightForWidth())
+        self.pushButton_cmd_xh.setSizePolicy(sizePolicy)
+        self.pushButton_cmd_xh.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_cmd_xh.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(9)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_AutoGet_1M_26.setFont(font)
-        self.pushButton_AutoGet_1M_26.setStyleSheet("QPushButton {\n"
+        self.pushButton_cmd_xh.setFont(font)
+        self.pushButton_cmd_xh.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(27, 29, 35);\n"
 "}\n"
 "\n"
@@ -2580,7 +2581,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
-        self.pushButton_AutoGet_1M_26.setObjectName("pushButton_AutoGet_1M_26")
+        self.pushButton_cmd_xh.setObjectName("pushButton_cmd_xh")
         self.groupBox_3 = QtWidgets.QGroupBox(self.frame_14)
         self.groupBox_3.setGeometry(QtCore.QRect(15, 465, 586, 86))
         self.groupBox_3.setObjectName("groupBox_3")
@@ -2825,7 +2826,7 @@ class Ui_MainWindow(object):
         self.comboBox_cmd_FS6.addItem("")
         self.comboBox_cmd_FS6.addItem("")
         self.groupBox_4 = QtWidgets.QGroupBox(self.frame_14)
-        self.groupBox_4.setGeometry(QtCore.QRect(290, 380, 406, 81))
+        self.groupBox_4.setGeometry(QtCore.QRect(215, 380, 481, 81))
         self.groupBox_4.setObjectName("groupBox_4")
         self.pushButton_cmd_persureSet6 = QtWidgets.QPushButton(self.groupBox_4)
         self.pushButton_cmd_persureSet6.setGeometry(QtCore.QRect(335, 45, 61, 31))
@@ -3031,11 +3032,45 @@ class Ui_MainWindow(object):
 "    background-color: rgb(85, 170, 255);\n"
 "}")
         self.pushButton_cmd_persureSet4.setObjectName("pushButton_cmd_persureSet4")
+        self.pushButton_cmd_persureSet = QtWidgets.QPushButton(self.groupBox_4)
+        self.pushButton_cmd_persureSet.setGeometry(QtCore.QRect(410, 45, 61, 31))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_cmd_persureSet.sizePolicy().hasHeightForWidth())
+        self.pushButton_cmd_persureSet.setSizePolicy(sizePolicy)
+        self.pushButton_cmd_persureSet.setMinimumSize(QtCore.QSize(0, 0))
+        self.pushButton_cmd_persureSet.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_cmd_persureSet.setFont(font)
+        self.pushButton_cmd_persureSet.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(27, 29, 35);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"}")
+        self.pushButton_cmd_persureSet.setObjectName("pushButton_cmd_persureSet")
+        self.lineEdit_cmd_persureSet = QtWidgets.QLineEdit(self.groupBox_4)
+        self.lineEdit_cmd_persureSet.setGeometry(QtCore.QRect(410, 20, 61, 21))
+        self.lineEdit_cmd_persureSet.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"padding: 2px;\n"
+"color: rgb(0, 255, 127);")
+        self.lineEdit_cmd_persureSet.setInputMask("")
+        self.lineEdit_cmd_persureSet.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_cmd_persureSet.setObjectName("lineEdit_cmd_persureSet")
         self.groupBox_5 = QtWidgets.QGroupBox(self.frame_14)
-        self.groupBox_5.setGeometry(QtCore.QRect(15, 380, 266, 81))
+        self.groupBox_5.setGeometry(QtCore.QRect(15, 380, 191, 81))
         self.groupBox_5.setObjectName("groupBox_5")
         self.comboBox_cmd_seaState = QtWidgets.QComboBox(self.groupBox_5)
-        self.comboBox_cmd_seaState.setGeometry(QtCore.QRect(130, 30, 71, 31))
+        self.comboBox_cmd_seaState.setGeometry(QtCore.QRect(95, 15, 71, 31))
         self.comboBox_cmd_seaState.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "padding: 5px;\n"
 "color: rgb(0, 255, 127);")
@@ -3051,7 +3086,7 @@ class Ui_MainWindow(object):
         self.comboBox_cmd_seaState.addItem("")
         self.comboBox_cmd_seaState.addItem("")
         self.lineEdit_cmd_environmentTemp = QtWidgets.QLineEdit(self.groupBox_5)
-        self.lineEdit_cmd_environmentTemp.setGeometry(QtCore.QRect(5, 30, 51, 31))
+        self.lineEdit_cmd_environmentTemp.setGeometry(QtCore.QRect(30, 15, 51, 31))
         self.lineEdit_cmd_environmentTemp.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "padding: 2px;\n"
 "color: rgb(0, 255, 127);")
@@ -3059,7 +3094,7 @@ class Ui_MainWindow(object):
         self.lineEdit_cmd_environmentTemp.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEdit_cmd_environmentTemp.setObjectName("lineEdit_cmd_environmentTemp")
         self.pushButton_cmd_environment = QtWidgets.QPushButton(self.groupBox_5)
-        self.pushButton_cmd_environment.setGeometry(QtCore.QRect(205, 30, 51, 31))
+        self.pushButton_cmd_environment.setGeometry(QtCore.QRect(105, 50, 51, 26))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -3089,20 +3124,12 @@ class Ui_MainWindow(object):
 "\n"
 "")
         self.pushButton_cmd_environment.setObjectName("pushButton_cmd_environment")
-        self.line_4 = QtWidgets.QFrame(self.groupBox_5)
-        self.line_4.setGeometry(QtCore.QRect(120, 30, 16, 26))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.line_4.sizePolicy().hasHeightForWidth())
-        self.line_4.setSizePolicy(sizePolicy)
-        self.line_4.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.line_4.setStyleSheet("border-left:2px solid white; backgroud-color:black;")
-        self.line_4.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_4.setObjectName("line_4")
         self.label_environmentTemp_Info = QtWidgets.QLabel(self.groupBox_5)
-        self.label_environmentTemp_Info.setGeometry(QtCore.QRect(60, 25, 56, 34))
+        self.label_environmentTemp_Info.setGeometry(QtCore.QRect(30, 45, 56, 26))
+        font = QtGui.QFont()
+        font.setFamily("01 Digit")
+        font.setPointSize(8)
+        self.label_environmentTemp_Info.setFont(font)
         self.label_environmentTemp_Info.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "border-radius: 10px;\n"
 "padding: 5px;\n"
@@ -3351,7 +3378,9 @@ class Ui_MainWindow(object):
         self.label_80.setText(_translate("MainWindow", "高压未知"))
         self.label_81.setText(_translate("MainWindow", "危界未知"))
         self.groupBox_2.setTitle(_translate("MainWindow", "操作控制"))
-        self.lineEdit_cmd_xh_angle.setPlaceholderText(_translate("MainWindow", "0.00"))
+        self.lineEdit_cmd_xh_angle.setText(_translate("MainWindow", "-90"))
+        self.lineEdit_cmd_xh_angle.setPlaceholderText(_translate("MainWindow", "-90"))
+        self.lineEdit_cmd_fy_angle.setText(_translate("MainWindow", "0"))
         self.lineEdit_cmd_fy_angle.setPlaceholderText(_translate("MainWindow", "0.00"))
         self.pushButton_cmd_fy_angle.setText(_translate("MainWindow", "俯仰角度"))
         self.pushButton_cmd_xh_angle.setText(_translate("MainWindow", "旋回角度"))
@@ -3361,9 +3390,9 @@ class Ui_MainWindow(object):
         self.pushButton_cmd_frontcase3.setText(_translate("MainWindow", "3#开盖"))
         self.pushButton_cmd_frontcase4.setText(_translate("MainWindow", "4#开盖"))
         self.pushButton_cmd_frontcase2.setText(_translate("MainWindow", "2#开盖"))
-        self.pushButton_AutoGet_1M_24.setText(_translate("MainWindow", "高压闭合"))
-        self.pushButton_AutoGet_1M_25.setText(_translate("MainWindow", "俯仰启动"))
-        self.pushButton_AutoGet_1M_26.setText(_translate("MainWindow", "旋回启动"))
+        self.pushButton_cmd_mainpower.setText(_translate("MainWindow", "高压闭合"))
+        self.pushButton_cmd_fy.setText(_translate("MainWindow", "俯仰启动"))
+        self.pushButton_cmd_xh.setText(_translate("MainWindow", "旋回启动"))
         self.groupBox_3.setTitle(_translate("MainWindow", "FS控制"))
         self.comboBox_cmd_FS1.setItemText(0, _translate("MainWindow", "1#保险关闭"))
         self.comboBox_cmd_FS1.setItemText(1, _translate("MainWindow", "1#保险打开"))
@@ -3392,22 +3421,25 @@ class Ui_MainWindow(object):
         self.groupBox_4.setTitle(_translate("MainWindow", "气压设定"))
         self.pushButton_cmd_persureSet6.setText(_translate("MainWindow", "6#气压"))
         self.pushButton_cmd_persureSet2.setText(_translate("MainWindow", "2#气压"))
-        self.lineEdit_cmd_persureSet1.setText(_translate("MainWindow", "10.0"))
+        self.lineEdit_cmd_persureSet1.setText(_translate("MainWindow", "0"))
         self.lineEdit_cmd_persureSet1.setPlaceholderText(_translate("MainWindow", "0.00"))
         self.pushButton_cmd_persureSet3.setText(_translate("MainWindow", "3#气压"))
-        self.lineEdit_cmd_persureSet4.setText(_translate("MainWindow", "10.0"))
+        self.lineEdit_cmd_persureSet4.setText(_translate("MainWindow", "0"))
         self.lineEdit_cmd_persureSet4.setPlaceholderText(_translate("MainWindow", "0.00"))
-        self.lineEdit_cmd_persureSet2.setText(_translate("MainWindow", "10.0"))
+        self.lineEdit_cmd_persureSet2.setText(_translate("MainWindow", "0"))
         self.lineEdit_cmd_persureSet2.setPlaceholderText(_translate("MainWindow", "0.00"))
-        self.lineEdit_cmd_persureSet6.setText(_translate("MainWindow", "10.0"))
+        self.lineEdit_cmd_persureSet6.setText(_translate("MainWindow", "0"))
         self.lineEdit_cmd_persureSet6.setPlaceholderText(_translate("MainWindow", "0.00"))
         self.pushButton_cmd_persureSet1.setText(_translate("MainWindow", "1#气压"))
         self.pushButton_cmd_persureSet5.setText(_translate("MainWindow", "5#气压"))
-        self.lineEdit_cmd_persureSet5.setText(_translate("MainWindow", "10.0"))
+        self.lineEdit_cmd_persureSet5.setText(_translate("MainWindow", "0"))
         self.lineEdit_cmd_persureSet5.setPlaceholderText(_translate("MainWindow", "0.00"))
-        self.lineEdit_cmd_persureSet3.setText(_translate("MainWindow", "10.0"))
+        self.lineEdit_cmd_persureSet3.setText(_translate("MainWindow", "0"))
         self.lineEdit_cmd_persureSet3.setPlaceholderText(_translate("MainWindow", "0.00"))
         self.pushButton_cmd_persureSet4.setText(_translate("MainWindow", "4#气压"))
+        self.pushButton_cmd_persureSet.setText(_translate("MainWindow", "气源气压"))
+        self.lineEdit_cmd_persureSet.setText(_translate("MainWindow", "0"))
+        self.lineEdit_cmd_persureSet.setPlaceholderText(_translate("MainWindow", "0.00"))
         self.groupBox_5.setTitle(_translate("MainWindow", "环境信息"))
         self.comboBox_cmd_seaState.setItemText(0, _translate("MainWindow", "0级海况"))
         self.comboBox_cmd_seaState.setItemText(1, _translate("MainWindow", "1级海况"))

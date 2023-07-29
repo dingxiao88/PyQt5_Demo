@@ -141,6 +141,8 @@ class mainWin(QMainWindow, Ui_MainWindow):
             self.udp_send_KW_Angel.append(0x00)
 
         # AXT数据初始化
+        # 母线控制
+        self.cmd_mainpower_ctl = 0
         # 控制1~6管前盖状态 0:关闭 1:打开
         self.cmd_front_case1 = 0
         self.cmd_front_case2 = 0
@@ -148,9 +150,15 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.cmd_front_case4 = 0
         self.cmd_front_case5 = 0
         self.cmd_front_case6 = 0
+        # FY控制
+        self.cmd_fy_ctl = 0
+        # XH控制
+        self.cmd_xh_ctl = 0
         # 控制俯仰、旋回角度
         self.cmd_fy_angle = 0.0
-        self.cmd_xh_angle = 0.0
+        self.cmd_xh_angle = -90.0
+        # 气源压力
+        self.cmd_persure = 10.0
         # 1~6管气瓶压力
         self.cmd_persure1 = 10.0
         self.cmd_persure2 = 10.0
@@ -421,6 +429,14 @@ class mainWin(QMainWindow, Ui_MainWindow):
         # 测试高压控制 | 测试鸣音器控制
         self.udp_send[9] = 0x00
 
+        self.count1 = 0
+        self.count2 = 0
+        self.count3 = 0
+        self.count4 = 0
+        self.count5 = 0
+        self.count6 = 0
+        self.count7 = 0
+
         # 初始化本地网卡
         NetWork_Fun.Init_Local_Interface(self)
         self.comboBox_LocalInterface.currentIndexChanged.connect(lambda:NetWork_Fun.On_interface_selection_change(self))
@@ -464,6 +480,13 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
 
         #-------------------------------------------AXT------------------------------------------
+        # AXT-高压开关
+        self.pushButton_cmd_mainpower.clicked.connect(lambda:NetWork_Fun.AXT_MainPower_Control(self))
+        # AXT-FY开关
+        self.pushButton_cmd_fy.clicked.connect(lambda:NetWork_Fun.AXT_FY_Control(self))
+        # AXT-XH开关
+        self.pushButton_cmd_xh.clicked.connect(lambda:NetWork_Fun.AXT_XH_Control(self))
+
         # AXT-旋回角度发送按钮
         self.pushButton_cmd_xh_angle.clicked.connect(lambda:NetWork_Fun.AXT_FYXH_Angle_Control(self))
         # AXT-俯仰角度发送按钮
@@ -475,6 +498,9 @@ class mainWin(QMainWindow, Ui_MainWindow):
         self.pushButton_cmd_frontcase4.clicked.connect(lambda:NetWork_Fun.AXT_FrontCast_Control(self, 4))
         self.pushButton_cmd_frontcase5.clicked.connect(lambda:NetWork_Fun.AXT_FrontCast_Control(self, 5))
         self.pushButton_cmd_frontcase6.clicked.connect(lambda:NetWork_Fun.AXT_FrontCast_Control(self, 6))
+
+        # AXT-气源压力设定
+        self.pushButton_cmd_persureSet.clicked.connect(lambda:NetWork_Fun.AXT_Persure_Set(self))
 
         # AXT-气瓶压力设定
         self.pushButton_cmd_persureSet1.clicked.connect(lambda:NetWork_Fun.AXT_Persure_Set(self))
@@ -650,34 +676,437 @@ class mainWin(QMainWindow, Ui_MainWindow):
 
 
     # AXT信息回显
-    def AXT_Recv_Info_Display(self, str_info, count, fy_angle, xh_angle, str_axt_str, axt_dict):
+    def AXT_Recv_Info_Display(self, str_info, count, fy_angle, xh_angle, str_axt_str, axt_dict, mid):
         # print('--->')
         self.label_dc_Info.setText(str(count)) 
         # AXT调试信息输出
         self.label_AXT_DebguInfo.setText(str_axt_str)
 
+        # if(mid == 2):
+        #     print(axt_dict)
+
         #AXT数据显示
         # print(axt_dict)
         if(axt_dict):
 
-            # -1号管温度
-            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube1_Temperature"], 1))
-            self.label_43.setText(temp_str)
-            # -2号管温度
-            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube2_Temperature"], 1))
-            self.label_45.setText(temp_str)
-            # -3号管温度
-            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube3_Temperature"], 1))
-            self.label_46.setText(temp_str)
-            # -4号管温度
-            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube4_Temperature"], 1))
-            self.label_47.setText(temp_str)
-            # -5号管温度
-            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube5_Temperature"], 1))
-            self.label_44.setText(temp_str)
-            # -6号管温度
-            temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube6_Temperature"], 1))
-            self.label_42.setText(temp_str)
+            # 工作状态
+            if(mid == 1):
+                # -1号有/无DAN
+                if(axt_dict["AXT_Tube1_BombStatus"] == 0):
+                    self.label_9.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_9.setText("无弹")
+                elif(axt_dict["AXT_Tube1_BombStatus"] == 1):
+                    self.label_9.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_9.setText("有弹")
+                # -2号有/无DAN
+                if(axt_dict["AXT_Tube2_BombStatus"] == 0):
+                    self.label_29.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_29.setText("无弹")
+                elif(axt_dict["AXT_Tube2_BombStatus"] == 1):
+                    self.label_29.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_29.setText("有弹")
+                # -3号有/无DAN
+                if(axt_dict["AXT_Tube3_BombStatus"] == 0):
+                    self.label_32.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_32.setText("无弹")
+                elif(axt_dict["AXT_Tube3_BombStatus"] == 1):
+                    self.label_32.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_32.setText("有弹")
+                # -4号有/无DAN
+                if(axt_dict["AXT_Tube4_BombStatus"] == 0):
+                    self.label_37.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_37.setText("无弹")
+                elif(axt_dict["AXT_Tube4_BombStatus"] == 1):
+                    self.label_37.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_37.setText("有弹")
+                # -5号有/无DAN
+                if(axt_dict["AXT_Tube5_BombStatus"] == 0):
+                    self.label_38.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_38.setText("无弹")
+                elif(axt_dict["AXT_Tube5_BombStatus"] == 1):
+                    self.label_38.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_38.setText("有弹")
+                # -6号有/无DAN
+                if(axt_dict["AXT_Tube6_BombStatus"] == 0):
+                    self.label_41.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_41.setText("无弹")
+                elif(axt_dict["AXT_Tube6_BombStatus"] == 1):
+                    self.label_41.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_41.setText("有弹")
+
+                # -AXT设备工作状态-AXT设备故障信息
+                if(axt_dict["AXT_Dev_Status"] == 0):
+                    self.label_72.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_72.setText("设备状态:正常")
+                    self.label_77.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_77.setText("故障信息:无")
+                elif(axt_dict["AXT_Dev_Status"] == 1):
+                    self.label_72.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_72.setText("设备状态:故障")
+                    self.label_77.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    err_id_str = '{0}'.format(axt_dict["AXT_Dev_ErrorID"])
+                    self.label_77.setText("故障信息:" + err_id_str)
+                
+                # # -AXT设备母线工作状态
+                # if(axt_dict["AXT_Dev_MainPower_Status"] == 0):
+                #     self.label_80.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                #     self.label_80.setText("母线关闭")
+                # elif(axt_dict["AXT_Dev_MainPower_Status"] == 1):
+                #     self.label_80.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                #     self.label_80.setText("母线开启")
+
+                # # -AXT设备FY工作状态
+                # if(axt_dict["AXT_Dev_FY_Status"] == 0):
+                #     self.label_78.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                #     self.label_78.setText("关闭")
+                # elif(axt_dict["AXT_Dev_FY_Status"] == 1):
+                #     self.label_78.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                #     self.label_78.setText("启动")
+
+                # # -AXT设备XH工作状态
+                # if(axt_dict["AXT_Dev_XH_Status"] == 0):
+                #     self.label_79.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                #     self.label_79.setText("关闭")
+                # elif(axt_dict["AXT_Dev_XH_Status"] == 1):
+                #     self.label_79.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                #     self.label_79.setText("启动")
+
+                # -1号回插信号
+                if(axt_dict["AXT_Tube1_CableStatus"] == 0):
+                    self.label_61.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_61.setText("未连接")
+                elif(axt_dict["AXT_Tube1_CableStatus"] == 1):
+                    self.label_61.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_61.setText("连接")
+
+                # -2号回插信号
+                if(axt_dict["AXT_Tube2_CableStatus"] == 0):
+                    self.label_60.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_60.setText("未连接")
+                elif(axt_dict["AXT_Tube2_CableStatus"] == 1):
+                    self.label_60.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_60.setText("连接")
+
+                # -3号回插信号
+                if(axt_dict["AXT_Tube3_CableStatus"] == 0):
+                    self.label_62.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_62.setText("未连接")
+                elif(axt_dict["AXT_Tube3_CableStatus"] == 1):
+                    self.label_62.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_62.setText("连接")
+
+                # -4号回插信号
+                if(axt_dict["AXT_Tube4_CableStatus"] == 0):
+                    self.label_63.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_63.setText("未连接")
+                elif(axt_dict["AXT_Tube4_CableStatus"] == 1):
+                    self.label_63.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_63.setText("连接")
+
+                # -5号回插信号
+                if(axt_dict["AXT_Tube5_CableStatus"] == 0):
+                    self.label_64.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_64.setText("未连接")
+                elif(axt_dict["AXT_Tube5_CableStatus"] == 1):
+                    self.label_64.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_64.setText("连接")
+                    
+                # -6号回插信号
+                if(axt_dict["AXT_Tube6_CableStatus"] == 0):
+                    self.label_65.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_65.setText("未连接")
+                elif(axt_dict["AXT_Tube6_CableStatus"] == 1):
+                    self.label_65.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_65.setText("连接")
+
+                # print(axt_dict["AXT_Tube6_BombStatus"])
+
+            # 发射命令反馈
+            elif(mid == 3):
+                # -1号发射命反馈
+                tube1_info_str = 'AXT_Tube2_FireInfo:{0}'.format(axt_dict["AXT_Tube2_FireInfo"])
+                print(tube1_info_str)
+                
+                if(axt_dict["AXT_Tube1_FireInfo"] == 0):
+                    self.label_55.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_55.setText("关闭")
+                elif(axt_dict["AXT_Tube1_FireInfo"] == 1):
+                    self.label_55.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_55.setText("打开")
+                elif(axt_dict["AXT_Tube1_FireInfo"] == 3):
+                    self.label_55.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_55.setText("发射")
+                
+                # -2号发射命反馈
+                if(axt_dict["AXT_Tube2_FireInfo"] == 0):
+                    self.label_54.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_54.setText("关闭")
+                elif(axt_dict["AXT_Tube2_FireInfo"] == 1):
+                    self.label_54.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_54.setText("打开")
+                elif(axt_dict["AXT_Tube2_FireInfo"] == 3):
+                    self.label_54.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_54.setText("发射")
+
+                # -3号发射命反馈
+                if(axt_dict["AXT_Tube3_FireInfo"] == 0):
+                    self.label_56.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_56.setText("关闭")
+                elif(axt_dict["AXT_Tube3_FireInfo"] == 1):
+                    self.label_56.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_56.setText("打开")
+                elif(axt_dict["AXT_Tube3_FireInfo"] == 3):
+                    self.label_56.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_56.setText("发射")
+
+                # -4号发射命反馈
+                if(axt_dict["AXT_Tube4_FireInfo"] == 0):
+                    self.label_57.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_57.setText("关闭")
+                elif(axt_dict["AXT_Tube4_FireInfo"] == 1):
+                    self.label_57.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_57.setText("打开")
+                elif(axt_dict["AXT_Tube4_FireInfo"] == 3):
+                    self.label_57.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_57.setText("发射")
+
+                # -5号发射命反馈
+                if(axt_dict["AXT_Tube5_FireInfo"] == 0):
+                    self.label_59.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_59.setText("关闭")
+                elif(axt_dict["AXT_Tube5_FireInfo"] == 1):
+                    self.label_59.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_59.setText("打开")
+                elif(axt_dict["AXT_Tube5_FireInfo"] == 3):
+                    self.label_59.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_59.setText("发射")
+
+                # -6号发射命反馈
+                # print(axt_dict["AXT_Tube6_FireInfo"])
+                if(axt_dict["AXT_Tube6_FireInfo"] == 0):
+                    self.label_58.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_58.setText("关闭")
+                elif(axt_dict["AXT_Tube6_FireInfo"] == 1):
+                    self.label_58.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_58.setText("打开")
+                elif(axt_dict["AXT_Tube6_FireInfo"] == 3):
+                    self.label_58.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_58.setText("发射")
+
+            # 1-6管前盖状态-XH角度-FY角度
+            elif(mid == 2):
+                # print(axt_dict["AXT_Tube1_FrontCaseStatus"])
+                # -1号前盖状态
+                if(axt_dict["AXT_Tube1_FrontCaseStatus"] == 2):
+                    self.label_48.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_48.setText("开盖中")
+                elif(axt_dict["AXT_Tube1_FrontCaseStatus"] == 3):
+                    self.label_48.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_48.setText("开盖到位")
+                elif(axt_dict["AXT_Tube1_FrontCaseStatus"] == 4):
+                    self.label_48.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_48.setText("关盖中")
+                elif(axt_dict["AXT_Tube1_FrontCaseStatus"] == 5):
+                    self.label_48.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_48.setText("关盖到位")
+                # -2号前盖状态
+                if(axt_dict["AXT_Tube2_FrontCaseStatus"] == 2):
+                    self.label_49.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_49.setText("开盖中")
+                elif(axt_dict["AXT_Tube2_FrontCaseStatus"] == 3):
+                    self.label_49.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_49.setText("开盖到位")
+                elif(axt_dict["AXT_Tube2_FrontCaseStatus"] == 4):
+                    self.label_49.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_49.setText("关盖中")
+                elif(axt_dict["AXT_Tube2_FrontCaseStatus"] == 5):
+                    self.label_49.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_49.setText("关盖到位")
+                # -3号前盖状态
+                if(axt_dict["AXT_Tube3_FrontCaseStatus"] == 2):
+                    self.label_50.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_50.setText("开盖中")
+                elif(axt_dict["AXT_Tube3_FrontCaseStatus"] == 3):
+                    self.label_50.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_50.setText("开盖到位")
+                elif(axt_dict["AXT_Tube3_FrontCaseStatus"] == 4):
+                    self.label_50.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_50.setText("关盖中")
+                elif(axt_dict["AXT_Tube3_FrontCaseStatus"] == 5):
+                    self.label_50.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_50.setText("关盖到位")
+                # -4号前盖状态
+                if(axt_dict["AXT_Tube4_FrontCaseStatus"] == 2):
+                    self.label_51.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_51.setText("开盖中")
+                elif(axt_dict["AXT_Tube4_FrontCaseStatus"] == 3):
+                    self.label_51.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_51.setText("开盖到位")
+                elif(axt_dict["AXT_Tube4_FrontCaseStatus"] == 4):
+                    self.label_51.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_51.setText("关盖中")
+                elif(axt_dict["AXT_Tube4_FrontCaseStatus"] == 5):
+                    self.label_51.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_51.setText("关盖到位")
+                # -5号前盖状态
+                if(axt_dict["AXT_Tube5_FrontCaseStatus"] == 2):
+                    self.label_52.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_52.setText("开盖中")
+                elif(axt_dict["AXT_Tube5_FrontCaseStatus"] == 3):
+                    self.label_52.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_52.setText("开盖到位")
+                elif(axt_dict["AXT_Tube5_FrontCaseStatus"] == 4):
+                    self.label_52.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_52.setText("关盖中")
+                elif(axt_dict["AXT_Tube5_FrontCaseStatus"] == 5):
+                    self.label_52.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_52.setText("关盖到位")
+                # -6号前盖状态
+                if(axt_dict["AXT_Tube6_FrontCaseStatus"] == 2):
+                    self.label_53.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_53.setText("开盖中")
+                elif(axt_dict["AXT_Tube6_FrontCaseStatus"] == 3):
+                    self.label_53.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_53.setText("开盖到位")
+                elif(axt_dict["AXT_Tube6_FrontCaseStatus"] == 4):
+                    self.label_53.setStyleSheet("color:yellow;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_53.setText("关盖中")
+                elif(axt_dict["AXT_Tube6_FrontCaseStatus"] == 5):
+                    self.label_53.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_53.setText("关盖到位")
+
+                # -旋回INFO
+                if(axt_dict["AXT_XH_Info"] == 0):
+                    self.label_79.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_79.setText("收到命令")
+                elif(axt_dict["AXT_XH_Info"] == 1):
+                    self.label_79.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_79.setText("运行中")
+                elif(axt_dict["AXT_XH_Info"] == 2):
+                    self.label_79.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_79.setText("运行到位")
+                elif(axt_dict["AXT_XH_Info"] == 3):
+                    self.label_79.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_79.setText("故障")
+
+                # -俯仰INFO
+                if(axt_dict["AXT_FY_Info"] == 0):
+                    self.label_78.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_78.setText("收到命令")
+                elif(axt_dict["AXT_FY_Info"] == 1):
+                    self.label_78.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_78.setText("运行中")
+                elif(axt_dict["AXT_FY_Info"] == 2):
+                    self.label_78.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_78.setText("运行到位")
+                elif(axt_dict["AXT_FY_Info"] == 3):
+                    self.label_78.setStyleSheet("color:rgb(0, 255, 127);" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_78.setText("故障")
+
+
+                # -旋回角度
+                temp_str = '{0}'.format(round(axt_dict["AXT_XH_RealAngle"], 1))
+                self.label_74.setText(temp_str)
+                # -俯仰角度
+                temp_str = '{0}'.format(round(axt_dict["AXT_FY_RealAngle"], 1))
+                self.label_75.setText(temp_str)
+
+            # 1-6管气压
+            elif(mid == 5):
+                # -1号管气压
+                temp_str = '{0}MPa'.format(round(axt_dict["AXT_Tube1_AirPressure"], 1))
+                self.label_10.setText(temp_str)
+                # -2号管气压
+                temp_str = '{0}MPa'.format(round(axt_dict["AXT_Tube2_AirPressure"], 1))
+                self.label_28.setText(temp_str)
+                # -3号管气压
+                temp_str = '{0}MPa'.format(round(axt_dict["AXT_Tube3_AirPressure"], 1))
+                self.label_31.setText(temp_str)
+                # -4号管气压
+                temp_str = '{0}MPa'.format(round(axt_dict["AXT_Tube4_AirPressure"], 1))
+                self.label_34.setText(temp_str)
+                # -5号管气压
+                temp_str = '{0}MPa'.format(round(axt_dict["AXT_Tube5_AirPressure"], 1))
+                self.label_36.setText(temp_str)
+                # -6号管气压
+                temp_str = '{0}MPa'.format(round(axt_dict["AXT_Tube6_AirPressure"], 1))
+                self.label_39.setText(temp_str)
+
+            # 1-3管温度
+            elif(mid == 6):
+                # -1号管加热状态
+                if(axt_dict["AXT_Tube1_Heat_Flag"] == 0):
+                    # -1号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube1_Temperature"], 1))
+                    self.label_43.setStyleSheet("color:white;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_43.setText(temp_str)
+                elif(axt_dict["AXT_Tube1_Heat_Flag"] == 1):
+                    # -1号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube1_Temperature"], 1))
+                    self.label_43.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_43.setText(temp_str)  
+
+                # -2号管加热状态
+                if(axt_dict["AXT_Tube2_Heat_Flag"] == 0):
+                    # -2号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube2_Temperature"], 1))
+                    self.label_45.setStyleSheet("color:white;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_45.setText(temp_str)
+                elif(axt_dict["AXT_Tube2_Heat_Flag"] == 1):
+                    # -2号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube2_Temperature"], 1))
+                    self.label_45.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_45.setText(temp_str)
+
+                # -3号管加热状态
+                if(axt_dict["AXT_Tube3_Heat_Flag"] == 0):
+                    # -3号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube3_Temperature"], 1))
+                    self.label_46.setStyleSheet("color:white;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_46.setText(temp_str)
+                elif(axt_dict["AXT_Tube3_Heat_Flag"] == 1):
+                    # -3号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube3_Temperature"], 1))
+                    self.label_46.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_46.setText(temp_str)
+
+            # 4-6管温度
+            elif(mid == 7):
+                # -4号管加热状态
+                if(axt_dict["AXT_Tube4_Heat_Flag"] == 0):
+                    # -4号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube4_Temperature"], 1))
+                    self.label_47.setStyleSheet("color:white;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_47.setText(temp_str)
+                elif(axt_dict["AXT_Tube4_Heat_Flag"] == 1):
+                    # -4号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube4_Temperature"], 1))
+                    self.label_47.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_47.setText(temp_str)
+
+                # -5号管加热状态
+                if(axt_dict["AXT_Tube5_Heat_Flag"] == 0):
+                    # -5号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube5_Temperature"], 1))
+                    self.label_44.setStyleSheet("color:white;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_44.setText(temp_str)
+                elif(axt_dict["AXT_Tube5_Heat_Flag"] == 1):
+                    # -5号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube5_Temperature"], 1))
+                    self.label_44.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_44.setText(temp_str)
+
+                # -6号管加热状态
+                if(axt_dict["AXT_Tube6_Heat_Flag"] == 0):    
+                    # -6号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube6_Temperature"], 1))
+                    self.label_42.setStyleSheet("color:white;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_42.setText(temp_str)
+                elif(axt_dict["AXT_Tube6_Heat_Flag"] == 1):    
+                    # -6号管温度
+                    temp_str = '{0}℃'.format(round(axt_dict["AXT_Tube6_Temperature"], 1))
+                    self.label_42.setStyleSheet("color:red;" "margin:1px;" "background-color: rgb(33, 37, 43)")
+                    self.label_42.setText(temp_str)
 
             
         # self.label_fy_angle.setText(str(fy_angle))
